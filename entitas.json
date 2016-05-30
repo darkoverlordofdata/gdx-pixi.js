@@ -1,0 +1,55 @@
+{
+  "namespace": "com.darkoverlordofdata.invaderz",
+  "src": "src/main/scala",
+  "output": {
+    "generated": "components.scala"
+  },
+  "alloc": {
+    "entities": 128,
+    "components": 64
+  },
+  "components": {
+    "Alien": false,
+    "Bounds": [
+      "width:Float",
+      "height:Float"
+    ],
+    "Bullet": false,
+    "Destroy": false,
+    "Player": false,
+    "Position": [
+      "x:Float",
+      "y:Float"
+    ],
+    "Velocity": [
+      "x:Float",
+      "y:Float"
+    ],
+    "View": [
+      "sprite:co.technius.scalajs.pixi.Sprite"
+    ]
+  },
+  "systems": {
+    "Collision": [
+      "IExecuteSystem"
+    ],
+    "CreateAliens": [
+      "IInitializeSystem",
+      "IExecuteSystem"
+    ],
+    "Destroy": [
+      "IExecuteSystem"
+    ],
+    "Input": [
+      "IExecuteSystem"
+    ],
+    "Physics": [
+      "IExecuteSystem"
+    ],
+    "Render": [
+      "IInitializeSystem",
+      "IExecuteSystem"
+    ]
+  },
+  "entities": {}
+}

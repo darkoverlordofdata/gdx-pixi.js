@@ -1,0 +1,13 @@
+# sbt target folders
+target/
+
+# eclipse project files
+/.settings
+/.classpath
+/.project
+project
+shared
+target
+.ensime_cache
+.idea
+/node_modules/

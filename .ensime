@@ -1,0 +1,25 @@
+(
+ :root-dir "/home/bruce/Git/invaders-scala-js"
+ :cache-dir "/home/bruce/Git/invaders-scala-js/.ensime_cache"
+ :scala-compiler-jars ("/home/bruce/.ivy2/cache/org.scala-lang/scala-compiler/jars/scala-compiler-2.11.8.jar" "/home/bruce/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.8.jar" "/home/bruce/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.11.8.jar" "/home/bruce/.ivy2/cache/org.scala-lang/scalap/jars/scalap-2.11.8.jar")
+ :name "invaders-scala-js"
+ :java-home "/usr/lib/jvm/java-8-oracle"
+ :java-flags ("-Xss2m" "-Xms1024m" "-Xmx1024m" "-XX:ReservedCodeCacheSize=128m" "-XX:MaxMetaspaceSize=256m")
+ :reference-source-roots ("/usr/lib/jvm/java-8-oracle/src.zip")
+ :scala-version "2.11.8"
+ :compiler-args ("-Xplugin:/home/bruce/.ivy2/cache/org.scala-js/scalajs-compiler_2.11.8/jars/scalajs-compiler_2.11.8-0.6.9.jar" "-feature" "-deprecation" "-Xlint" "-Yinline-warnings" "-Yno-adapted-args" "-Ywarn-dead-code" "-Ywarn-numeric-widen" "-Xfuture" "-Ywarn-unused-import" "-Ymacro-expand:discard")
+ :formatting-prefs nil
+ :disable-source-monitoring nil
+ :disable-class-monitoring nil
+ :subprojects ((
+   :name "invaders-scala-js"
+   :source-roots ("/home/bruce/Git/invaders-scala-js/src/main/scala" "/home/bruce/Git/invaders-scala-js/src/test/scala")
+   :targets ("/home/bruce/Git/invaders-scala-js/target/scala-2.11/classes")
+   :test-targets ("/home/bruce/Git/invaders-scala-js/target/scala-2.11/test-classes")
+   :depends-on-modules nil
+   :compile-deps ("/home/bruce/.ivy2/cache/org.webjars/jquery/jars/jquery-2.1.4.jar" "/home/bruce/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.8.jar" "/home/bruce/.ivy2/cache/org.scala-js/scalajs-dom_sjs0.6_2.11/jars/scalajs-dom_sjs0.6_2.11-0.9.0.jar" "/home/bruce/.ivy2/cache/be.doeraene/scalajs-jquery_sjs0.6_2.11/jars/scalajs-jquery_sjs0.6_2.11-0.9.0.jar" "/home/bruce/.ivy2/cache/org.scala-js/scalajs-library_2.11/jars/scalajs-library_2.11-0.6.9.jar")
+   :runtime-deps nil
+   :test-deps ("/home/bruce/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.11.4.jar" "/home/bruce/.ivy2/cache/org.scala-js/scalajs-test-interface_2.11/jars/scalajs-test-interface_2.11-0.6.0.jar" "/home/bruce/.ivy2/cache/com.lihaoyi/utest_sjs0.6_2.11/jars/utest_sjs0.6_2.11-0.3.0.jar")
+   :doc-jars ("/home/bruce/Git/invaders-scala-js/target/scala-2.11/invaders_sjs0.6_2.11-0.1-SNAPSHOT-javadoc.jar" "/home/bruce/.ivy2/cache/org.scala-lang/scala-library/docs/scala-library-2.11.8-javadoc.jar" "/home/bruce/.ivy2/cache/org.scala-lang/scala-reflect/docs/scala-reflect-2.11.4-javadoc.jar" "/home/bruce/.ivy2/cache/org.scala-js/scalajs-dom_sjs0.6_2.11/docs/scalajs-dom_sjs0.6_2.11-0.9.0-javadoc.jar" "/home/bruce/.ivy2/cache/be.doeraene/scalajs-jquery_sjs0.6_2.11/docs/scalajs-jquery_sjs0.6_2.11-0.9.0-javadoc.jar" "/home/bruce/.ivy2/cache/org.scala-js/scalajs-library_2.11/docs/scalajs-library_2.11-0.6.9-javadoc.jar" "/home/bruce/.ivy2/cache/org.scala-js/scalajs-test-interface_2.11/docs/scalajs-test-interface_2.11-0.6.0-javadoc.jar" "/home/bruce/.ivy2/cache/com.lihaoyi/utest_sjs0.6_2.11/docs/utest_sjs0.6_2.11-0.3.0-javadoc.jar")
+   :reference-source-roots ("/home/bruce/.ivy2/cache/org.webjars/jquery/srcs/jquery-2.1.4-sources.jar" "/home/bruce/.ivy2/cache/org.scala-lang/scala-library/srcs/scala-library-2.11.8-sources.jar" "/home/bruce/.ivy2/cache/org.scala-lang/scala-reflect/srcs/scala-reflect-2.11.4-sources.jar" "/home/bruce/.ivy2/cache/org.scala-js/scalajs-dom_sjs0.6_2.11/srcs/scalajs-dom_sjs0.6_2.11-0.9.0-sources.jar" "/home/bruce/.ivy2/cache/be.doeraene/scalajs-jquery_sjs0.6_2.11/srcs/scalajs-jquery_sjs0.6_2.11-0.9.0-sources.jar" "/home/bruce/.ivy2/cache/org.scala-js/scalajs-library_2.11/srcs/scalajs-library_2.11-0.6.9-sources.jar" "/home/bruce/.ivy2/cache/org.scala-js/scalajs-test-interface_2.11/srcs/scalajs-test-interface_2.11-0.6.0-sources.jar" "/home/bruce/.ivy2/cache/com.lihaoyi/utest_sjs0.6_2.11/srcs/utest_sjs0.6_2.11-0.3.0-sources.jar")))
+)
