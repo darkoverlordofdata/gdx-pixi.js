@@ -1,7 +1,7 @@
 {
-  "name": "invaders-scala.js",
+  "name": "gdx-pixi.js",
   "version": "0.0.1",
-  "description": "Space Invaders",
+  "description": "A libGDX api for scala.js ",
   "main": "index.js",
   "scripts": {
     "publish": "gulp publish",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/darkoverlordofdata/invaders-scala-js.git"
+    "url": "git+https://github.com/darkoverlordofdata/gdx-pixi.js.git"
   },
   "author": "darkoverlordofdata",
   "license": "MIT",
@@ -20,5 +20,5 @@
     "gulp-shell": "^0.4.2",
     "gulp-webserver": "^0.9.1"
   },
-  "homepage": "https://github.com/darkoverlordofdata/invaders-scala-js#readme"
+  "homepage": "https://github.com/darkoverlordofdata/gdx-pixi.js"
 }

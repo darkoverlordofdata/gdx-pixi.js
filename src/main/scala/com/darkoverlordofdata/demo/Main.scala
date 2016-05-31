@@ -1,4 +1,4 @@
-package com.darkoverlordofdata.invaderz
+package com.darkoverlordofdata.demo
 
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx

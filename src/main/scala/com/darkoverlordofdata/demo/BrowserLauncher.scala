@@ -1,4 +1,4 @@
-package com.darkoverlordofdata.invaderz
+package com.darkoverlordofdata.demo
 
 import co.technius.scalajs.pixi.Pixi
 import co.technius.scalajs.pixi.loaders._
@@ -12,6 +12,8 @@ object BrowserLauncher extends JSApp {
       .add("images/badlogic.jpg")
       .load((loader: Loader, res: ResourceDictionary) => {
         val config = new JsApplicationConfiguration()
+        config.width = 320
+        config.height = 480
         new JsApplication(new Main(), config)
       })
   }
