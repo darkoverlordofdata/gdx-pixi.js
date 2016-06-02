@@ -6,8 +6,8 @@ import scala.scalajs.js.annotation.JSName
 @JSName("gdx.JsApplicationConfiguration")
 @js.native
 class JsApplicationConfiguration extends js.Object {
-  var height: Double = js.native
-  var width: Double = js.native
+  var height: Int = js.native
+  var width: Int = js.native
   var fullscreen: Boolean = js.native
   var title: String = js.native
 }
