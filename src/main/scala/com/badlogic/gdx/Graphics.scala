@@ -10,10 +10,10 @@ class Graphics extends js.Object {
   var frameId: Double = js.native
   var lastTime: Double = js.native
   var frames: Double = js.native
-  var fps: Double = js.native
-  def getDeltaTime: Double = js.native
-  def getWidth: Double = js.native
-  def getHeight: Double = js.native
-  def getDensity: Double = js.native
+  var fps: Int = js.native
+  def getDeltaTime(): Float = js.native
+  def getWidth(): Int = js.native
+  def getHeight(): Int = js.native
+  def getDensity(): Int = js.native
 
 }

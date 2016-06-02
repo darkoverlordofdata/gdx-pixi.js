@@ -15,6 +15,7 @@ object BrowserLauncher extends JSApp {
         config.width = 320
         config.height = 480
         new JsApplication(new Main(), config)
+//        new JsApplication(new Demo(), config)
       })
   }
 }

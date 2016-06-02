@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics._
 
 @JSName("utils.viewport.FillViewport")
 @js.native
-class FillViewport extends js.Object {
-  def this(worldWidth: Double, worldHeight: Double, camera: Camera = ???) = this()
+class FillViewport extends ScalingViewport {
+  def this(worldWidth: Float, worldHeight: Float, camera: Camera = ???) = this()
 }
 

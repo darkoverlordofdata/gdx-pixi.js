@@ -25,7 +25,7 @@ class Main extends ApplicationAdapter {
 
   }
 
-  override def resize(width: Double, height: Double): Unit = {}
+  override def resize(width: Int, height: Int): Unit = {}
 
   override def dispose(): Unit = {}
 

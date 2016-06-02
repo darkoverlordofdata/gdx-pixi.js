@@ -1,18 +1,13 @@
 package com.badlogic.gdx
 
-import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
-
-@JSName("gdx.InputProcessor")
-@js.native
-class InputProcessor extends js.Object {
-  def keyDown(keycode: Double): Boolean = js.native
-  def keyUp(keycode: Double): Boolean = js.native
-  def keyTyped(keycode: String): Boolean = js.native
-  def touchDown(screenX: Double, screenY: Double, pointer: Double, button: Double): Boolean = js.native
-  def touchUp(screenX: Double, screenY: Double, pointer: Double, button: Double): Boolean = js.native
-  def touchDragged(screenX: Double, screenY: Double, pointer: Double): Boolean = js.native
-  def mouseMoved(screenX: Double, screenY: Double): Boolean = js.native
-  def scrolled(amount: Double): Boolean = js.native
+trait InputProcessor {
+  def keyDown(keycode: Int): Boolean
+  def keyUp(keycode: Int): Boolean
+  def keyTyped(keycode: Char): Boolean
+  def touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean
+  def touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean
+  def touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean
+  def mouseMoved(screenX: Int, screenY: Int): Boolean
+  def scrolled(amount: Int): Boolean
 }
 

@@ -1,11 +1,18 @@
 package com.badlogic.gdx
 
-trait ApplicationListener {
-  def create(): Unit
-  def resize(width: Double, height: Double): Unit
-  def render(): Unit
-  def pause(): Unit
-  def resume(): Unit
-  def dispose(): Unit
+import scala.scalajs.js.annotation.JSExport
 
+trait ApplicationListener {
+  @JSExport
+  def create(): Unit
+  @JSExport
+  def resize(width: Int, height: Int): Unit
+  @JSExport
+  def render(): Unit
+  @JSExport
+  def pause(): Unit
+  @JSExport
+  def resume(): Unit
+  @JSExport
+  def dispose(): Unit
 }

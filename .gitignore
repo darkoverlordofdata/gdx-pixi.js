@@ -11,3 +11,4 @@ target
 .ensime_cache
 .idea
 /node_modules/
+/old/

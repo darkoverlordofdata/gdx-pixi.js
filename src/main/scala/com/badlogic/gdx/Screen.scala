@@ -1,17 +1,12 @@
 package com.badlogic.gdx
 
-import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
-
-@JSName("gdx.Screen")
-@js.native
-class Screen extends js.Object {
-  def hide(): Unit = js.native
-  def dispose(): Unit = js.native
-  def pause(): Unit = js.native
-  def resize(height: Double, width: Double): Unit = js.native
-  def show(): Unit = js.native
-  def resume(): Unit = js.native
-  def render(time: Double): Unit = js.native
+trait Screen {
+  def hide(): Unit
+  def dispose(): Unit
+  def pause(): Unit
+  def resize(height: Int, width: Int): Unit
+  def show(): Unit
+  def resume(): Unit
+  def render(time: Float): Unit
 }
 

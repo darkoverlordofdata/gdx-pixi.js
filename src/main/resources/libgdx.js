@@ -8,10 +8,9 @@
 (function($env) {
     "use strict";
 
-    var _instance = null;
-    var _processor = null;
-    var _renderer = null;
-    
+    var _processor = null;  // reference to input processor
+    var _renderer = null;   // pixi renderer
+
     /**
      * @JSName("gdx.audio.Sound")
      */
@@ -27,7 +26,7 @@
         readString() {
         }
     }
-    
+
     /**
      * @JSName("gdx.graphics.Camera")
      */
@@ -39,7 +38,7 @@
         }
         update() {}
     }
-    
+
     /**
      * @JSName("gdx.graphics.OrthographicCamera")
      */
@@ -51,8 +50,8 @@
         update() {}
 
     }
-    
-    
+
+
     /**
      * @JSName("gdx.graphics.GL20")
      */
@@ -64,7 +63,7 @@
         glClear(mask) {
         }
     }
-    
+
     GL20.GL_COLOR_BUFFER_BIT = 0x00004000;
 	GL20.GL_NEAREST = 0x2600;
     GL20.GL_LINEAR = 0x2601;
@@ -73,7 +72,7 @@
     GL20.GL_LINEAR_MIPMAP_NEAREST = 0x2701;
 	GL20.GL_NEAREST_MIPMAP_LINEAR = 0x2702;
     GL20.GL_LINEAR_MIPMAP_LINEAR = 0x2703;
-    
+
     /**
      * @JSName("gdx.graphics.Texture")
      */
@@ -91,12 +90,12 @@
      * @JSName("gdx.graphics.Texture.TextureFilter")
      */
     Texture.TextureFilter = {
-		Nearest: GL20.GL_NEAREST, 
-        Linear: GL20.GL_LINEAR, 
+		Nearest: GL20.GL_NEAREST,
+        Linear: GL20.GL_LINEAR,
         MipMap: GL20.GL_LINEAR_MIPMAP_LINEAR,
-        MipMapNearestNearest:GL20.GL_NEAREST_MIPMAP_NEAREST, 
-        MipMapLinearNearest: GL20.GL_LINEAR_MIPMAP_NEAREST, 
-        MipMapNearestLinear: GL20.GL_NEAREST_MIPMAP_LINEAR, 
+        MipMapNearestNearest:GL20.GL_NEAREST_MIPMAP_NEAREST,
+        MipMapLinearNearest: GL20.GL_LINEAR_MIPMAP_NEAREST,
+        MipMapNearestLinear: GL20.GL_NEAREST_MIPMAP_LINEAR,
         MipMapLinearLinear: GL20.GL_LINEAR_MIPMAP_LINEAR
     }
 
@@ -107,24 +106,24 @@
         constructor() {
             this.sprites = new PIXI.Container()
         }
-        
+
         begin() {
             this.sprites.children.length = 0;
         }
-        draw(img, x, y, width=-1, height=-1) {
+        draw(texture, x, y, width=-1, height=-1) {
             this.sprites.addChild(texture.sprite);
             texture.sprite.x = x;
             texture.sprite.y = y;
         }
-        end {
+        end() {
             _renderer.render(this.sprites);
         }
         setProjectionMatrix(projection) {
-            
+
         }
-        
+
     }
-    
+
     /**
      * @JSName("gdx.graphics.g2d.BitmapFont")
      */
@@ -138,10 +137,28 @@
         getWidth(){}
         getHeight(){}
         draw(batch, str, x, y){
-            
+
         }
     }
-    
+
+    /**
+     * @JSName("gdx.graphics.g2d.TextureRegion")
+     */
+    class TextureRegion {
+        constructor(texture) {
+            this.texture = texture;
+        }
+        setX(value){
+
+        }
+        setY(value) {
+
+        }
+        setColor(red, green, blue, alpha) {
+
+        }
+    }
+
     /**
      * @JSName("gdx.graphics.g2d.Sprite")
      */
@@ -149,13 +166,13 @@
         getWidth(){}
         getHeight(){}
         setScale(x, y) {
-            
+
         }
         setPosition(x, y) {
-            
+
         }
         draw(batch) {
-            
+
         }
     }
 
@@ -174,25 +191,7 @@
         createSprite(name){}
     }
 
-    /**
-     * @JSName("gdx.graphics.g2d.TextureRegion")
-     */
-    class TextureRegion {
-        constructor(texture) {
-            this.texture = texture;
-        }
-        setX(value){
-            
-        }
-        setY(value) {
-            
-        }
-        setColor(red, green, blue, alpha) {
-            
-        }
-    }
 
-    
     /**
      * @JSName("gdx.math.Vector3")
      */
@@ -213,46 +212,58 @@
     class ClickListener {
         clicked(event, x, y){}
     }
-    
+
     /**
      * @JSName("gdx.scenes.scene2d.Actor")
      */
     class Actor {
-     
+
         setX(x) {
-            
-        }   
+
+        }
         setY(y) {
-            
+
         }
         setScale(scaleXY) {
-            
+
         }
         addListener(listener) {
-            
+
         }
     }
-    
+
     /**
      * @JSName("gdx.scenes.scene2d.Event")
      */
     class Event {}
-    
+
     /**
      * @JSName("gdx.scenes.scene2d.EventListener")
      */
     class EventListener {}
-    
+
     /**
      * @JSName("gdx.scenes.scene2d.InputEvent")
      */
     class InputEvent {}
-    
+
     /**
      * @JSName("gdx.scenes.scene2d.InputListener")
      */
     class InputListener extends EventListener {}
-    
+    class InputProcessor {
+
+         keyDown(keycode){}
+         keyUp(keycode){}
+         keyTyped(character){}
+         touchDown(screenX, screenY, pointer, button){}
+         touchUp(screenX, screenY, pointer, button){}
+         touchDragged(screenX, screenY, pointer){}
+         mouseMoved(screenX, screenY){}
+         scrolled(amount){}
+    }
+
+
     /**
      * @JSName("gdx.scenes.scene2d.Stage")
      */
@@ -260,16 +271,16 @@
         getWidth(){}
         getHeight(){}
         act() {
-            
+
         }
         draw() {
-            
+
         }
         addActor(actor) {
-            
+
         }
     }
-    
+
     /**
      * @JSName("gdx.utils.Scaling")
      */
@@ -284,25 +295,13 @@
         none: 7
     }
 
-    
+
     /**
-     * @JSName("gdx.utils.viewport.FillViewport")
+     * @JSName("gdx.utils.viewport.Viewport")
      */
-    class FillViewport extends ScalingViewport {
-        constructor(worldWidth, worldHeight, camera) {
-            super(Scaling.fill, worldWidth, worldHeight, camera);
-        }
+    class Viewport {
     }
-    
-    /**
-     * @JSName("gdx.utils.viewport.FitViewport")
-     */
-    class FitViewport extends ScalingViewport {
-        constructor(worldWidth, worldHeight, camera) {
-            super(Scaling.fit, worldWidth, worldHeight, camera);
-        }
-    }
-    
+
     /**
      * @JSName("gdx.utils.viewport.ScalingViewport")
      */
@@ -314,25 +313,37 @@
             this.camera = camera ? camera : new OrthographicCamera();
         }
     }
-    
+
     /**
-     * @JSName("gdx.utils.viewport.Viewport")
+     * @JSName("gdx.utils.viewport.FillViewport")
      */
-    class Viewport {
+    class FillViewport extends ScalingViewport {
+        constructor(worldWidth, worldHeight, camera) {
+            super(Scaling.fill, worldWidth, worldHeight, camera);
+        }
     }
-    
+
+    /**
+     * @JSName("gdx.utils.viewport.FitViewport")
+     */
+    class FitViewport extends ScalingViewport {
+        constructor(worldWidth, worldHeight, camera) {
+            super(Scaling.fit, worldWidth, worldHeight, camera);
+        }
+    }
+
     /**
      * @JSName("gdx.utils.Json")
      */
     class Json {
     }
-    
+
     /**
      * @JSName("gdx.Audio")
      */
     class Audio{
         newSound(raw) {
-            
+
         }
     }
 
@@ -341,7 +352,7 @@
      */
     class Files{
         internal(path) {
-            
+
         }
     }
 
@@ -409,9 +420,12 @@
             this.time = 0;
             this.fps = 0;
         }
-        
+
         getDeltaTime() {return this.deltaTime;}
-        getWidth() {return this.config.width;}
+        getWidth() {
+            console.log("getWidth")
+            return this.config.width;
+        }
         getHeight() {return this.config.height;}
         getDensity() {return window.devicePixelRatio;}
         setupDisplay() {
@@ -434,14 +448,7 @@
             }
         }
     }
-    
-    class Application {
-        constructor(instance, config) {
-            _instance = instance
-        }
-    }
-    
-    
+
     /**
      * @JSName("gdx.Input")
      */
@@ -474,9 +481,9 @@
             window.addEventListener('keyup', function (event) {
                 _processor.keyUp(event.keyCode);
             }, true);
-        }   
+        }
     }
-    
+
     /**
      * @JSName("gdx.Input.Buttons")
      */
@@ -487,25 +494,13 @@
         BACK: 3,
         FORWARD: 4
     }
-    
+
     /**
      * @JSName("gdx.InpuyKeys")
      */
     Input.Keys = {
         A: 29,
         Z: 54
-    }
-
-    class InputProcessor {
-        
-        keyDown(keycode){}
-        keyUp(keycode){}
-        keyTyped(character){}
-        touchDown(screenX, screenY, pointer, button){}
-        touchUp(screenX, screenY, pointer, button){}
-        touchDragged(screenX, screenY, pointer){}
-        mouseMoved(screenX, screenY){}
-        scrolled(amount){}
     }
 
     class Net{}
@@ -569,67 +564,66 @@
         }
     }
 
-    class Screen {
-        hide() {}
-        dispose() {}
-        pause() {}
-        resize(width, height) {}
-        show() {}
-        resume() {}
-        render(time){}
-    }
-    
-
-
     /**
      * export the api
      */
     $env.gdx =  {
-        Gdx: Gdx,
-        Audio: Audio,
-        Files: Files,
-        Graphics: Graphics,
-        Input: Input,
-        Net: Net,
-
-        JsApplication: JsApplication,
-        JsApplicationConfiguration: JsApplicationConfiguration,
-        Application: Application,
-        InputProcessor: InputProcessor,
-        Game: Game,
-        Screen: Screen,
-
+        audio: {
+            Sound: Sound  
+        },
+        files: {
+            FileHandle
+        },
+        graphics: {
+            g2d: {
+                Batch: Batch,
+                BitmapFont: BitmapFont,
+                Sprite: Sprite,
+                SpriteBatch: SpriteBatch,
+                TextureAtlas: TextureAtlas,
+                TextureRegion: TextureRegion
+            },
+            Camera: Camera,
+            GL20: GL20,
+            OrthographicCamera: OrthographicCamera,
+            Texture: Texture
+        },
         math: {
-            MathUtils: Math
+            MathUtils: Math,
+            Vector3: Vector3
+        },
+        scenes: {
+            scene2d: {
+                utils: {
+                    ClickListener: ClickListener
+                },
+                Actor: Actor,
+                Event: Event,
+                EventListener: EventListener,
+                InputEvent: InputEvent,
+                InputListener: InputListener,
+                Stage: Stage
+            }
         },
         utils: {
             viewport: {
                 FillViewport: FillViewport,
-                FitViewport: FitViewport
-            }
+                FitViewport: FitViewport,
+                ScalingViewport: ScalingViewport,
+                Viewport: Viewport
+            },
+            Json: Json,
+            Scaling: Scaling
         },
-        scenes: {
-            scene2d: {
-                Stage: Stage,
-                InputEvent: InputEvent,
-                utils: {
-                    ClickListener: ClickListener
-                }
-            }
-        },
-        graphics: {
-            OrthographicCamera: OrthographicCamera,
-            Texture: Texture,
-            GL20: GL20,
-            g2d: {
-                //Sprite: Sprite,
-                SpriteBatch: SpriteBatch,
-                TextureAtlas: TextureAtlas,
-                TextureRegion: TextureRegion,
-                BitmapFont: BitmapFont
-                
-            }
-        }
+        Audio: Audio,
+        Files: Files,
+        Game: Game,
+        Gdx: Gdx,
+        Graphics: Graphics,
+        Input: Input,
+        Net: Net,
+        JsApplication: JsApplication,
+        JsApplicationConfiguration: JsApplicationConfiguration
     }
 }(this));
 

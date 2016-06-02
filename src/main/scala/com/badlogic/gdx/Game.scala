@@ -1,19 +1,14 @@
 package com.badlogic.gdx
 
-import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
-
-@JSName("gdx.Game")
-@js.native
-class Game extends js.Object {
-  var screen: Screen = js.native
-  def dispose(): Unit = js.native
-  def pause(): Unit = js.native
-  def resume(): Unit = js.native
-  def render(): Unit = js.native
-  def resize(): Unit = js.native
-  def setScreen(screen:Screen): Unit = js.native
-  def getScreen: Screen = js.native
-  def create(): Unit = js.native
+trait Game extends ApplicationListener {
+  //var screen: Screen
+  def setScreen(screen:Screen): Unit
+  def getScreen(): Screen
+  override def create(): Unit
+  override def resize(width: Int, height: Int): Unit
+  override def render(): Unit
+  override def pause(): Unit
+  override def resume(): Unit
+  override def dispose(): Unit
 }
 
