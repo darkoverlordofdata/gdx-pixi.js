@@ -1,7 +1,5 @@
 package com.darkoverlordofdata.demo
 
-import co.technius.scalajs.pixi.Pixi
-import co.technius.scalajs.pixi.loaders._
 import com.badlogic.gdx.{JsApplicationConfiguration, JsApplication}
 import scala.scalajs.js.JSApp
 
