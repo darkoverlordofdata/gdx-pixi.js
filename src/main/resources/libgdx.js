@@ -12,6 +12,29 @@
     var _renderer = null;   // pixi renderer
 
     /**
+     * getJSON
+     *
+     * @param url
+     * @returns Promise
+     */
+    var getJSON = function(url) {
+        return new Promise(function(resolve, reject) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('get', url, true);
+            xhr.responseType = 'json';
+            xhr.onload = function() {
+                var status = xhr.status;
+                if (status == 200) {
+                    resolve(xhr.response);
+                } else {
+                    reject(status);
+                }
+            };
+            xhr.send();
+        });
+    };
+
+    /**
      * @JSName("gdx.audio.Sound")
      */
     class Sound {
@@ -133,10 +156,10 @@
             this.region = region;
             this.flip = flip;
         }
-        setUseIntegerPositions(integer){}
-        getWidth(){}
-        getHeight(){}
-        draw(batch, str, x, y){
+        setUseIntegerPositions(integer) {}
+        getWidth() {}
+        getHeight() {}
+        draw(batch, str, x, y) {
 
         }
     }
@@ -522,6 +545,13 @@
      */
     class JsApplication {
         constructor(listener, config){
+
+            getJSON('manifest.json').then(data => {
+                for (let file of data.files) 
+                    PIXI.loader.add(file)
+                PIXI.loader.load( () => this.initialize())
+            }, status => console.log(`error ${status}: Unable to load manifest.json`));
+            
             if (config.title === null) {
                 config.title = listener.constructor.name;
             }
@@ -540,8 +570,8 @@
             Gdx.files = this.files;
             Gdx.input = this.input;
             Gdx.net = this.net;
-            this.initialize();
         }
+        
         /**
          * Start the main loop
          */

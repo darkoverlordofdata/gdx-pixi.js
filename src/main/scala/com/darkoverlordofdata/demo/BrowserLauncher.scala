@@ -8,14 +8,9 @@ import scala.scalajs.js.JSApp
 object BrowserLauncher extends JSApp {
 
   def main(): Unit = {
-    Pixi.loader
-      .add("images/badlogic.jpg")
-      .load((loader: Loader, res: ResourceDictionary) => {
-        val config = new JsApplicationConfiguration()
-        config.width = 320
-        config.height = 480
-        new JsApplication(new Main(), config)
-//        new JsApplication(new Demo(), config)
-      })
+      val config = new JsApplicationConfiguration()
+      config.width = 320
+      config.height = 480
+      new JsApplication(new Main(), config)
   }
 }
