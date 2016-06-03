@@ -20,5 +20,8 @@
     "gulp-shell": "^0.4.2",
     "gulp-webserver": "^0.9.1"
   },
-  "homepage": "https://github.com/darkoverlordofdata/gdx-pixi.js"
+  "homepage": "https://github.com/darkoverlordofdata/gdx-pixi.js",
+  "dependencies": {
+    "morgan": "^1.7.0"
+  }
 }
