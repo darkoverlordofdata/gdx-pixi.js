@@ -9,6 +9,7 @@ object BrowserLauncher extends JSApp {
       val config = new JsApplicationConfiguration()
       config.width = 320
       config.height = 480
-      new JsApplication(new Main(), config)
+      //new JsApplication(new Main(), config)
+      new JsApplication(new Demo(), config)
   }
 }

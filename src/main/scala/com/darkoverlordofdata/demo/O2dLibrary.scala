@@ -1,6 +1,7 @@
 package com.darkoverlordofdata.demo
 
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.{Sprite, TextureAtlas}
 
 object Layer extends Enumeration {
@@ -39,6 +40,7 @@ object O2dLibrary {
   }
 
   def getResource(name:String):String = {
+    println(s"getResource(${name})")
     name match {
       case "background" => "BackdropBlackLittleSparkBlack"
       case "player" => "spaceshipspr"
@@ -57,7 +59,11 @@ object O2dLibrary {
   }
 
   def getSprite(name:String):Sprite = {
-    sprites.createSprite(getResource(name))
+    println(s"getSprite(${name})")
+    val n1 = getResource(name)
+    println(s"resource = $n1")
+    //sprites.createSprite(n1)
+    new Sprite(new Texture(name))
   }
 
 }

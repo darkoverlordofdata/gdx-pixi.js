@@ -10,10 +10,12 @@
 
     var _processor = null;  // reference to input processor
     var _renderer = null;   // pixi renderer
+    var _resources = null;
 
     /**
      * getJSON
      *
+     * @see https://mathiasbynens.be/notes/xhr-responsetype-json
      * @param url
      * @returns Promise
      */
@@ -46,6 +48,9 @@
      * @JSName("gdx.files.FileHandle")
      */
     class FileHandle {
+        constructor(path) {
+            this.path = path;
+        }
         readString() {
         }
     }
@@ -101,11 +106,15 @@
      */
     class Texture {
         constructor(path) {
-            this.path = path;
-            this.sprite = PIXI.Sprite.fromImage(path);
+            if (typeof path === 'string')
+                this.path = _resources[path] ? _resources[path].url : path;
+            else
+                this.path = path.path;
+                
+            this.sprite = PIXI.Sprite.fromImage(this.path);
             this.id = Texture.uniqueId++;
         }
-        setFilter(minFilter ,magFilterp1) {}
+        setFilter(minFilter ,magFilter) {}
     }
     Texture.uniqueId = 0;
 
@@ -186,13 +195,16 @@
      * @JSName("gdx.graphics.g2d.Sprite")
      */
     class Sprite extends TextureRegion {
-        getWidth(){}
-        getHeight(){}
+        constructor(texture) {
+            super(texture);
+        }
+        getWidth(){return this.texture.sprite.width;}
+        getHeight(){return this.texture.sprite.height;}
         setScale(x, y) {
-
+            this.texture.sprite.scale.set(x, y);
         }
         setPosition(x, y) {
-
+            this.texture.sprite.position.set(x, y);
         }
         draw(batch) {
 
@@ -323,6 +335,16 @@
      * @JSName("gdx.utils.viewport.Viewport")
      */
     class Viewport {
+    /**
+        * applyCamera
+        * 
+        * Calls to the apply method of an object x map to 
+        * calling x, i.e., x(...) instead of x.apply(...). 
+        * @see https://www.scala-js.org/doc/interoperability/facade-types.html
+        */
+        applyCamera() {
+            console.log("APPLY");
+        }
     }
 
     /**
@@ -330,6 +352,7 @@
      */
     class ScalingViewport extends Viewport {
         constructor(scaling, worldWidth, worldHeight, camera) {
+            super();
             this.scaling = scaling;
             this.worldWidth = worldWidth;
             this.worldHeight = worldHeight;
@@ -375,7 +398,7 @@
      */
     class Files{
         internal(path) {
-
+            return new FileHandle(path)
         }
     }
 
@@ -446,7 +469,6 @@
 
         getDeltaTime() {return this.deltaTime;}
         getWidth() {
-            console.log("getWidth")
             return this.config.width;
         }
         getHeight() {return this.config.height;}
@@ -546,12 +568,6 @@
     class JsApplication {
         constructor(listener, config){
 
-            getJSON('manifest.json').then(data => {
-                for (let file of data.files) 
-                    PIXI.loader.add(file)
-                PIXI.loader.load( () => this.initialize())
-            }, status => console.log(`error ${status}: Unable to load manifest.json`));
-            
             if (config.title === null) {
                 config.title = listener.constructor.name;
             }
@@ -570,6 +586,19 @@
             Gdx.files = this.files;
             Gdx.input = this.input;
             Gdx.net = this.net;
+            /**
+             * Load the manifest, and initialize
+             */
+            getJSON('manifest.json').then(data => {
+                for (let name in data.atlas) {
+                    PIXI.loader.add(name, data.atlas[name]);
+                }
+                PIXI.loader.load( (loader, res) => {
+                    _resources = Object.create(res);
+                    this.initialize();
+                });
+            }, status => console.log(`error ${status}: Unable to load manifest.json`));
+            
         }
         
         /**
@@ -598,6 +627,16 @@
      * export the api
      */
     $env.gdx =  {
+        utils: {
+            viewport: {
+                FillViewport: FillViewport,
+                FitViewport: FitViewport,
+                ScalingViewport: ScalingViewport,
+                Viewport: Viewport
+            },
+            Json: Json,
+            Scaling: Scaling
+        },
         audio: {
             Sound: Sound  
         },
@@ -634,16 +673,6 @@
                 InputListener: InputListener,
                 Stage: Stage
             }
-        },
-        utils: {
-            viewport: {
-                FillViewport: FillViewport,
-                FitViewport: FitViewport,
-                ScalingViewport: ScalingViewport,
-                Viewport: Viewport
-            },
-            Json: Json,
-            Scaling: Scaling
         },
         Audio: Audio,
         Files: Files,

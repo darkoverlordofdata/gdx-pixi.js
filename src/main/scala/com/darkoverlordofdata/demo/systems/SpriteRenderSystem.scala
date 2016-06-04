@@ -4,23 +4,19 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.{OrthographicCamera, GL20}
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.utils.viewport.FillViewport
-import com.darkoverlordofdata.entitas.{Entity, GroupChangedArgs, IExecuteSystem, Pool}
+import com.darkoverlordofdata.entitas.{Entity, GroupChangedArgs, IInitializeSystem, IExecuteSystem, Pool}
 import com.darkoverlordofdata.demo.EntityExtensions._
 import com.darkoverlordofdata.demo.Factory._
 import com.darkoverlordofdata.demo.{O2dLibrary, Match, GameScene}
 
 import scala.collection.mutable.ListBuffer
 
-class SpriteRenderSystem (val game:GameScene, val pool:Pool) extends IExecuteSystem {
+class SpriteRenderSystem (val game:GameScene, val pool:Pool) extends IInitializeSystem with IExecuteSystem {
   println("SpriteRenderSystem")
 
   lazy val group = pool.getGroup(Match.View)
   val scale = .8f
-  println("...")
-  println(s"${Gdx.graphics.getWidth}")
-  println(s"${game.width}")
   val width = game.width.toFloat
-  println(s"width = $width")
   val height = game.height.toFloat
   val pixelFactor = game.pixelFactor
   lazy val batch = new SpriteBatch()
@@ -30,9 +26,6 @@ class SpriteRenderSystem (val game:GameScene, val pool:Pool) extends IExecuteSys
 
   var sprites = new ListBuffer[Entity]()
 
-  viewport.apply()
-  camera.position.set(width/(pixelFactor*2f), height/(pixelFactor*2f), 0f)
-  camera.update()
 
   /**
     * onEntityAdded
@@ -64,6 +57,13 @@ class SpriteRenderSystem (val game:GameScene, val pool:Pool) extends IExecuteSys
       sprite.setPosition(entity.position.x - x, entity.position.y - y)
       sprite.draw(batch)
     }
+  }
+  
+  override def initialize(): Unit = {
+    println("SpriteRenderSystem.initialize")
+    viewport.apply()
+    camera.position.set(width/(pixelFactor*2f), height/(pixelFactor*2f), 0f)
+    camera.update()
   }
   /**
     * Draw the list
