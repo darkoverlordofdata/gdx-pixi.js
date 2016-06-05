@@ -35,8 +35,14 @@ object BrowserLauncher extends JSApp {
 manifest.json:
 ```
 {
-  "files": [
-    "images/badlogic.jpg"
-  ]
-}
-```
+  "atlas": {
+    "background":"images/BackdropBlackLittleSparkBlack.png",
+    "bang":"images/bang.png",
+    "explosion":"images/explosion.png",
+    "enemy1":"images/enemy1.png",
+    "enemy2":"images/enemy2.png",
+    "enemy3":"images/enemy3.png",
+    "bullet":"images/bullet.png",
+    "player":"images/spaceshipspr.png"
+  }
+}```
