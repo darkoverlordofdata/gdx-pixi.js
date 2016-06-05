@@ -113,6 +113,7 @@
                 
             //console.log("new Texture", this.path)
             this.sprite = PIXI.Sprite.fromImage(this.path);
+            //if (path !== 'background' && path != 'player') this.sprite.anchor.set(0.5, 0.5);
             this.id = Texture.uniqueId++;
         }
         setFilter(minFilter ,magFilter) {}
@@ -145,8 +146,6 @@
         }
         draw(texture, x, y, width=-1, height=-1) {
             
-            if ("images/BackdropBlackLittleSparkBlack.png" !== texture.texture.path)
-                console.log('draw '+texture.texture.path)
             this.sprites.addChild(texture.texture.sprite);
             texture.texture.sprite.x = x;
             texture.texture.sprite.y = y;
@@ -208,10 +207,11 @@
             this.texture.sprite.scale.set(x, y);
         }
         setPosition(x, y) {
-            this.texture.sprite.position.set(x, y);
+            //this.texture.sprite.position.set(x, y);
+            //this.texture.sprite.position.set(Gdx.graphics.getWidth()-x, Gdx.graphics.getHeight()-y);
+            this.texture.sprite.position.set(x, Gdx.graphics.getHeight()-y-this.texture.sprite._texture.height);
         }
         draw(batch) {
-        //   batch.draw(sprite, entity.position.x-x, entity.position.y-y, 0, 0)
             batch.draw(this, this.texture.sprite.position.x, this.texture.sprite.position.y)
         }
     }
@@ -340,6 +340,9 @@
      * @JSName("gdx.utils.viewport.Viewport")
      */
     class Viewport {
+        update(x, y) {
+            
+        }
     /**
         * applyCamera
         * 
@@ -393,7 +396,7 @@
      */
     class Audio{
         newSound(raw) {
-
+            return new Sound(raw);
         }
     }
 
@@ -404,43 +407,6 @@
         internal(path) {
             return new FileHandle(path)
         }
-    }
-
-    /**
-     * @JSName("gdx.Game")
-     */
-    class Game {
-        constructor() {
-            this.screen = null;
-            this.create();
-        }
-        dispose() {
-            if (screen != null) screen.hide();
-        }
-        pause() {
-            if (screen != null) screen.pause();
-        }
-        resume () {
-            if (screen != null) screen.resume();
-        }
-        render() {
-            if (screen != null) screen.render(Gdx.graphics.getDeltaTime());
-        }
-        resize(width, height) {
-            if (screen != null) screen.resize(width, height);
-        }
-        setScreen(screen) {
-            if (this.screen != null) this.screen.hide();
-            this.screen = screen;
-            if (this.screen != null) {
-                this.screen.show();
-                this.screen.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            }
-		}
-        getScreen() {
-            return this.screen;
-        }
-        create() {}
     }
 
     /**
@@ -505,24 +471,25 @@
         setInputProcessor(processor) {
             _processor = processor;
             document.addEventListener('touchstart', function(event) {
+                console.log('touchstart');
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                _processor.touchDown(event.clientX, event.clientY, event.pointer, event.button)
+                _processor.touchDown(event.clientX, event.clientY, 0, event.button)
             }, true);
             document.addEventListener('touchmove', function(event) {
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                _processor.touchDragged(event.clientX, event.clientY, event.pointer)
+                _processor.touchDragged(event.clientX, event.clientY, 0)
             }, true);
             document.addEventListener('touchend', function(event) {
-                _processor.touchUp(event.clientX, event.clientY, event.pointer, event.button)
+                _processor.touchUp(event.clientX, event.clientY, 0, event.button)
             }, true);
             document.addEventListener('mousedown', function(event) {
-                _processor.touchDown(event.clientX, event.clientY, event.pointer, event.button)
+                _processor.touchDown(event.clientX, event.clientY, -1, event.button)
             }, true);
             document.addEventListener('mousemove', function(event) {
                 _processor.mouseMoved(event.clientX, event.clientY)
             }, true);
             document.addEventListener('mouseup', function(event) {
-                _processor.touchUp(event.clientX, event.clientY, event.pointer, event.button)
+                _processor.touchUp(event.clientX, event.clientY, -1, event.button)
             }, true);
             window.addEventListener('keydown', function (event) {
                 _processor.keyDown(event.keyCode);
@@ -548,8 +515,8 @@
      * @JSName("gdx.InpuyKeys")
      */
     Input.Keys = {
-        A: 29,
-        Z: 54
+        A: 54,
+        Z: 90
     }
 
     class Net{}
@@ -610,8 +577,6 @@
          */
         initialize() {
             
-            var k = 0;
-
             _renderer = PIXI.autoDetectRenderer(this.config.width, this.config.height)
             document.body.appendChild(_renderer.view)
 
@@ -620,9 +585,6 @@
             let _this = this;
             let mainLoop = function(time) {
                 
-                if (k++ == 1)   
-                    console.log(_this.listener);
-
                 _this.graphics.update(time);
                 _this.graphics.frameId++;
                 _this.listener.render();
@@ -685,7 +647,6 @@
         },
         Audio: Audio,
         Files: Files,
-        Game: Game,
         Gdx: Gdx,
         Graphics: Graphics,
         Input: Input,

@@ -6,6 +6,8 @@ import com.darkoverlordofdata.demo.{Match, GameScene}
 import com.darkoverlordofdata.demo.EntityExtensions._
 import com.darkoverlordofdata.demo.Factory._
 
+import scala.scalajs.js.annotation.JSExport
+
 /**
   * Created by bruce on 5/13/16.
   */
@@ -26,7 +28,7 @@ class PlayerInputSystem (val game:GameScene, val pool:Pool)
 
 
   override def initialize(): Unit = {
-    //Gdx.input.setInputProcessor(this)
+    Gdx.input.setInputProcessor(this)
     pool.createPlayer(width.toFloat, height.toFloat)
   }
 
@@ -49,6 +51,7 @@ class PlayerInputSystem (val game:GameScene, val pool:Pool)
     }
   }
 
+
   def moveTo(x: Int, y:Int) = {
     mouseX = x/pixelFactor
     mouseY = (height - y)/pixelFactor
@@ -58,22 +61,26 @@ class PlayerInputSystem (val game:GameScene, val pool:Pool)
     false
   }
 
+  @JSExport
   def mouseMoved(screenX: Int, screenY: Int): Boolean = {
     moveTo(screenX, screenY)
     false
   }
 
+  @JSExport
   def keyDown(keycode: Int): Boolean = {
     if (Input.Keys.Z == keycode) shoot = true
     true
   }
 
+  @JSExport
   def touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean = {
     shoot = true
     moveTo(screenX, screenY)
     false
   }
 
+  @JSExport
   def keyUp(keycode: Int): Boolean = {
     if (Input.Keys.Z == keycode) shoot = false
     true
@@ -83,11 +90,13 @@ class PlayerInputSystem (val game:GameScene, val pool:Pool)
     false
   }
 
+  @JSExport
   def touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean = {
     shoot = false
     true
   }
 
+  @JSExport
   def touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean = {
     moveTo(screenX, screenY)
     false

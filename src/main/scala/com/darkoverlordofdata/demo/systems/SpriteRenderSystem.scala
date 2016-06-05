@@ -35,7 +35,6 @@ class SpriteRenderSystem (val game:GameScene, val pool:Pool) extends IExecuteSys
     * Maintain sorted list of entities
     */
   group.onEntityAdded += {e: GroupChangedArgs =>
-    //println(s"onEntityAdded ${e.entity}")
     sprites = (sprites += e.entity).sortBy(-_.layer.ordinal)
   }
 
@@ -44,7 +43,7 @@ class SpriteRenderSystem (val game:GameScene, val pool:Pool) extends IExecuteSys
     * Remove entity from the list
     */
   group.onEntityRemoved += {e: GroupChangedArgs =>
-//    println(s"onEntityRemoved ${e.entity}")
+    //println(s"onEntityRemoved ${e.entity}")
     sprites -= e.entity
   }
 
@@ -78,9 +77,8 @@ class SpriteRenderSystem (val game:GameScene, val pool:Pool) extends IExecuteSys
   }
 
   def resize(width: Int, height: Int) = {
-    println(s"resize $width $height")
-    //viewport.update(width, height)
-    //camera.position.set(camera.viewportWidth/2f, camera.viewportHeight/2f, 0f)
+    viewport.update(width, height)
+    camera.position.set(camera.viewportWidth/2f, camera.viewportHeight/2f, 0f)
   }
 
 }
