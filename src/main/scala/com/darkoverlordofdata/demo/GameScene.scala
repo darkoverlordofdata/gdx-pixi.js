@@ -19,10 +19,12 @@ class GameScene extends Screen {
   lazy val spriteRenderSystem:SpriteRenderSystem = { new SpriteRenderSystem(this, pool) }
   lazy val systems:Systems = { createSystems(pool, spriteRenderSystem) }
 
+  var k = 0
   systems.initialize()
 
   def createSystems(pool: Pool, spriteRenderSystem: SpriteRenderSystem): Systems = {
     new Systems()
+      .add(pool.createSystem(spriteRenderSystem))
       .add(pool.createSystem(new PhysicsSystem(this, pool)))
       .add(pool.createSystem(new ViewManagerSystem(this, pool)))
       .add(pool.createSystem(new PlayerInputSystem(this, pool)))
@@ -32,16 +34,17 @@ class GameScene extends Screen {
       .add(pool.createSystem(new EntitySpawningTimerSystem(this, pool)))
       .add(pool.createSystem(new ScaleTweenSystem(this, pool)))
       .add(pool.createSystem(new RemoveOffscreenShipsSystem(this, pool)))
-      .add(pool.createSystem(spriteRenderSystem))
-      .add(pool.createSystem(new HealthRenderSystem(this, pool)))
-      .add(pool.createSystem(new ScoreRenderSystem(this, pool)))
-      .add(pool.createSystem(new DestroySystem(this, pool)))
+      //.add(pool.createSystem(new HealthRenderSystem(this, pool)))
+      //.add(pool.createSystem(new ScoreRenderSystem(this, pool)))
+      //.add(pool.createSystem(new DestroySystem(this, pool)))
   }
 
   override def hide(): Unit = {}
   override def dispose(): Unit = {}
   override def pause(): Unit = {}
   override def render(delta: Float): Unit = {
+//    k += 1
+//    if (k == 1)
     systems.execute()
   }
   override def resize(width: Int, height: Int): Unit = {

@@ -11,7 +11,7 @@ import com.darkoverlordofdata.demo.{O2dLibrary, Match, GameScene}
 
 import scala.collection.mutable.ListBuffer
 
-class SpriteRenderSystem (val game:GameScene, val pool:Pool) extends IInitializeSystem with IExecuteSystem {
+class SpriteRenderSystem (val game:GameScene, val pool:Pool) extends IExecuteSystem {
   println("SpriteRenderSystem")
 
   lazy val group = pool.getGroup(Match.View)
@@ -26,12 +26,16 @@ class SpriteRenderSystem (val game:GameScene, val pool:Pool) extends IInitialize
 
   var sprites = new ListBuffer[Entity]()
 
+  viewport.apply()
+  camera.position.set(width/(pixelFactor*2f), height/(pixelFactor*2f), 0f)
+  camera.update()
 
   /**
     * onEntityAdded
     * Maintain sorted list of entities
     */
   group.onEntityAdded += {e: GroupChangedArgs =>
+    //println(s"onEntityAdded ${e.entity}")
     sprites = (sprites += e.entity).sortBy(-_.layer.ordinal)
   }
 
@@ -40,17 +44,18 @@ class SpriteRenderSystem (val game:GameScene, val pool:Pool) extends IInitialize
     * Remove entity from the list
     */
   group.onEntityRemoved += {e: GroupChangedArgs =>
+//    println(s"onEntityRemoved ${e.entity}")
     sprites -= e.entity
   }
 
   def drawEntity(entity:Entity): Unit = {
     val sprite = entity.view.sprite
     if (sprite != null) {
-      if (entity.hasScale)
+      if (entity.hasScale) {
         sprite.setScale(entity.scale.x * scale, entity.scale.y * scale)
-      else
+      } else {
         sprite.setScale(scale)
-
+      }
       val x = sprite.getWidth / 2f
       val y = sprite.getHeight / 2f
 
@@ -59,12 +64,6 @@ class SpriteRenderSystem (val game:GameScene, val pool:Pool) extends IInitialize
     }
   }
   
-  override def initialize(): Unit = {
-    println("SpriteRenderSystem.initialize")
-    viewport.apply()
-    camera.position.set(width/(pixelFactor*2f), height/(pixelFactor*2f), 0f)
-    camera.update()
-  }
   /**
     * Draw the list
     */
@@ -79,8 +78,9 @@ class SpriteRenderSystem (val game:GameScene, val pool:Pool) extends IInitialize
   }
 
   def resize(width: Int, height: Int) = {
-    viewport.update(width, height)
-    camera.position.set(camera.viewportWidth/2f, camera.viewportHeight/2f, 0f)
+    println(s"resize $width $height")
+    //viewport.update(width, height)
+    //camera.position.set(camera.viewportWidth/2f, camera.viewportHeight/2f, 0f)
   }
 
 }

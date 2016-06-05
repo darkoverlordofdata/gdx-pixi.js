@@ -40,7 +40,6 @@ object O2dLibrary {
   }
 
   def getResource(name:String):String = {
-    println(s"getResource(${name})")
     name match {
       case "background" => "BackdropBlackLittleSparkBlack"
       case "player" => "spaceshipspr"
@@ -59,10 +58,6 @@ object O2dLibrary {
   }
 
   def getSprite(name:String):Sprite = {
-    println(s"getSprite(${name})")
-    val n1 = getResource(name)
-    println(s"resource = $n1")
-    //sprites.createSprite(n1)
     new Sprite(new Texture(name))
   }
 

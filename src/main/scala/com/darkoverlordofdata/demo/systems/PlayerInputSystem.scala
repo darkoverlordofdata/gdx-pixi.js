@@ -26,7 +26,7 @@ class PlayerInputSystem (val game:GameScene, val pool:Pool)
 
 
   override def initialize(): Unit = {
-    Gdx.input.setInputProcessor(this)
+    //Gdx.input.setInputProcessor(this)
     pool.createPlayer(width.toFloat, height.toFloat)
   }
 

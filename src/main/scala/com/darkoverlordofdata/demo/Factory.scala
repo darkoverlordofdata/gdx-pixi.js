@@ -19,10 +19,12 @@ object Factory {
     }
 
     def createPlayer(width: Float, height: Float): Entity = {
+      println(s"createPlayer $width $height")
       val entity = prefab("player")
         .addPosition(width / 2, 80f)
         .addScore(0)
         .setPlayer(true)
+      println(s"$entity")
       entity
     }
 

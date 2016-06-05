@@ -111,6 +111,7 @@
             else
                 this.path = path.path;
                 
+            //console.log("new Texture", this.path)
             this.sprite = PIXI.Sprite.fromImage(this.path);
             this.id = Texture.uniqueId++;
         }
@@ -143,9 +144,12 @@
             this.sprites.children.length = 0;
         }
         draw(texture, x, y, width=-1, height=-1) {
-            this.sprites.addChild(texture.sprite);
-            texture.sprite.x = x;
-            texture.sprite.y = y;
+            
+            if ("images/BackdropBlackLittleSparkBlack.png" !== texture.texture.path)
+                console.log('draw '+texture.texture.path)
+            this.sprites.addChild(texture.texture.sprite);
+            texture.texture.sprite.x = x;
+            texture.texture.sprite.y = y;
         }
         end() {
             _renderer.render(this.sprites);
@@ -163,7 +167,7 @@
         constructor(fontFile, region, integer) {
             this.fontFile = fontFile;
             this.region = region;
-            this.flip = flip;
+            this.integer = integer;
         }
         setUseIntegerPositions(integer) {}
         getWidth() {}
@@ -180,15 +184,6 @@
         constructor(texture) {
             this.texture = texture;
         }
-        setX(value){
-
-        }
-        setY(value) {
-
-        }
-        setColor(red, green, blue, alpha) {
-
-        }
     }
 
     /**
@@ -198,8 +193,17 @@
         constructor(texture) {
             super(texture);
         }
-        getWidth(){return this.texture.sprite.width;}
-        getHeight(){return this.texture.sprite.height;}
+        getWidth() {return this.texture.sprite._texture.width;}
+        getHeight(){return this.texture.sprite._texture.height;}
+        setX(value){
+
+        }
+        setY(value) {
+
+        }
+        setColor(red, green, blue, alpha) {
+
+        }
         setScale(x, y) {
             this.texture.sprite.scale.set(x, y);
         }
@@ -207,7 +211,8 @@
             this.texture.sprite.position.set(x, y);
         }
         draw(batch) {
-
+        //   batch.draw(sprite, entity.position.x-x, entity.position.y-y, 0, 0)
+            batch.draw(this, this.texture.sprite.position.x, this.texture.sprite.position.y)
         }
     }
 
@@ -343,7 +348,6 @@
         * @see https://www.scala-js.org/doc/interoperability/facade-types.html
         */
         applyCamera() {
-            console.log("APPLY");
         }
     }
 
@@ -605,6 +609,8 @@
          * Start the main loop
          */
         initialize() {
+            
+            var k = 0;
 
             _renderer = PIXI.autoDetectRenderer(this.config.width, this.config.height)
             document.body.appendChild(_renderer.view)
@@ -613,6 +619,9 @@
             this.listener.create();
             let _this = this;
             let mainLoop = function(time) {
+                
+                if (k++ == 1)   
+                    console.log(_this.listener);
 
                 _this.graphics.update(time);
                 _this.graphics.frameId++;

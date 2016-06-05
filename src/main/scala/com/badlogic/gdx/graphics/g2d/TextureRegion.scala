@@ -9,7 +9,4 @@ import scala.scalajs.js.annotation.JSName
 @js.native
 class TextureRegion extends js.Object {
   def this(texture: Texture) = this()
-  def setX(value:Float): Unit = js.native
-  def setY(value:Float): Unit = js.native
-  def setColor(red:Float, green:Float, blue:Float, alpha:Float): Unit = js.native
 }

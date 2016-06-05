@@ -3,7 +3,7 @@ package com.badlogic.gdx.math
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 
-@JSName("gdx.MathUtils")
+@JSName("gdx.math.Vector3")
 @js.native
 class Vector3 extends js.Object {
 
