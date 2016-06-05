@@ -1,0 +1,26 @@
+{
+
+"images": [
+    "images/invaderz.png"
+],
+
+"frames": [
+    [1, 1, 256, 256, 0, 0, 0],
+    [259, 1, 93, 126, 0, 0, 0],
+    [259, 129, 32, 32, 0, 0, 0],
+    [293, 129, 10, 30, 0, 0, 0]
+],
+
+"animations": {
+    "black": { "frames": [0] },
+    "ship": { "frames": [1] },
+    "invader": { "frames": [2] },
+    "bullet": { "frames": [3] }
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:eef2f633f28483190a164b0ad5ec7b0e:5c56e7874cf0a78e6763c17ade522e75:698babdf13bb01b014fef37bb909c306$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+}
