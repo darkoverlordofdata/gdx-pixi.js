@@ -49,14 +49,18 @@ class SpriteRenderSystem (val game:GameScene, val pool:Pool) extends IExecuteSys
 
   def drawEntity(entity:Entity): Unit = {
     val sprite = entity.view.sprite
+    var scaleX = 1f
+    var scaleY = 1f
     if (sprite != null) {
       if (entity.hasScale) {
-        sprite.setScale(entity.scale.x * scale, entity.scale.y * scale)
+        scaleX = entity.scale.x
+        scaleY = entity.scale.y
+        sprite.setScale(scaleX * scale, scaleY * scale)
       } else {
         sprite.setScale(scale)
       }
-      val x = sprite.getWidth / 2f
-      val y = sprite.getHeight / 2f
+      val x = sprite.getWidth / 2f * scale * scaleX
+      val y = sprite.getHeight / 2f * scale * scaleY
 
       sprite.setPosition(entity.position.x - x, entity.position.y - y)
       sprite.draw(batch)
