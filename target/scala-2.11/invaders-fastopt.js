@@ -11258,7 +11258,7 @@ $c_Lcom_darkoverlordofdata_demo_systems_PlayerInputSystem.prototype.execute__V =
     $m_Lcom_darkoverlordofdata_demo_EntityExtensions$();
     var jsx$1 = new $c_Lcom_darkoverlordofdata_demo_EntityExtensions$ExtendEntity().init___Lcom_darkoverlordofdata_entitas_Entity(player);
     var x = $fround(this.mouseX$1);
-    var y = $fround(((-172.0) + $fround(this.mouseY$1)));
+    var y = $fround(this.mouseY$1);
     jsx$1.updatePosition__Lcom_darkoverlordofdata_demo_PositionComponent__Lcom_darkoverlordofdata_entitas_Entity(new $c_Lcom_darkoverlordofdata_demo_PositionComponent().init___F__F(x, y));
     if (this.shoot$1) {
       this.timeToFire$1 = $fround((this.timeToFire$1 - $uF($g.gdx.Gdx.graphics.getDeltaTime())));
