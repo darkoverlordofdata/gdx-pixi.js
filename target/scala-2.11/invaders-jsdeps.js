@@ -479,18 +479,14 @@
             _processor = processor;
             
             document.addEventListener('touchstart', (event) => {
+                let pixel = window.devicePixelRatio
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                let x = Math.ceil(event.clientX/_ratio);
-                let y = Math.ceil(event.clientY/_ratio);
-                console.log(`touchstart ${x},${y}`);
-                _processor.touchDown(x, y, 0, 0)
+                _processor.touchDown(Math.ceil(event.clientX/_ratio*pixel), Math.ceil(event.clientY/_ratio*pixel), 0, 0)
             }, true);
             document.addEventListener('touchmove', (event) =>  {
+                let pixel = window.devicePixelRatio
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                let x = Math.ceil(event.clientX/_ratio);
-                let y = Math.ceil(event.clientY/_ratio);
-                console.log(`touchmove ${x},${y}`);
-                _processor.touchDragged(x, y, 0)
+                _processor.touchDragged(Math.ceil(event.clientX/_ratio*pixel), Math.ceil(event.clientY/_ratio*pixel), 0)
             }, true);
             document.addEventListener('touchend', (event) =>  {
                 event = event.targetTouches ? event.targetTouches[0] : event;
