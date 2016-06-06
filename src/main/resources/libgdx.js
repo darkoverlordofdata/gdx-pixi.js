@@ -11,10 +11,11 @@
     var _renderer = null;   // pixi renderer
     var _resources = null;
     var _stage = null;
-    var _ratio = 0;
+    var _scaling = 1;       // Scaling.fill
+    var _scaleX = 1;
+    var _scaleY = 1;
     var _width = 0;
     var _height = 0;
-    var _scaling = 1;       // Scaling.fill
 
     /**
      * getJSON
@@ -441,9 +442,7 @@
         }
 
         getDeltaTime() {return this.deltaTime;}
-        getWidth() {
-            return this.config.width;
-        }
+        getWidth() {return this.config.width;}
         getHeight() {return this.config.height;}
         getDensity() {return window.devicePixelRatio;}
         setupDisplay() {
@@ -478,25 +477,25 @@
             document.addEventListener('touchstart', (event) => {
                 let pixel = window.devicePixelRatio
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                _processor.touchDown(Math.ceil(event.clientX/_ratio*pixel), Math.ceil(event.clientY/_ratio*pixel), 0, 0)
+                _processor.touchDown(Math.ceil(event.clientX/_scaleX*pixel), Math.ceil(event.clientY/_scaleY*pixel), 0, 0)
             }, true);
             document.addEventListener('touchmove', (event) =>  {
                 let pixel = window.devicePixelRatio
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                _processor.touchDragged(Math.ceil(event.clientX/_ratio*pixel), Math.ceil(event.clientY/_ratio*pixel), 0)
+                _processor.touchDragged(Math.ceil(event.clientX/_scaleX*pixel), Math.ceil(event.clientY/_scaleY*pixel), 0)
             }, true);
             document.addEventListener('touchend', (event) =>  {
                 event = event.targetTouches ? event.targetTouches[0] : event;
                 _processor.touchUp(0, 0, 0, 0)
             }, true);
             document.addEventListener('mousedown', (event) =>  {
-                _processor.touchDown(Math.ceil(event.clientX/_ratio), Math.ceil(event.clientY/_ratio), -1, event.button)
+                _processor.touchDown(Math.ceil(event.clientX/_scaleX), Math.ceil(event.clientY/_scaleY), -1, event.button)
             }, true);
             document.addEventListener('mousemove', (event) =>  {
-                _processor.mouseMoved(Math.ceil(event.clientX/_ratio), Math.ceil(event.clientY/_ratio))
+                _processor.mouseMoved(Math.ceil(event.clientX/_scaleX), Math.ceil(event.clientY/_scaleY))
             }, true);
             document.addEventListener('mouseup', (event) =>  {
-                _processor.touchUp(Math.ceil(event.clientX/_ratio), Math.ceil(event.clientY/_ratio), -1, event.button)
+                _processor.touchUp(Math.ceil(event.clientX/_scaleX), Math.ceil(event.clientY/_scaleY), -1, event.button)
             }, true);
             window.addEventListener('keydown', (event) => _processor.keyDown(event.keyCode), true);
             window.addEventListener('keyup', (event) => _processor.keyUp(event.keyCode), true);
@@ -537,43 +536,39 @@
     }
     
     function resize() {
-        /* code path s.b
-         *
-         * class Viewport
-         * ...
-         * public void update(int screenWidth,
-                   int screenHeight,
-                   boolean centerCamera)
-                   
-            Configures this viewport's screen bounds using the specified screen size and calls apply(boolean). 
-            Typically called from ApplicationListener.resize(int, int) or Screen.resize(int, int).
-            The default implementation only calls apply(boolean).
-
-         */
         switch(_scaling) {
             case Scaling.fit:
+                // Determine which screen dimension is least constrained
+                _scaleX = _scaleY = Math.max(window.innerWidth/_width, window.innerHeight/_height);
                 break;
             case Scaling.fill:
                 // Determine which screen dimension is most constrained
-                _ratio = Math.min(window.innerWidth/_width, window.innerHeight/_height);
-                // Scale the view appropriately to fill that dimension
-                _stage.scale.x = _stage.scale.y = _ratio;
+                _scaleX = _scaleY = Math.min(window.innerWidth/_width, window.innerHeight/_height);
                 break;
             case Scaling.fillX:
+                _scaleX = window.innerWidth/_width
+                _scaleY = _scaleX
                 break;
             case Scaling.fillY:
+                _scaleY = window.innerHeight/_height
+                _scaleX = _scaleY
                 break;
             case Scaling.stretch:
-                break;
-            case Scaling.fillX:
+                _scaleX = window.innerWidth/_width
+                _scaleY = window.innerHeight/_height
                 break;
             case Scaling.stretchX:
+                _scaleX = window.innerWidth/_width
+                _scaleY = _scaleX
                 break;
             case Scaling.stretchY:
+                _scaleY = window.innerHeight/_height
+                _scaleX = _scaleY
                 break;
         }
-        // Update pixi
-        _renderer.resize(Math.ceil(_width * _ratio), Math.ceil(_height * _ratio));
+        _stage.scale.x = _scaleX;
+        _stage.scale.y = _scaleY;
+        _renderer.resize(Math.ceil(_width * _scaleX), Math.ceil(_height * _scaleY));
     }    
     
 
@@ -635,7 +630,7 @@
             _renderer.view.style.top = "0px";
             _renderer.view.style.left = "0px";
             _stage = new PIXI.Container();
-            resize();
+            resize(); // listener.resize();
             document.body.appendChild(_renderer.view);
             window.addEventListener("resize", resize);
 
