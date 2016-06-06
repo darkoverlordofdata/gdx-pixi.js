@@ -8,9 +8,13 @@
 (function($env) {
     "use strict";
 
+    var GAME_WIDTH = 0;
+    var GAME_HEIGHT = 0;
+
     var _processor = null;  // reference to input processor
     var _renderer = null;   // pixi renderer
     var _resources = null;
+    var _stage = null;
 
     /**
      * getJSON
@@ -138,7 +142,8 @@
      */
     class Batch {
         constructor() {
-            this.sprites = new PIXI.Container()
+            this.sprites = new PIXI.Container();
+            _stage.addChild(this.sprites)
         }
 
         begin() {
@@ -151,7 +156,7 @@
             texture.texture.sprite.y = y;
         }
         end() {
-            _renderer.render(this.sprites);
+            _renderer.render(_stage);
         }
         setProjectionMatrix(projection) {
 
@@ -532,6 +537,21 @@
             this.title = null;
         }
     }
+    
+    function resize() {
+        
+        // Determine which screen dimension is most constrained
+        let ratio = Math.min(window.innerWidth/GAME_WIDTH,
+                        window.innerHeight/GAME_HEIGHT);
+        
+        // Scale the view appropriately to fill that dimension
+        _stage.scale.x = _stage.scale.y = ratio;
+        
+        // Update the renderer dimensions
+        _renderer.resize(Math.ceil(GAME_WIDTH * ratio),
+                        Math.ceil(GAME_HEIGHT * ratio));
+    }    
+    
 
     /**
      * @JSName("gdx.JsApplication")
@@ -577,8 +597,23 @@
          */
         initialize() {
             
-            _renderer = PIXI.autoDetectRenderer(this.config.width, this.config.height)
-            document.body.appendChild(_renderer.view)
+            GAME_WIDTH = this.config.width;
+            GAME_HEIGHT = this.config.height;
+            
+            var rendererOptions = {
+                antialiasing: false,
+                transparent: false,
+                resolution: window.devicePixelRatio,
+                autoResize: true
+            }
+            _renderer = PIXI.autoDetectRenderer(this.config.width, this.config.height, rendererOptions)
+            _renderer.view.style.position = "absolute";
+            _renderer.view.style.top = "0px";
+            _renderer.view.style.left = "0px";
+            _stage = new PIXI.Container();
+            resize();
+            document.body.appendChild(_renderer.view);
+            window.addEventListener("resize", resize);
 
             this.graphics.setupDisplay();
             this.listener.create();

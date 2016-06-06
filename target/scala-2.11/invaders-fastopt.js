@@ -7970,7 +7970,7 @@ $c_Lcom_darkoverlordofdata_demo_systems_SpriteRenderSystem.prototype.drawEntity_
       sprite.setScale(this.scale$1)
     };
     var x = $fround(($fround(($fround(($fround($uI(sprite.getWidth())) / 2.0)) * this.scale$1)) * scaleX));
-    var y = $fround(($fround(($fround(($fround($uI(sprite.getHeight())) / 2.0)) / this.scale$1)) / scaleY));
+    var y = $fround(($fround(($fround(($fround($uI(sprite.getHeight())) / 2.0)) * this.scale$1)) * scaleY));
     sprite.setPosition($fround((($m_Lcom_darkoverlordofdata_demo_EntityExtensions$(), new $c_Lcom_darkoverlordofdata_demo_EntityExtensions$ExtendEntity().init___Lcom_darkoverlordofdata_entitas_Entity(entity)).position__Lcom_darkoverlordofdata_demo_PositionComponent().x$1 - x)), $fround((($m_Lcom_darkoverlordofdata_demo_EntityExtensions$(), new $c_Lcom_darkoverlordofdata_demo_EntityExtensions$ExtendEntity().init___Lcom_darkoverlordofdata_entitas_Entity(entity)).position__Lcom_darkoverlordofdata_demo_PositionComponent().y$1 - y)));
     sprite.draw(this.batch__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch())
   }
