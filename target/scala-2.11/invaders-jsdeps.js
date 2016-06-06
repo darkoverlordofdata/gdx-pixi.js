@@ -480,11 +480,11 @@
             
             document.addEventListener('touchstart', (event) => {
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                _processor.touchDown(event.clientX, event.clientY, 0, 0)
+                _processor.touchDown(Math.ceil(event.clientX/_ratio), Math.ceil(event.clientY/_ratio), 0, 0)
             }, true);
             document.addEventListener('touchmove', (event) =>  {
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                _processor.touchDragged(event.clientX, event.clientY, 0)
+                _processor.touchDragged(Math.ceil(event.clientX/_ratio), Math.ceil(event.clientY/_ratio), 0)
             }, true);
             document.addEventListener('touchend', (event) =>  {
                 event = event.targetTouches ? event.targetTouches[0] : event;
