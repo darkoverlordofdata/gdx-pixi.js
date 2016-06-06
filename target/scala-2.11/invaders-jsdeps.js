@@ -481,17 +481,11 @@
             document.addEventListener('touchstart', (event) => {
                 let pixel = window.devicePixelRatio
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                let x = Math.ceil(event.clientX/_ratio*pixel);
-                let y = Math.ceil(event.clientY/_ratio*pixel);
-                console.log(`touchstart ${x},${y}`);
                 _processor.touchDown(Math.ceil(event.clientX/_ratio*pixel), Math.ceil(event.clientY/_ratio*pixel), 0, 0)
             }, true);
             document.addEventListener('touchmove', (event) =>  {
                 let pixel = window.devicePixelRatio
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                let x = Math.ceil(event.clientX/_ratio*pixel);
-                let y = Math.ceil(event.clientY/_ratio*pixel);
-                console.log(`touchmove ${x},${y}`);
                 _processor.touchDragged(Math.ceil(event.clientX/_ratio*pixel), Math.ceil(event.clientY/_ratio*pixel), 0)
             }, true);
             document.addEventListener('touchend', (event) =>  {
@@ -499,15 +493,9 @@
                 _processor.touchUp(0, 0, 0, 0)
             }, true);
             document.addEventListener('mousedown', (event) =>  {
-                let x = Math.ceil(event.clientX/_ratio);
-                let y = Math.ceil(event.clientY/_ratio);
-                console.log(`mousedown ${x},${y}`);
                 _processor.touchDown(Math.ceil(event.clientX/_ratio), Math.ceil(event.clientY/_ratio), -1, event.button)
             }, true);
             document.addEventListener('mousemove', (event) =>  {
-                let x = Math.ceil(event.clientX/_ratio);
-                let y = Math.ceil(event.clientY/_ratio);
-                console.log(`mousemove ${x},${y}`);
                 _processor.mouseMoved(Math.ceil(event.clientX/_ratio), Math.ceil(event.clientY/_ratio))
             }, true);
             document.addEventListener('mouseup', (event) =>  {
@@ -614,8 +602,8 @@
          */
         initialize() {
             
-            GAME_WIDTH = this.config.width;
-            GAME_HEIGHT = this.config.height;
+            GAME_WIDTH = this.config.width//*window.devicePixelRatio;
+            GAME_HEIGHT = this.config.height//*window.devicePixelRatio;
             
             var rendererOptions = {
                 antialiasing: false,

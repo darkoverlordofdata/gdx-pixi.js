@@ -11274,7 +11274,7 @@ $c_Lcom_darkoverlordofdata_demo_systems_PlayerInputSystem.prototype.execute__V =
 });
 $c_Lcom_darkoverlordofdata_demo_systems_PlayerInputSystem.prototype.moveTo__I__I__V = (function(x, y) {
   this.mouseX$1 = ((x / this.pixelFactor$1) | 0);
-  this.mouseY$1 = ((((this.height$1 - y) | 0) / this.pixelFactor$1) | 0)
+  this.mouseY$1 = ((this.height$1 - ((y / this.pixelFactor$1) | 0)) | 0)
 });
 $c_Lcom_darkoverlordofdata_demo_systems_PlayerInputSystem.prototype.group$lzycompute__p1__Lcom_darkoverlordofdata_entitas_Group = (function() {
   if ((!this.bitmap$0$1)) {
