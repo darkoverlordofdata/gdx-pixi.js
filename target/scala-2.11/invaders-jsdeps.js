@@ -476,16 +476,16 @@
         setInputProcessor(processor) {
             _processor = processor;
             document.addEventListener('touchstart', function(event) {
-                console.log('touchstart');
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                _processor.touchDown(event.clientX, event.clientY, 0, event.button)
+                _processor.touchDown(event.clientX, event.clientY, 0, 0)
             }, true);
             document.addEventListener('touchmove', function(event) {
                 event = event.targetTouches ? event.targetTouches[0] : event;
                 _processor.touchDragged(event.clientX, event.clientY, 0)
             }, true);
             document.addEventListener('touchend', function(event) {
-                _processor.touchUp(event.clientX, event.clientY, 0, event.button)
+                event = event.targetTouches ? event.targetTouches[0] : event;
+                _processor.touchUp(0, 0, 0, 0)
             }, true);
             document.addEventListener('mousedown', function(event) {
                 _processor.touchDown(event.clientX, event.clientY, -1, event.button)
