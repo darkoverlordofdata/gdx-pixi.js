@@ -54,7 +54,7 @@ class PlayerInputSystem (val game:GameScene, val pool:Pool)
 
   def moveTo(x: Int, y:Int) = {
     mouseX = x/pixelFactor
-    mouseY = (height - y)/pixelFactor
+    mouseY = height - y/pixelFactor
   }
 
   def keyTyped(character: Char): Boolean = {

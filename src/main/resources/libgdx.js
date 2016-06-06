@@ -15,6 +15,7 @@
     var _renderer = null;   // pixi renderer
     var _resources = null;
     var _stage = null;
+    var _ratio = 0;
 
     /**
      * getJSON
@@ -473,33 +474,37 @@
      * @JSName("gdx.Input")
      */
     class Input {
+
         setInputProcessor(processor) {
             _processor = processor;
-            document.addEventListener('touchstart', function(event) {
-                console.log('touchstart');
+            
+            document.addEventListener('touchstart', (event) => {
+                let pixel = window.devicePixelRatio
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                _processor.touchDown(event.clientX, event.clientY, 0, event.button)
+                _processor.touchDown(Math.ceil(event.clientX/_ratio*pixel), Math.ceil(event.clientY/_ratio*pixel), 0, 0)
             }, true);
-            document.addEventListener('touchmove', function(event) {
+            document.addEventListener('touchmove', (event) =>  {
+                let pixel = window.devicePixelRatio
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                _processor.touchDragged(event.clientX, event.clientY, 0)
+                _processor.touchDragged(Math.ceil(event.clientX/_ratio*pixel), Math.ceil(event.clientY/_ratio*pixel), 0)
             }, true);
-            document.addEventListener('touchend', function(event) {
-                _processor.touchUp(event.clientX, event.clientY, 0, event.button)
+            document.addEventListener('touchend', (event) =>  {
+                event = event.targetTouches ? event.targetTouches[0] : event;
+                _processor.touchUp(0, 0, 0, 0)
             }, true);
-            document.addEventListener('mousedown', function(event) {
-                _processor.touchDown(event.clientX, event.clientY, -1, event.button)
+            document.addEventListener('mousedown', (event) =>  {
+                _processor.touchDown(Math.ceil(event.clientX/_ratio), Math.ceil(event.clientY/_ratio), -1, event.button)
             }, true);
-            document.addEventListener('mousemove', function(event) {
-                _processor.mouseMoved(event.clientX, event.clientY)
+            document.addEventListener('mousemove', (event) =>  {
+                _processor.mouseMoved(Math.ceil(event.clientX/_ratio), Math.ceil(event.clientY/_ratio))
             }, true);
-            document.addEventListener('mouseup', function(event) {
-                _processor.touchUp(event.clientX, event.clientY, -1, event.button)
+            document.addEventListener('mouseup', (event) =>  {
+                _processor.touchUp(Math.ceil(event.clientX/_ratio), Math.ceil(event.clientY/_ratio), -1, event.button)
             }, true);
-            window.addEventListener('keydown', function (event) {
+            window.addEventListener('keydown', (event) => {
                 _processor.keyDown(event.keyCode);
             }, true);
-            window.addEventListener('keyup', function (event) {
+            window.addEventListener('keyup', (event) => {
                 _processor.keyUp(event.keyCode);
             }, true);
         }
@@ -541,15 +546,15 @@
     function resize() {
         
         // Determine which screen dimension is most constrained
-        let ratio = Math.min(window.innerWidth/GAME_WIDTH,
+        _ratio = Math.min(window.innerWidth/GAME_WIDTH,
                         window.innerHeight/GAME_HEIGHT);
         
         // Scale the view appropriately to fill that dimension
-        _stage.scale.x = _stage.scale.y = ratio;
+        _stage.scale.x = _stage.scale.y = _ratio;
         
         // Update the renderer dimensions
-        _renderer.resize(Math.ceil(GAME_WIDTH * ratio),
-                        Math.ceil(GAME_HEIGHT * ratio));
+        _renderer.resize(Math.ceil(GAME_WIDTH * _ratio),
+                        Math.ceil(GAME_HEIGHT * _ratio));
     }    
     
 
@@ -597,8 +602,8 @@
          */
         initialize() {
             
-            GAME_WIDTH = this.config.width;
-            GAME_HEIGHT = this.config.height;
+            GAME_WIDTH = this.config.width//*window.devicePixelRatio;
+            GAME_HEIGHT = this.config.height//*window.devicePixelRatio;
             
             var rendererOptions = {
                 antialiasing: false,
