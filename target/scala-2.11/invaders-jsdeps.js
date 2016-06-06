@@ -499,9 +499,15 @@
                 _processor.touchUp(0, 0, 0, 0)
             }, true);
             document.addEventListener('mousedown', (event) =>  {
+                let x = Math.ceil(event.clientX/_ratio);
+                let y = Math.ceil(event.clientY/_ratio);
+                console.log(`mousedown ${x},${y}`);
                 _processor.touchDown(Math.ceil(event.clientX/_ratio), Math.ceil(event.clientY/_ratio), -1, event.button)
             }, true);
             document.addEventListener('mousemove', (event) =>  {
+                let x = Math.ceil(event.clientX/_ratio);
+                let y = Math.ceil(event.clientY/_ratio);
+                console.log(`mousemove ${x},${y}`);
                 _processor.mouseMoved(Math.ceil(event.clientX/_ratio), Math.ceil(event.clientY/_ratio))
             }, true);
             document.addEventListener('mouseup', (event) =>  {
