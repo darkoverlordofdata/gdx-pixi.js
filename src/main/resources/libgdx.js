@@ -7,15 +7,14 @@
 //var gdx =
 (function($env) {
     "use strict";
-
-    var GAME_WIDTH = 0;
-    var GAME_HEIGHT = 0;
-
     var _processor = null;  // reference to input processor
     var _renderer = null;   // pixi renderer
     var _resources = null;
     var _stage = null;
     var _ratio = 0;
+    var _width = 0;
+    var _height = 0;
+    var _scaling = 1;       // Scaling.fill
 
     /**
      * getJSON
@@ -24,12 +23,12 @@
      * @param url
      * @returns Promise
      */
-    var getJSON = function(url) {
+    function getJSON(url) {
         return new Promise(function(resolve, reject) {
             var xhr = new XMLHttpRequest();
             xhr.open('get', url, true);
             xhr.responseType = 'json';
-            xhr.onload = function() {
+            xhr.onload = () => {
                 var status = xhr.status;
                 if (status == 200) {
                     resolve(xhr.response);
@@ -116,9 +115,7 @@
             else
                 this.path = path.path;
                 
-            //console.log("new Texture", this.path)
             this.sprite = PIXI.Sprite.fromImage(this.path);
-            //if (path !== 'background' && path != 'player') this.sprite.anchor.set(0.5, 0.5);
             this.id = Texture.uniqueId++;
         }
         setFilter(minFilter ,magFilter) {}
@@ -501,12 +498,8 @@
             document.addEventListener('mouseup', (event) =>  {
                 _processor.touchUp(Math.ceil(event.clientX/_ratio), Math.ceil(event.clientY/_ratio), -1, event.button)
             }, true);
-            window.addEventListener('keydown', (event) => {
-                _processor.keyDown(event.keyCode);
-            }, true);
-            window.addEventListener('keyup', (event) => {
-                _processor.keyUp(event.keyCode);
-            }, true);
+            window.addEventListener('keydown', (event) => _processor.keyDown(event.keyCode), true);
+            window.addEventListener('keyup', (event) => _processor.keyUp(event.keyCode), true);
         }
     }
 
@@ -544,17 +537,43 @@
     }
     
     function resize() {
-        
-        // Determine which screen dimension is most constrained
-        _ratio = Math.min(window.innerWidth/GAME_WIDTH,
-                        window.innerHeight/GAME_HEIGHT);
-        
-        // Scale the view appropriately to fill that dimension
-        _stage.scale.x = _stage.scale.y = _ratio;
-        
-        // Update the renderer dimensions
-        _renderer.resize(Math.ceil(GAME_WIDTH * _ratio),
-                        Math.ceil(GAME_HEIGHT * _ratio));
+        /* code path s.b
+         *
+         * class Viewport
+         * ...
+         * public void update(int screenWidth,
+                   int screenHeight,
+                   boolean centerCamera)
+                   
+            Configures this viewport's screen bounds using the specified screen size and calls apply(boolean). 
+            Typically called from ApplicationListener.resize(int, int) or Screen.resize(int, int).
+            The default implementation only calls apply(boolean).
+
+         */
+        switch(_scaling) {
+            case Scaling.fit:
+                break;
+            case Scaling.fill:
+                // Determine which screen dimension is most constrained
+                _ratio = Math.min(window.innerWidth/_width, window.innerHeight/_height);
+                // Scale the view appropriately to fill that dimension
+                _stage.scale.x = _stage.scale.y = _ratio;
+                break;
+            case Scaling.fillX:
+                break;
+            case Scaling.fillY:
+                break;
+            case Scaling.stretch:
+                break;
+            case Scaling.fillX:
+                break;
+            case Scaling.stretchX:
+                break;
+            case Scaling.stretchY:
+                break;
+        }
+        // Update pixi
+        _renderer.resize(Math.ceil(_width * _ratio), Math.ceil(_height * _ratio));
     }    
     
 
@@ -602,8 +621,8 @@
          */
         initialize() {
             
-            GAME_WIDTH = this.config.width//*window.devicePixelRatio;
-            GAME_HEIGHT = this.config.height//*window.devicePixelRatio;
+            _width = this.config.width//*window.devicePixelRatio;
+            _height = this.config.height//*window.devicePixelRatio;
             
             var rendererOptions = {
                 antialiasing: false,
