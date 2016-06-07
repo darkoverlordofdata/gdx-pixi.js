@@ -178,22 +178,15 @@
             this.integer = integer;
             
             let name = this.fontFile.path.split('/').pop().split('.')[0];
-            let doc = (new DOMParser()).parseFromString(_resources[name].xhr.responseText, 'text/xml');
-            this.face = doc.evaluate('/font/info/@face', doc, null, XPathResult.STRING_TYPE, null).stringValue;
-            this.size = doc.evaluate('/font/info/@size', doc, null, XPathResult.STRING_TYPE, null).stringValue;
-            
-            //console.log(`fontFace = ${fontFace}, fontSize = ${fontSize}`)
-            
-            
+            let dom = (new DOMParser()).parseFromString(_resources[name].xhr.responseText, 'text/xml');
+            this.face = dom.evaluate('/font/info/@face', dom, null, XPathResult.STRING_TYPE, null).stringValue;
+            this.size = dom.evaluate('/font/info/@size', dom, null, XPathResult.STRING_TYPE, null).stringValue;
         }
         setUseIntegerPositions(integer) {}
         getWidth() {}
         getHeight() {}
-        
-        
         draw(batch, str, x, y) {
-            let texture = new PIXI.extras.BitmapText('', {font: `${this.size}px ${this.face}`, align: 'right' });
-            texture.text = str;
+            let texture = new PIXI.extras.BitmapText(str, {font: `${this.size}px ${this.face}`, align: 'right' });
             batch.draw(texture, x, _height-y);
         }
     }

@@ -8011,7 +8011,7 @@ $c_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem.prototype.execute__V =
   this.batch__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch().begin();
   var player = this.group__Lcom_darkoverlordofdata_entitas_Group().singleEntity__Lcom_darkoverlordofdata_entitas_Entity();
   if ((player !== null)) {
-    this.font__Lcom_badlogic_gdx_graphics_g2d_BitmapFont().draw(this.batch__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch(), new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["", ""])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([($m_Lcom_darkoverlordofdata_demo_EntityExtensions$(), new $c_Lcom_darkoverlordofdata_demo_EntityExtensions$ExtendEntity().init___Lcom_darkoverlordofdata_entitas_Entity(player)).score__Lcom_darkoverlordofdata_demo_ScoreComponent().value$1])), $fround(($fround(this.width$1) / $fround((2.0 * $fround(this.pixelFactor$1))))), $fround(((-10.0) + $fround(((this.height$1 / this.pixelFactor$1) | 0)))))
+    this.font__Lcom_badlogic_gdx_graphics_g2d_BitmapFont().draw(this.batch__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch(), new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["", ""])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([($m_Lcom_darkoverlordofdata_demo_EntityExtensions$(), new $c_Lcom_darkoverlordofdata_demo_EntityExtensions$ExtendEntity().init___Lcom_darkoverlordofdata_entitas_Entity(player)).score__Lcom_darkoverlordofdata_demo_ScoreComponent().value$1])), $fround(($fround(this.width$1) / 2.0)), $fround(((-10.0) + $fround(this.height$1))))
   };
   this.batch__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch().end()
 });
