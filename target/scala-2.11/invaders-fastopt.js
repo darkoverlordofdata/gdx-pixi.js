@@ -6351,7 +6351,7 @@ $c_Lcom_darkoverlordofdata_demo_GameScene.prototype.camera$lzycompute__p1__Lcom_
   return this.camera$1
 });
 $c_Lcom_darkoverlordofdata_demo_GameScene.prototype.createSystems__Lcom_darkoverlordofdata_entitas_Pool__Lcom_darkoverlordofdata_demo_systems_SpriteRenderSystem__Lcom_darkoverlordofdata_entitas_Systems = (function(pool, spriteRenderSystem) {
-  return new $c_Lcom_darkoverlordofdata_entitas_Systems().init___().add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(spriteRenderSystem)).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_PhysicsSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_ViewManagerSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_PlayerInputSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_SoundEffectSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_CollisionSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_ExpiringSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_EntitySpawningTimerSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_ScaleTweenSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_RemoveOffscreenShipsSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_DestroySystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool)))
+  return new $c_Lcom_darkoverlordofdata_entitas_Systems().init___().add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(spriteRenderSystem)).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_PhysicsSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_ViewManagerSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_PlayerInputSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_SoundEffectSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_CollisionSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_ExpiringSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_EntitySpawningTimerSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_ScaleTweenSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_RemoveOffscreenShipsSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool))).add__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_Systems(pool.createSystem__Lcom_darkoverlordofdata_entitas_ISystem__Lcom_darkoverlordofdata_entitas_ISystem(new $c_Lcom_darkoverlordofdata_demo_systems_DestroySystem().init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool(this, pool)))
 });
 $c_Lcom_darkoverlordofdata_demo_GameScene.prototype.pixelFactor__I = (function() {
   return (((4 & this.bitmap$0$1) === 0) ? this.pixelFactor$lzycompute__p1__I() : this.pixelFactor$1)
@@ -7606,6 +7606,122 @@ var $d_Lcom_darkoverlordofdata_demo_systems_ExpiringSystem = new $TypeData().ini
 });
 $c_Lcom_darkoverlordofdata_demo_systems_ExpiringSystem.prototype.$classData = $d_Lcom_darkoverlordofdata_demo_systems_ExpiringSystem;
 /** @constructor */
+function $c_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem() {
+  $c_O.call(this);
+  this.game$1 = null;
+  this.pool$1 = null;
+  this.group$1 = null;
+  this.camera$1 = null;
+  this.batch$1 = null;
+  this.font$1 = null;
+  this.bitmap$0$1 = 0
+}
+$c_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem.prototype = new $h_O();
+$c_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem.prototype.constructor = $c_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem;
+/** @constructor */
+function $h_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem() {
+  /*<skip>*/
+}
+$h_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem.prototype = $c_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem.prototype;
+$c_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem.prototype.group__Lcom_darkoverlordofdata_entitas_Group = (function() {
+  return (((1 & this.bitmap$0$1) === 0) ? this.group$lzycompute__p1__Lcom_darkoverlordofdata_entitas_Group() : this.group$1)
+});
+$c_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem.prototype.init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool = (function(game, pool) {
+  this.game$1 = game;
+  this.pool$1 = pool;
+  var this$2 = $m_s_Console$();
+  var this$3 = $as_Ljava_io_PrintStream(this$2.outVar$2.v$1);
+  this$3.java$lang$JSConsoleBasedPrintStream$$printString__T__V("HealthRenderSystem\n");
+  return this
+});
+$c_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem.prototype.CreateFont__T__Lcom_badlogic_gdx_graphics_g2d_BitmapFont = (function(file) {
+  var fontTexture = new $g.gdx.graphics.Texture($g.gdx.Gdx.files.internal(new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["", "_0.png"])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([file]))));
+  fontTexture.setFilter($uI($g.gdx.graphics.Texture.TextureFilter.Linear), $uI($g.gdx.graphics.Texture.TextureFilter.MipMapLinearLinear));
+  var fontRegion = new $g.gdx.graphics.g2d.TextureRegion(fontTexture);
+  var font = new $g.gdx.graphics.g2d.BitmapFont($g.gdx.Gdx.files.internal(new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["", ".fnt"])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([file]))), fontRegion, false);
+  font.setUseIntegerPositions(false);
+  return font
+});
+$c_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem.prototype.font__Lcom_badlogic_gdx_graphics_g2d_BitmapFont = (function() {
+  return (((8 & this.bitmap$0$1) === 0) ? this.font$lzycompute__p1__Lcom_badlogic_gdx_graphics_g2d_BitmapFont() : this.font$1)
+});
+$c_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem.prototype.batch__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch = (function() {
+  return (((4 & this.bitmap$0$1) === 0) ? this.batch$lzycompute__p1__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch() : this.batch$1)
+});
+$c_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem.prototype.camera__Lcom_badlogic_gdx_graphics_OrthographicCamera = (function() {
+  return (((2 & this.bitmap$0$1) === 0) ? this.camera$lzycompute__p1__Lcom_badlogic_gdx_graphics_OrthographicCamera() : this.camera$1)
+});
+$c_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem.prototype.font$lzycompute__p1__Lcom_badlogic_gdx_graphics_g2d_BitmapFont = (function() {
+  if (((8 & this.bitmap$0$1) === 0)) {
+    this.font$1 = this.CreateFont__T__Lcom_badlogic_gdx_graphics_g2d_BitmapFont("fonts/normal");
+    this.bitmap$0$1 = (8 | this.bitmap$0$1)
+  };
+  return this.font$1
+});
+$c_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem.prototype.execute__V = (function() {
+  this.batch__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch().setProjectionMatrix(this.camera__Lcom_badlogic_gdx_graphics_OrthographicCamera().combined);
+  this.batch__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch().begin();
+  var this$1 = this.group__Lcom_darkoverlordofdata_entitas_Group().entities__sci_List();
+  var these = this$1;
+  while ((!these.isEmpty__Z())) {
+    var arg1 = these.head__O();
+    var entity = $as_Lcom_darkoverlordofdata_entitas_Entity(arg1);
+    var health = ($m_Lcom_darkoverlordofdata_demo_EntityExtensions$(), new $c_Lcom_darkoverlordofdata_demo_EntityExtensions$ExtendEntity().init___Lcom_darkoverlordofdata_entitas_Entity(entity)).health__Lcom_darkoverlordofdata_demo_HealthComponent();
+    var position = ($m_Lcom_darkoverlordofdata_demo_EntityExtensions$(), new $c_Lcom_darkoverlordofdata_demo_EntityExtensions$ExtendEntity().init___Lcom_darkoverlordofdata_entitas_Entity(entity)).position__Lcom_darkoverlordofdata_demo_PositionComponent();
+    var percentage = $doubleToInt($uF($g.gdx.math.MathUtils.round($fround((100.0 * $fround((health.currentHealth$1 / health.maximumHealth$1)))))));
+    this.font__Lcom_badlogic_gdx_graphics_g2d_BitmapFont().draw(this.batch__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch(), new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["", "%"])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([percentage])), position.x$1, position.y$1);
+    these = $as_sci_List(these.tail__O())
+  };
+  this.batch__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch().end()
+});
+$c_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem.prototype.camera$lzycompute__p1__Lcom_badlogic_gdx_graphics_OrthographicCamera = (function() {
+  if (((2 & this.bitmap$0$1) === 0)) {
+    this.camera$1 = this.game$1.camera__Lcom_badlogic_gdx_graphics_OrthographicCamera();
+    this.bitmap$0$1 = (2 | this.bitmap$0$1)
+  };
+  return this.camera$1
+});
+$c_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem.prototype.group$lzycompute__p1__Lcom_darkoverlordofdata_entitas_Group = (function() {
+  if (((1 & this.bitmap$0$1) === 0)) {
+    var jsx$1 = this.pool$1;
+    var this$1 = $m_Lcom_darkoverlordofdata_entitas_Matcher$();
+    var array = [$m_Lcom_darkoverlordofdata_demo_Match$().Position$1, $m_Lcom_darkoverlordofdata_demo_Match$().Health$1];
+    var result = new $c_scm_ListBuffer().init___();
+    var i = 0;
+    var len = $uI(array.length);
+    while ((i < len)) {
+      var index = i;
+      var arg1 = array[index];
+      var arg = $as_Lcom_darkoverlordofdata_entitas_IMatcher(arg1);
+      result.$$plus$eq__O__scm_ListBuffer(arg);
+      i = ((1 + i) | 0)
+    };
+    var this$3 = result.scala$collection$mutable$ListBuffer$$start$6;
+    var len$1 = $s_sc_LinearSeqOptimized$class__length__sc_LinearSeqOptimized__I(this$3);
+    var result$1 = $newArrayObject($d_Lcom_darkoverlordofdata_entitas_IMatcher.getArrayOf(), [len$1]);
+    $s_sc_TraversableOnce$class__copyToArray__sc_TraversableOnce__O__I__V(this$3, result$1, 0);
+    this.group$1 = jsx$1.getGroup__Lcom_darkoverlordofdata_entitas_IMatcher__Lcom_darkoverlordofdata_entitas_Group(this$1.allOf__AI__Lcom_darkoverlordofdata_entitas_IAllOfMatcher(this$1.mergeIndices__ALcom_darkoverlordofdata_entitas_IMatcher__AI(result$1)));
+    this.bitmap$0$1 = (1 | this.bitmap$0$1)
+  };
+  return this.group$1
+});
+$c_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem.prototype.batch$lzycompute__p1__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch = (function() {
+  if (((4 & this.bitmap$0$1) === 0)) {
+    this.batch$1 = new $g.gdx.graphics.g2d.SpriteBatch();
+    this.bitmap$0$1 = (4 | this.bitmap$0$1)
+  };
+  return this.batch$1
+});
+var $d_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem = new $TypeData().initClass({
+  Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem: 0
+}, false, "com.darkoverlordofdata.demo.systems.HealthRenderSystem", {
+  Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem: 1,
+  O: 1,
+  Lcom_darkoverlordofdata_entitas_IExecuteSystem: 1,
+  Lcom_darkoverlordofdata_entitas_ISystem: 1
+});
+$c_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem.prototype.$classData = $d_Lcom_darkoverlordofdata_demo_systems_HealthRenderSystem;
+/** @constructor */
 function $c_Lcom_darkoverlordofdata_demo_systems_PhysicsSystem() {
   $c_O.call(this);
   this.game$1 = null;
@@ -7833,6 +7949,112 @@ var $d_Lcom_darkoverlordofdata_demo_systems_ScaleTweenSystem = new $TypeData().i
   Lcom_darkoverlordofdata_entitas_ISystem: 1
 });
 $c_Lcom_darkoverlordofdata_demo_systems_ScaleTweenSystem.prototype.$classData = $d_Lcom_darkoverlordofdata_demo_systems_ScaleTweenSystem;
+/** @constructor */
+function $c_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem() {
+  $c_O.call(this);
+  this.game$1 = null;
+  this.pool$1 = null;
+  this.group$1 = null;
+  this.width$1 = 0;
+  this.height$1 = 0;
+  this.pixelFactor$1 = 0;
+  this.camera$1 = null;
+  this.batch$1 = null;
+  this.font$1 = null;
+  this.bitmap$0$1 = 0
+}
+$c_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem.prototype = new $h_O();
+$c_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem.prototype.constructor = $c_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem;
+/** @constructor */
+function $h_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem() {
+  /*<skip>*/
+}
+$h_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem.prototype = $c_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem.prototype;
+$c_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem.prototype.group__Lcom_darkoverlordofdata_entitas_Group = (function() {
+  return (((1 & this.bitmap$0$1) === 0) ? this.group$lzycompute__p1__Lcom_darkoverlordofdata_entitas_Group() : this.group$1)
+});
+$c_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem.prototype.init___Lcom_darkoverlordofdata_demo_GameScene__Lcom_darkoverlordofdata_entitas_Pool = (function(game, pool) {
+  this.game$1 = game;
+  this.pool$1 = pool;
+  var this$2 = $m_s_Console$();
+  var this$3 = $as_Ljava_io_PrintStream(this$2.outVar$2.v$1);
+  this$3.java$lang$JSConsoleBasedPrintStream$$printString__T__V("ScoreRenderSystem\n");
+  this.width$1 = game.width__I();
+  this.height$1 = game.height__I();
+  this.pixelFactor$1 = game.pixelFactor__I();
+  this.camera$1 = game.camera__Lcom_badlogic_gdx_graphics_OrthographicCamera();
+  return this
+});
+$c_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem.prototype.CreateFont__T__Lcom_badlogic_gdx_graphics_g2d_BitmapFont = (function(file) {
+  var fontTexture = new $g.gdx.graphics.Texture($g.gdx.Gdx.files.internal(new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["", "_0.png"])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([file]))));
+  fontTexture.setFilter($uI($g.gdx.graphics.Texture.TextureFilter.Linear), $uI($g.gdx.graphics.Texture.TextureFilter.MipMapLinearLinear));
+  var fontRegion = new $g.gdx.graphics.g2d.TextureRegion(fontTexture);
+  var font = new $g.gdx.graphics.g2d.BitmapFont($g.gdx.Gdx.files.internal(new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["", ".fnt"])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([file]))), fontRegion, false);
+  font.setUseIntegerPositions(false);
+  return font
+});
+$c_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem.prototype.font__Lcom_badlogic_gdx_graphics_g2d_BitmapFont = (function() {
+  return (((4 & this.bitmap$0$1) === 0) ? this.font$lzycompute__p1__Lcom_badlogic_gdx_graphics_g2d_BitmapFont() : this.font$1)
+});
+$c_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem.prototype.batch__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch = (function() {
+  return (((2 & this.bitmap$0$1) === 0) ? this.batch$lzycompute__p1__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch() : this.batch$1)
+});
+$c_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem.prototype.font$lzycompute__p1__Lcom_badlogic_gdx_graphics_g2d_BitmapFont = (function() {
+  if (((4 & this.bitmap$0$1) === 0)) {
+    this.font$1 = this.CreateFont__T__Lcom_badlogic_gdx_graphics_g2d_BitmapFont("fonts/hud");
+    this.bitmap$0$1 = (4 | this.bitmap$0$1)
+  };
+  return this.font$1
+});
+$c_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem.prototype.execute__V = (function() {
+  this.batch__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch().setProjectionMatrix(this.camera$1.combined);
+  this.batch__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch().begin();
+  var player = this.group__Lcom_darkoverlordofdata_entitas_Group().singleEntity__Lcom_darkoverlordofdata_entitas_Entity();
+  if ((player !== null)) {
+    this.font__Lcom_badlogic_gdx_graphics_g2d_BitmapFont().draw(this.batch__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch(), new $c_s_StringContext().init___sc_Seq(new $c_sjs_js_WrappedArray().init___sjs_js_Array(["", ""])).s__sc_Seq__T(new $c_sjs_js_WrappedArray().init___sjs_js_Array([($m_Lcom_darkoverlordofdata_demo_EntityExtensions$(), new $c_Lcom_darkoverlordofdata_demo_EntityExtensions$ExtendEntity().init___Lcom_darkoverlordofdata_entitas_Entity(player)).score__Lcom_darkoverlordofdata_demo_ScoreComponent().value$1])), $fround(($fround(this.width$1) / $fround((2.0 * $fround(this.pixelFactor$1))))), $fround(((-10.0) + $fround(((this.height$1 / this.pixelFactor$1) | 0)))))
+  };
+  this.batch__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch().end()
+});
+$c_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem.prototype.group$lzycompute__p1__Lcom_darkoverlordofdata_entitas_Group = (function() {
+  if (((1 & this.bitmap$0$1) === 0)) {
+    var jsx$1 = this.pool$1;
+    var this$1 = $m_Lcom_darkoverlordofdata_entitas_Matcher$();
+    var array = [$m_Lcom_darkoverlordofdata_demo_Match$().Player$1, $m_Lcom_darkoverlordofdata_demo_Match$().Score$1];
+    var result = new $c_scm_ListBuffer().init___();
+    var i = 0;
+    var len = $uI(array.length);
+    while ((i < len)) {
+      var index = i;
+      var arg1 = array[index];
+      var arg = $as_Lcom_darkoverlordofdata_entitas_IMatcher(arg1);
+      result.$$plus$eq__O__scm_ListBuffer(arg);
+      i = ((1 + i) | 0)
+    };
+    var this$3 = result.scala$collection$mutable$ListBuffer$$start$6;
+    var len$1 = $s_sc_LinearSeqOptimized$class__length__sc_LinearSeqOptimized__I(this$3);
+    var result$1 = $newArrayObject($d_Lcom_darkoverlordofdata_entitas_IMatcher.getArrayOf(), [len$1]);
+    $s_sc_TraversableOnce$class__copyToArray__sc_TraversableOnce__O__I__V(this$3, result$1, 0);
+    this.group$1 = jsx$1.getGroup__Lcom_darkoverlordofdata_entitas_IMatcher__Lcom_darkoverlordofdata_entitas_Group(this$1.allOf__AI__Lcom_darkoverlordofdata_entitas_IAllOfMatcher(this$1.mergeIndices__ALcom_darkoverlordofdata_entitas_IMatcher__AI(result$1)));
+    this.bitmap$0$1 = (1 | this.bitmap$0$1)
+  };
+  return this.group$1
+});
+$c_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem.prototype.batch$lzycompute__p1__Lcom_badlogic_gdx_graphics_g2d_SpriteBatch = (function() {
+  if (((2 & this.bitmap$0$1) === 0)) {
+    this.batch$1 = new $g.gdx.graphics.g2d.SpriteBatch();
+    this.bitmap$0$1 = (2 | this.bitmap$0$1)
+  };
+  return this.batch$1
+});
+var $d_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem = new $TypeData().initClass({
+  Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem: 0
+}, false, "com.darkoverlordofdata.demo.systems.ScoreRenderSystem", {
+  Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem: 1,
+  O: 1,
+  Lcom_darkoverlordofdata_entitas_IExecuteSystem: 1,
+  Lcom_darkoverlordofdata_entitas_ISystem: 1
+});
+$c_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem.prototype.$classData = $d_Lcom_darkoverlordofdata_demo_systems_ScoreRenderSystem;
 /** @constructor */
 function $c_Lcom_darkoverlordofdata_demo_systems_SoundEffectSystem() {
   $c_O.call(this);
