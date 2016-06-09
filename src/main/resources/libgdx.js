@@ -1,10 +1,12 @@
 /**
- * libGDX Emulator - copyright 2016 darkoverlordofdata
- * 
- * this is not a full emulation, this is just the minimum required 
+ * libGDX.js Emulator
+ *
+ * MIT License
+ * Copyright (c) 2016 Bruce Davidson &lt;darkoverlordofdata@gmail.com&gt;
+ *
+ * this is not a full emulation, this is just the minimum required
  * to allow my scala.js games to execute in the browser
  */
-//var gdx =
 (function($env) {
     "use strict";
     var _processor = null;  // reference to input processor
@@ -25,7 +27,7 @@
      * @returns Promise
      */
     function getJSON(url) {
-        return new Promise(function(resolve, reject) {
+        return new Promise((resolve, reject) => {
             var xhr = new XMLHttpRequest();
             xhr.open('get', url, true);
             xhr.responseType = 'json';
@@ -39,7 +41,7 @@
             };
             xhr.send();
         });
-    };
+    }
 
     /**
      * @JSName("gdx.audio.Sound")
@@ -149,10 +151,15 @@
             this.sprites.children.length = 0;
         }
         draw(texture, x, y, width=-1, height=-1) {
-            
-            this.sprites.addChild(texture.texture.sprite);
-            texture.texture.sprite.x = x;
-            texture.texture.sprite.y = y;
+            if (texture.texture) {
+                this.sprites.addChild(texture.texture.sprite);
+                texture.texture.sprite.x = x;
+                texture.texture.sprite.y = y;
+            } else {
+                this.sprites.addChild(texture);
+                texture.x = x;
+                texture.y = y;
+            }
         }
         end() {
             _renderer.render(_stage);
@@ -171,12 +178,18 @@
             this.fontFile = fontFile;
             this.region = region;
             this.integer = integer;
+            
+            let name = this.fontFile.path.split('/').pop().split('.')[0];
+            let dom = (new DOMParser()).parseFromString(_resources[name].xhr.responseText, 'text/xml');
+            this.face = dom.evaluate('/font/info/@face', dom, null, XPathResult.STRING_TYPE, null).stringValue;
+            this.size = dom.evaluate('/font/info/@size', dom, null, XPathResult.STRING_TYPE, null).stringValue;
         }
         setUseIntegerPositions(integer) {}
         getWidth() {}
         getHeight() {}
         draw(batch, str, x, y) {
-
+            let texture = new PIXI.extras.BitmapText(str, {font: `${this.size}px ${this.face}`, align: 'right' });
+            batch.draw(texture, x, _height-y);
         }
     }
 
@@ -604,6 +617,7 @@
                     PIXI.loader.add(name, data.atlas[name]);
                 }
                 PIXI.loader.load( (loader, res) => {
+                    console.log(res);
                     _resources = Object.create(res);
                     this.initialize();
                 });
@@ -636,12 +650,11 @@
 
             this.graphics.setupDisplay();
             this.listener.create();
-            let _this = this;
-            let mainLoop = function(time) {
+            let mainLoop = (time) => {
                 
-                _this.graphics.update(time);
-                _this.graphics.frameId++;
-                _this.listener.render();
+                this.graphics.update(time);
+                this.graphics.frameId++;
+                this.listener.render();
                 window.requestAnimationFrame(mainLoop);
             }
             window.requestAnimationFrame(mainLoop);

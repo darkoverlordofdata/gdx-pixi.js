@@ -29,7 +29,6 @@ class HealthRenderSystem (val game:GameScene, val pool:Pool) extends IExecuteSys
     batch.end()
   }
 
-
   def CreateFont(file: String): BitmapFont = {
     val fontTexture = new Texture(Gdx.files.internal(s"${file}_0.png"))
     fontTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.MipMapLinearLinear)

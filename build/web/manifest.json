@@ -8,6 +8,10 @@
     "enemy2":"images/enemy2.png",
     "enemy3":"images/enemy3.png",
     "bullet":"images/bullet.png",
-    "player":"images/spaceshipspr.png"
+    "player":"images/spaceshipspr.png",
+    "hud":"fonts/hud.fnt",
+    "hud_0":"fonts/hud_0.png",
+    "normal":"fonts/normal.fnt",
+    "normal_0":"fonts/normal_0.png"
   }
 }

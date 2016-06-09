@@ -1,0 +1,111 @@
+{
+  "namespace": "com.darkoverlordofdata.demo",
+  "src": "src/main/scala",
+  "output": {
+    "generated": "components.scala"
+  },
+  "alloc": {
+    "entities": 128,
+    "components": 64
+  },
+  "components": {
+    "Bounds": [
+      "radius:Float"
+    ],
+    "Bullet": false,
+    "Destroy": false,
+    "Enemy": false,
+    "Expires": [
+      "delay:Float"
+    ],
+    "Firing": false,
+    "Health": [
+      "currentHealth:Float",
+      "maximumHealth:Float"
+    ],
+    "Layer": [
+      "ordinal:Int"
+    ],
+    "Player": false,
+    "Position": [
+      "x:Float",
+      "y:Float"
+    ],
+    "Resource": [
+      "name:String"
+    ],
+    "Scale": [
+      "x:Float",
+      "y:Float"
+    ],
+    "Score": [
+      "value:Int"
+    ],
+    "SoundEffect": [
+      "effect:Int"
+    ],
+    "Tint": [
+      "r:Float",
+      "g:Float",
+      "b:Float",
+      "a:Float"
+    ],
+    "Tween": [
+      "min:Float",
+      "max:Float",
+      "speed:Float",
+      "repeat:Boolean",
+      "active:Boolean"
+    ],
+    "Velocity": [
+      "x:Float",
+      "y:Float"
+    ],
+    "View": [
+      "sprite:com.badlogic.gdx.graphics.g2d.Sprite"
+    ]
+  },
+  "systems": {
+    "Collision": [
+      "IExecuteSystem"
+    ],
+    "Destroy": [
+      "IExecuteSystem"
+    ],
+    "EntitySpawningTimer": [
+      "IExecuteSystem"
+    ],
+    "Expiring": [
+      "IExecuteSystem"
+    ],
+    "HealthRender": [
+      "IExecuteSystem"
+    ],
+    "Physics": [
+      "IExecuteSystem"
+    ],
+    "PlayerInput": [
+      "IInitializeSystem",
+      "IExecuteSystem"
+    ],
+    "RemoveOffscreenShips": [
+      "IExecuteSystem"
+    ],
+    "ScaleTween": [
+      "IExecuteSystem"
+    ],
+    "ScoreRender": [
+      "IExecuteSystem"
+    ],
+    "SoundEffect": [
+      "IExecuteSystem"
+    ],
+    "SpriteRender": [
+      "IExecuteSystem"
+    ],
+    "ViewManager": [
+      "ISystem"
+    ]
+  },
+  "entities": {}
+}

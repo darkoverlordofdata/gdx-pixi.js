@@ -22,14 +22,5 @@ class Main extends ApplicationAdapter {
     batch.begin()
     batch.draw(img, 0, 0)
     batch.end()
-
   }
-
-  override def resize(width: Int, height: Int): Unit = {}
-
-  override def dispose(): Unit = {}
-
-  override def pause(): Unit = {}
-
-  override def resume(): Unit = {}
 }

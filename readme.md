@@ -3,11 +3,13 @@
 An alternate js backend for libGDX using pixi.js
 Status - poc. [Demo](https://darkoverlordofdata.com/gdx-pixi.js/)
 
+This is not a detailed reimplementation of libGDX. Much of the api is a mock,
+with pixi managed behind the scenes to provide a similar experience.
+
 Why? Doesn't libGDX already have the gwt wrapper?
 Yes, but it's not compatible with some other options that I need.
 And I think that pixijs is better in the browser
 Besides, this is fun. 
-
 
 
 demo.scala:
@@ -74,3 +76,9 @@ manifest.json:
     "logo":"images/badlogic.png"
   }
 }```
+
+# License
+## MIT License
+Copyright (c) 2016 Bruce Davidson &lt;darkoverlordofdata@gmail.com&gt;
+## Apache License
+libGDX is licensed under the [Apache 2 License](http://www.apache.org/licenses/LICENSE-2.0.html),

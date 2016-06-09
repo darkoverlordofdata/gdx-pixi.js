@@ -25,8 +25,10 @@ class ScoreRenderSystem (val game:GameScene, val pool:Pool) extends IExecuteSyst
     batch.setProjectionMatrix(camera.combined)
     batch.begin()
     val player = group.singleEntity
-    if (player != null)
-      font.draw(batch, s"${player.score.value}", width/(2f*pixelFactor), (height/pixelFactor)-10f)
+    if (player != null) {
+//      font.draw(batch, s"${player.score.value}", width / (2f * pixelFactor), (height / pixelFactor) - 10f)
+      font.draw(batch, s"${player.score.value}", width / (2f * 1), (height / 1) - 10f)
+    }
     batch.end()
   }
 

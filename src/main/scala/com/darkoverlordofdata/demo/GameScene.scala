@@ -33,8 +33,8 @@ class GameScene extends Screen {
       .add(pool.createSystem(new EntitySpawningTimerSystem(this, pool)))
       .add(pool.createSystem(new ScaleTweenSystem(this, pool)))
       .add(pool.createSystem(new RemoveOffscreenShipsSystem(this, pool)))
-      //.add(pool.createSystem(new HealthRenderSystem(this, pool)))
-      //.add(pool.createSystem(new ScoreRenderSystem(this, pool)))
+      .add(pool.createSystem(new HealthRenderSystem(this, pool)))
+      .add(pool.createSystem(new ScoreRenderSystem(this, pool)))
       .add(pool.createSystem(new DestroySystem(this, pool)))
   }
 
