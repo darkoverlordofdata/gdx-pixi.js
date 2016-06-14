@@ -1,8 +1,10 @@
 package com.uwsoft.editor.renderer.resources
 
-/**
-  * Created by bruce on 6/9/16.
-  */
-class ResourceManager {
+import scala.scalajs.js
+import scala.scalajs.js.annotation.JSName
+
+@JSName("uwsoft.editor.renderer.resources.ResourceManager")
+@js.native
+class ResourceManager extends js.Object {
 
 }

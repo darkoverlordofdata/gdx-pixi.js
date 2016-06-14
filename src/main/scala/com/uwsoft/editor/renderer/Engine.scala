@@ -1,8 +1,10 @@
 package com.uwsoft.editor.renderer
 
-/**
-  * Created by bruce on 6/9/16.
-  */
-class Engine {
+import scala.scalajs.js
+import scala.scalajs.js.annotation.JSName
 
+@JSName("uwsoft.editor.renderer.Engine")
+@js.native
+class Engine extends js.Object {
+  def update(delta:Float): Unit = js.native
 }

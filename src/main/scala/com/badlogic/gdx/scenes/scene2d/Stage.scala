@@ -15,7 +15,10 @@
   ******************************************************************************/
 package com.badlogic.gdx.scenes.scene2d
 
-import com.badlogic.gdx.InputAdapter
+import com.badlogic.gdx.{Gdx, InputAdapter}
+
+import scala.scalajs.js
+import scala.scalajs.js.annotation.JSName
 
 /** A 2D scene graph containing hierarchies of {@link Actor actors}. Stage handles the viewport and distributes input events.
   * <p>
@@ -30,14 +33,19 @@ import com.badlogic.gdx.InputAdapter
   * The Stage and its constituents (like Actors and Listeners) are not thread-safe and should only be updated and queried from a
   * single thread (presumably the main render thread). Methods should be reentrant, so you can update Actors and Stages from within
   * callbacks and handlers.
+  *
   * @author mzechner
   * @author Nathan Sweet */
-trait Stage extends InputAdapter {
-  def act(): Unit
-  def draw(): Unit
+class Stage extends InputAdapter {
 
-  def getWidth(): Float
-  def getHeight(): Float
+  val height = Gdx.graphics.getHeight()
+  val width = Gdx.graphics.getWidth()
 
-  def addActor(actor: Actor): Unit
+  def act(): Unit = {}
+  def draw(): Unit = {}
+
+  def getWidth(): Float = height
+  def getHeight(): Float = width
+
+  def addActor(actor: Actor): Unit = {}
 }

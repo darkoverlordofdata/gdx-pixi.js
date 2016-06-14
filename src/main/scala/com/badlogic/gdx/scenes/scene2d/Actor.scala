@@ -42,6 +42,8 @@ class Actor extends js.Object {
 
   def setX(x: Float): Unit = js.native
   def setY(y: Float): Unit = js.native
+  def getWidth(): Int = js.native
+  def getHeight(): Int = js.native
 
   /** Sets the scale for both X and Y */
   def setScale(scaleXY: Float): Unit = js.native

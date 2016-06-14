@@ -1,5 +1,25 @@
 {
+  "files": [
+    "assets/orig/pack.atlas",
+    "assets/orig/pack.png",
+    "assets/project.dt",
+    "assets/scenes/MainScene.dt",
+    "assets/scenes/LeaderboardScene.dt",
+    "assets/scenes/MenuScene.dt",
+    "assets/scenes/OptionsScene.dt",
+    "fonts/hud.fnt",
+    "fonts/hud_0.png",
+    "fonts/normal.fnt",
+    "fonts/normal_0.png"
+  ],
   "atlas": {
+    "pack":"assets/orig/pack.atlas",
+    "atlas":"assets/orig/pack.png",
+    "project":"assets/project.dt",
+    "MainScene":"assets/scenes/MainScene.dt",
+    "LeaderboardScene":"assets/scenes/LeaderboardScene.dt",
+    "MenuScene":"assets/scenes/MenuScene.dt",
+    "OptionsScene":"assets/scenes/OptionsScene.dt",
     "logo":"images/badlogic.jpg",
     "background":"images/BackdropBlackLittleSparkBlack.png",
     "bang":"images/bang.png",

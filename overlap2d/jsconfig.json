@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "system",
+        "outDir": "../src/main/resources"
+    },
+    "files": [
+        "src/overlap2d-runtime-libgdx.js"
+    ]
+}

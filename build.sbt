@@ -14,6 +14,7 @@ skip in packageJSDependencies := false
 
 // http://mvnrepository.com/artifact/org.webjars/pixi.js
 jsDependencies += ProvidedJS / "libgdx.js"
+jsDependencies += ProvidedJS / "overlap2d-runtime-libgdx.js"
 jsDependencies += "org.webjars" % "pixi.js" % "3.0.7" / "pixi.js"
 jsDependencies += RuntimeDOM
 
