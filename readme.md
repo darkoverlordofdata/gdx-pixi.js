@@ -12,6 +12,12 @@ And I think that pixijs is better in the browser
 Besides, this is fun. 
 
 
+# Build
+Javascript sources in src/main/libgdx and src/main/overlap2d are maintained using vscode. 
+Build (Ctrl-Shift-b) uses tsc to 'pile these sources to src/main/resources.
+Scala sources in src/main/scala are maintained with IntelliJ and compiled using sbt.
+
+
 demo.scala:
 ```
 package com.darkoverlordofdata.helloworld
@@ -58,14 +64,6 @@ class Main extends ApplicationAdapter {
     batch.end()
 
   }
-
-  override def resize(width: Double, height: Double): Unit = {}
-
-  override def dispose(): Unit = {}
-
-  override def pause(): Unit = {}
-
-  override def resume(): Unit = {}
 }
 ```
 
