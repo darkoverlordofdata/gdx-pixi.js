@@ -1,17 +1,14 @@
-var gdx;(function (gdx) {
+gdx.Audio = (function() {
 
     var Sound = gdx.audio.Sound;
     
     /**
      * @JSName("gdx.Audio")
      */
-    class Audio{
+    return class Audio{
         newSound(raw) {
             return new Sound(raw);
         }
     }
     
-    gdx.Audio = Audio;
-
-    
-})(gdx || (gdx = {}));
+}());

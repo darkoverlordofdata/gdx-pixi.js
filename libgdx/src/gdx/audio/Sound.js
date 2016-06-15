@@ -1,12 +1,15 @@
-var gdx;(function (gdx) {
-    var audio;(function (audio) {
-        /**
-         * @JSName("gdx.audio.Sound")
-         */
-        class Sound {
-            play() {
-            }
+/**
+ * @JSName("gdx.audio.Sound")
+ */
+gdx.audio.Sound = (function() {
+    
+    class Sound {
+
+        play() {
         }
-        audio.Sound = Sound;
-    })(audio = gdx.audio || (gdx.audio = {}));
-})(gdx || (gdx = {}));
+    }
+
+    return Sound;
+
+}());
+

@@ -1,27 +1,37 @@
-var gdx;(function (gdx) {
+/**
+ * libjs
+ *
+ * MIT License
+ * Copyright (c) 2016 Bruce Davidson &lt;darkoverlordofdata@gmail.com&gt;
+ *
+ */
+
     
     /**
-     * @JSName("gdx.Gdx")
+     * @JSName("Gdx")
      */
-    const Gdx = {
+gdx.Gdx = (function(){
+
+    return {
         app: null,
         graphics: null,
         audio: null,
         files: null,
         input: null,
         get: null,
-        gl: null
+        gl: null,
+
+        _resources: null,  // list of all loaded resources
+        _internal: null,   // xhr data buffers
+        _renderer: null,   // pixi renderer
+        _stage: null,      // top level stage
+        _scaling: 1,       // Scaling.fill
+        _scaleX: 1,        // screen scaling x
+        _scaleY: 1,        // screen scaling y
+        _height: 0,        // screen height
+        _width: 0          // screen width
+
+
     }
-    gdx.Gdx = Gdx;
-    gdx._internal = null;
-    gdx._renderer = null;   // pixi renderer
-    gdx._resources = null;  // list of all loaded resources
-    gdx._stage = null;      // top level stage
-    gdx._scaling = 1;       // Scaling.fill
-    gdx._scaleX = 1;        // screen scaling x
-    gdx._scaleY = 1;        // screen scaling y
-    gdx._height = 0;        // screen height
-    gdx._width = 0;         // screen width
 
-
-})(gdx || (gdx = {}));
+}());

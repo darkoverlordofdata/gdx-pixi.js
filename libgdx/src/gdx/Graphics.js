@@ -1,12 +1,12 @@
-var gdx;(function (gdx) {
-    
+gdx.Graphics = (function() {
+
     var GL20 = gdx.graphics.GL20;
     var Gdx = gdx.Gdx;
     
-        /**
+    /**
      * @JSName("gdx.Graphics")
      */
-    class Graphics {
+    return class Graphics {
         constructor(config){
             this.config = config;
             this.gl20 = new GL20()
@@ -43,6 +43,4 @@ var gdx;(function (gdx) {
         }
     }
 
-    gdx.Graphics = Graphics;
-    
-})(gdx || (gdx = {}));
+}());    

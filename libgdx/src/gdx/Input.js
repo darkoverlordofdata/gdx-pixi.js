@@ -1,39 +1,39 @@
-var gdx;(function (gdx) {
+gdx.Input = (function(){
 
-
+    var Gdx = gdx.Gdx;
     /**
      * @JSName("gdx.Input")
      */
     class Input {
 
         setInputProcessor(processor) {
-            gdx._processor = processor;
+            Gdx._processor = processor;
             
             document.addEventListener('touchstart', (event) => {
                 let pixel = window.devicePixelRatio
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                gdx._processor.touchDown(Math.ceil(event.clientX/gdx._scaleX*pixel), Math.ceil(event.clientY/gdx._scaleY*pixel), 0, 0)
+                Gdx._processor.touchDown(Math.ceil(event.clientX/Gdx._scaleX*pixel), Math.ceil(event.clientY/Gdx._scaleY*pixel), 0, 0)
             }, true);
             document.addEventListener('touchmove', (event) =>  {
                 let pixel = window.devicePixelRatio
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                gdx._processor.touchDragged(Math.ceil(event.clientX/gdx._scaleX*pixel), Math.ceil(event.clientY/gdx._scaleY*pixel), 0)
+                Gdx._processor.touchDragged(Math.ceil(event.clientX/Gdx._scaleX*pixel), Math.ceil(event.clientY/Gdx._scaleY*pixel), 0)
             }, true);
             document.addEventListener('touchend', (event) =>  {
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                gdx._processor.touchUp(0, 0, 0, 0)
+                Gdx._processor.touchUp(0, 0, 0, 0)
             }, true);
             document.addEventListener('mousedown', (event) =>  {
-                gdx._processor.touchDown(Math.ceil(event.clientX/gdx._scaleX), Math.ceil(event.clientY/gdx._scaleY), -1, event.button)
+                Gdx._processor.touchDown(Math.ceil(event.clientX/Gdx._scaleX), Math.ceil(event.clientY/Gdx._scaleY), -1, event.button)
             }, true);
             document.addEventListener('mousemove', (event) =>  {
-                gdx._processor.mouseMoved(Math.ceil(event.clientX/gdx._scaleX), Math.ceil(event.clientY/gdx._scaleY))
+                Gdx._processor.mouseMoved(Math.ceil(event.clientX/Gdx._scaleX), Math.ceil(event.clientY/Gdx._scaleY))
             }, true);
             document.addEventListener('mouseup', (event) =>  {
-                gdx._processor.touchUp(Math.ceil(event.clientX/gdx._scaleX), Math.ceil(event.clientY/gdx._scaleY), -1, event.button)
+                Gdx._processor.touchUp(Math.ceil(event.clientX/Gdx._scaleX), Math.ceil(event.clientY/Gdx._scaleY), -1, event.button)
             }, true);
-            window.addEventListener('keydown', (event) => gdx._processor.keyDown(event.keyCode), true);
-            window.addEventListener('keyup', (event) => gdx._processor.keyUp(event.keyCode), true);
+            window.addEventListener('keydown', (event) => Gdx._processor.keyDown(event.keyCode), true);
+            window.addEventListener('keyup', (event) => Gdx._processor.keyUp(event.keyCode), true);
         }
     }
 
@@ -56,6 +56,6 @@ var gdx;(function (gdx) {
         Z: 90
     }
 
-    gdx.Input = Input;
-    
-})(gdx || (gdx = {}));
+    return Input;
+
+}());

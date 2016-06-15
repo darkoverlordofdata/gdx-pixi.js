@@ -1,4 +1,4 @@
-var gdx;(function (gdx) {
+gdx.JsApplication = (function(){
 
     var Graphics = gdx.Graphics;
     var Audio = gdx.Audio;
@@ -8,39 +8,39 @@ var gdx;(function (gdx) {
     var Scaling = gdx.utils.Scaling;
 
     function resize() {
-        switch(gdx._scaling) {
+        switch(Gdx._scaling) {
             case Scaling.fit:
                 // Determine which screen dimension is least constrained
-                gdx._scaleX = gdx._scaleY = Math.max(window.innerWidth/gdx._width, window.innerHeight/gdx._height);
+                Gdx._scaleX = Gdx._scaleY = Math.max(window.innerWidth/Gdx._width, window.innerHeight/Gdx._height);
                 break;
             case Scaling.fill:
                 // Determine which screen dimension is most constrained
-                gdx._scaleX = gdx._scaleY = Math.min(window.innerWidth/gdx._width, window.innerHeight/gdx._height);
+                Gdx._scaleX = Gdx._scaleY = Math.min(window.innerWidth/Gdx._width, window.innerHeight/Gdx._height);
                 break;
             case Scaling.fillX:
-                gdx._scaleX = window.innerWidth/gdx._width
-                gdx._scaleY = gdx._scaleX
+                Gdx._scaleX = window.innerWidth/Gdx._width
+                Gdx._scaleY = Gdx._scaleX
                 break;
             case Scaling.fillY:
-                gdx._scaleY = window.innerHeight/gdx._height
-                gdx._scaleX = gdx._scaleY
+                Gdx._scaleY = window.innerHeight/Gdx._height
+                Gdx._scaleX = Gdx._scaleY
                 break;
             case Scaling.stretch:
-                gdx._scaleX = window.innerWidth/gdx._width
-                gdx._scaleY = window.innerHeight/gdx._height
+                Gdx._scaleX = window.innerWidth/Gdx._width
+                Gdx._scaleY = window.innerHeight/Gdx._height
                 break;
             case Scaling.stretchX:
-                gdx._scaleX = window.innerWidth/gdx._width
-                gdx._scaleY = gdx._scaleX
+                Gdx._scaleX = window.innerWidth/Gdx._width
+                Gdx._scaleY = Gdx._scaleX
                 break;
             case Scaling.stretchY:
-                gdx._scaleY = window.innerHeight/gdx._height
-                gdx._scaleX = gdx._scaleY
+                Gdx._scaleY = window.innerHeight/Gdx._height
+                Gdx._scaleX = Gdx._scaleY
                 break;
         }
-        gdx._stage.scale.x = gdx._scaleX;
-        gdx._stage.scale.y = gdx._scaleY;
-        gdx._renderer.resize(Math.ceil(gdx._width * gdx._scaleX), Math.ceil(gdx._height * gdx._scaleY));
+        Gdx._stage.scale.x = Gdx._scaleX;
+        Gdx._stage.scale.y = Gdx._scaleY;
+        Gdx._renderer.resize(Math.ceil(Gdx._width * Gdx._scaleX), Math.ceil(Gdx._height * Gdx._scaleY));
     }    
 
     /**
@@ -72,7 +72,7 @@ var gdx;(function (gdx) {
     /**
      * @JSName("gdx.JsApplication")
      */
-    class JsApplication {
+    return class JsApplication {
         constructor(listener, config){
 
             if (config.title === null) {
@@ -102,7 +102,7 @@ var gdx;(function (gdx) {
                 }
                 PIXI.loader.load( (loader, res) => {
                     console.log(res);
-                    gdx._resources = Object.create(res);
+                    Gdx._resources = Object.create(res);
 
                     for (let path in data.files) {
                         console.log(data.files[path]);
@@ -123,22 +123,22 @@ var gdx;(function (gdx) {
          */
         initialize() {
             
-            //console.log(JSON.parse(gdx._resources['main'].xhr.responseText));
-            gdx._width = this.config.width//*window.devicePixelRatio;
-            gdx._height = this.config.height//*window.devicePixelRatio;
+            //console.log(JSON.parse(Gdx._resources['main'].xhr.responseText));
+            Gdx._width = this.config.width//*window.devicePixelRatio;
+            Gdx._height = this.config.height//*window.devicePixelRatio;
             
-            gdx._renderer = PIXI.autoDetectRenderer(this.config.width, this.config.height, {
+            Gdx._renderer = PIXI.autoDetectRenderer(this.config.width, this.config.height, {
                 antialiasing: false,
                 transparent: false,
                 resolution: window.devicePixelRatio,
                 autoResize: true
             })
-            gdx._renderer.view.style.position = "absolute";
-            gdx._renderer.view.style.top = "0px";
-            gdx._renderer.view.style.left = "0px";
-            gdx._stage = new PIXI.Container();
+            Gdx._renderer.view.style.position = "absolute";
+            Gdx._renderer.view.style.top = "0px";
+            Gdx._renderer.view.style.left = "0px";
+            Gdx._stage = new PIXI.Container();
             resize(); // listener.resize();
-            document.body.appendChild(gdx._renderer.view);
+            document.body.appendChild(Gdx._renderer.view);
             window.addEventListener("resize", resize);
 
             this.graphics.setupDisplay();
@@ -154,6 +154,4 @@ var gdx;(function (gdx) {
         }
     }
     
-    gdx.JsApplication = JsApplication;
-
-})(gdx || (gdx = {}));
+}());

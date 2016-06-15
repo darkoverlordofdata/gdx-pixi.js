@@ -1,21 +1,18 @@
-var gdx;(function (gdx) {
-    var graphics;(function (graphics) {
+gdx.graphics.Camera = (function(){
 
-        var Vector3 = gdx.math.Vector3;
+    var Vector3 = gdx.math.Vector3;
+    
+    /**
+     * @JSName("gdx.graphics.Camera")
+     */
+    return class Camera {
         
-        /**
-         * @JSName("gdx.graphics.Camera")
-         */
-        class Camera {
-            constructor(viewportWidth, viewportHeight) {
-                this.position = new Vector3();
-                this.viewportWidth = viewportWidth;
-                this.viewportHeight = viewportHeight;
-            }
-            update() {}
+        constructor(viewportWidth, viewportHeight) {
+            this.position = new Vector3();
+            this.viewportWidth = viewportWidth;
+            this.viewportHeight = viewportHeight;
         }
+        update() {}
+    }
 
-        graphics.Camera = Camera;
-        
-    })(graphics = gdx.graphics || (gdx.graphics = {}));
-})(gdx || (gdx = {}));
+}());

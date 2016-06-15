@@ -1,10 +1,12 @@
-var gdx;(function (gdx) {
 
 
-    /**
-     * @JSName("gdx.JsApplicationConfiguration")
-     */
-    class JsApplicationConfiguration {
+/**
+ * @JSName("gdx.JsApplicationConfiguration")
+ */
+gdx.JsApplicationConfiguration = (function(){
+
+    return class JsApplicationConfiguration {
+        
         constructor() {
             this.height = 480;
             this.width = 640;
@@ -12,8 +14,6 @@ var gdx;(function (gdx) {
             this.title = null;
         }
     }
+
+}());
     
-    
-    gdx.JsApplicationConfiguration = JsApplicationConfiguration;
-    
-})(gdx || (gdx = {}));

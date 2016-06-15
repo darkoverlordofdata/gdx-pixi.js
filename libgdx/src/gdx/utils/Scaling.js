@@ -1,10 +1,9 @@
-var gdx;(function (gdx) {
-    var utils;(function (utils) {
+gdx.utils.Scaling = (function() {
 
         /**
          * @JSName("gdx.utils.Scaling")
          */
-        var Scaling = {
+        return {
             fit: 0,
             fill: 1,
             fillX: 2,
@@ -15,7 +14,4 @@ var gdx;(function (gdx) {
             none: 7
         }
 
-        utils.Scaling = Scaling;
-
-    })(utils = gdx.utils || (gdx.utils = {}));
-})(gdx || (gdx = {}));
+}());

@@ -5,6 +5,7 @@
         "outFile": "../src/main/resources/libgdx.js"
     },
     "files": [
+        "src/libgdx.js",
         "src/gdx/math/Vector3.js",
         "src/gdx/math/MathUtils.js",
         "src/gdx/Gdx.js",

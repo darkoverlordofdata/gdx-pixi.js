@@ -1,22 +1,15 @@
-var gdx;
-(function (gdx) {
-    var graphics;
-    (function (graphics) {
-        var g2d;
-        (function (g2d) {
 
-        /**
-         * @JSName("gdx.graphics.g2d.TextureAtlas")
-         */
-        class TextureAtlas {
-            constructor(packFile) {
-                this.packFile = packFile
-            }
-            createSprite(name){}
-        }
+/**
+ * @JSName("gdx.graphics.g2d.TextureAtlas")
+ */
+gdx.graphics.g2d.TextureAtlas = (function(){
 
-        g2d.TextureAtlas = TextureAtlas;
+    return class TextureAtlas {
         
-        })(g2d = graphics.g2d || (graphics.g2d = {}));
-    })(graphics = gdx.graphics || (gdx.graphics = {}));
-})(gdx || (gdx = {}));
+        constructor(packFile) {
+            this.packFile = packFile
+        }
+        createSprite(name){}
+    }
+
+}());
