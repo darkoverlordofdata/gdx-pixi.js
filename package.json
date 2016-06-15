@@ -4,7 +4,7 @@
   "description": "A libGDX api for scala.js ",
   "main": "index.js",
   "scripts": {
-    "_vscode_build": "tsc -p libgdx/jsconfig.json && tsc -p overlap2d/jsconfig.json",
+    "_vscode_build": "tsc -p src/main/libgdx/jsconfig.json && tsc -p src/main/overlap2d/jsconfig.json",
     "publish": "gulp publish",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
