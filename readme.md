@@ -73,7 +73,9 @@ manifest.json:
   "atlas": {
     "logo":"images/badlogic.png"
   }
-}```
+}
+```
+
 
 
 # License
