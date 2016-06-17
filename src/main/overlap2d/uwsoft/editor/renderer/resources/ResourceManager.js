@@ -1,14 +1,15 @@
 uwsoft.editor.renderer.resources.ResourceManager = (function(){
 
-    var Gdx = gdx.Gdx;
-    var File = {separator:'/'};
-    var scenesPath = "scenes";
-    var particleEffectsPath = "particles";
-    var spriteAnimationsPath = "sprite_animations";
-    var spriterAnimationsPath = "spriter_animations";
-    var spineAnimationsPath = "spine_animations";
-    var fontsPath = "freetypefonts";
-    var shadersPath = "shaders";
+    const Gdx = gdx.Gdx;
+    const File = {separator:'/'};
+    
+    const scenesPath = "scenes";
+    const particleEffectsPath = "particles";
+    const spriteAnimationsPath = "sprite_animations";
+    const spriterAnimationsPath = "spriter_animations";
+    const spineAnimationsPath = "spine_animations";
+    const fontsPath = "freetypefonts";
+    const shadersPath = "shaders";
 
     return class ResourceManager {
         constructor() {

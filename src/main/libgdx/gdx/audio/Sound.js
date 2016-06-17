@@ -1,15 +1,11 @@
 /**
  * @JSName("gdx.audio.Sound")
  */
-gdx.audio.Sound = (function() {
-    
-    class Sound {
 
-        play() {
-        }
+export default class Sound {
+
+    play() {
     }
+}
 
-    return Sound;
-
-}());
 

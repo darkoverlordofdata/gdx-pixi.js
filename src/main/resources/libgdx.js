@@ -8,29 +8,83 @@
  * partial implementation. to start, this is just enough for ShmupWarz to
  * run in the browser.
  */
-var gdx = (function () {
-    return {
-        audio: {},
-        files: {},
-        graphics: {
-            g2d: {},
-        },
-        math: {},
-        scenes: {
-            scene2d: {
-                utils: {},
+/**
+ * AMD Compatible module loader
+ *
+ * define("lib", ["require", "exports"], function (require, exports) {
+ *
+ * define("test", ["require", "exports", "lib"], function (require, exports, lib_1) {
+ *
+ * @param global window object
+ * @param publish api flag boolean
+ *
+ */
+var define = (function (root) {
+    "use strict";
+    console.log(root);
+    // Module registry
+    var modules = {};
+    // Fetch a module from the registry
+    var require = function (name) {
+        return modules[name] || {};
+    };
+    var resolve = function (dependancy) {
+        var ns = dependancy.split('/');
+        var node = root;
+        for (var i = 0; i < ns.length; i++) {
+            if (typeof node[ns[i]] === 'undefined') {
+                return null;
             }
-        },
-        utils: {
-            viewport: {}
+            node = node[ns[i]];
+        }
+        return node;
+    };
+    return function (name, deps, callback) {
+        "use strict";
+        // the exported module reference
+        var exports = modules[name] = {};
+        // first 2 dependencies are built-in:
+        var args = [require, exports];
+        // remaining dependencues
+        for (var i = 2; i < deps.length; i++) {
+            args.push(resolve(deps[i]));
+        }
+        // initialize the module
+        callback.apply(null, args);
+        // do exports:
+        var ns = name.split('/');
+        var node = root;
+        // find the module node
+        for (var i = 0; i < ns.length; i++) {
+            if (typeof node[ns[i]] === 'undefined') {
+                node[ns[i]] = {};
+            }
+            node = node[ns[i]];
+        }
+        // export default replaces the module node
+        if (exports.__esModule || exports['default']) {
+            var defaultName = ns.pop();
+            var defaultNode = root;
+            for (var i = 0; i < ns.length; i++) {
+                defaultNode = defaultNode[ns[i]];
+            }
+            defaultNode[defaultName] = exports['default'];
+            defaultNode[defaultName]['default'] = exports['default'];
+        }
+        // publish all of the exported values
+        for (var key in exports) {
+            if (key !== 'default')
+                node[key] = exports[key];
         }
     };
-}());
+}(this));
+// }({})); 
 /**
  * @JSName("gdx.math.Vector3")
  */
-gdx.math.Vector3 = (function () {
-    return class Vector3 {
+define("gdx/math/Vector3", ["require", "exports"], function (require, exports) {
+    "use strict";
+    class Vector3 {
         constructor() {
             this.set(0, 0, 0);
         }
@@ -40,9 +94,14 @@ gdx.math.Vector3 = (function () {
             this.z = z;
         }
     }
-    ;
-}());
-gdx.math.MathUtils = Math;
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = Vector3;
+});
+define("gdx/math/MathUtils", ["require", "exports"], function (require, exports) {
+    "use strict";
+    const math = Math;
+    exports.default = math;
+});
 /**
  * libjs
  *
@@ -50,11 +109,12 @@ gdx.math.MathUtils = Math;
  * Copyright (c) 2016 Bruce Davidson &lt;darkoverlordofdata@gmail.com&gt;
  *
  */
-/**
- * @JSName("Gdx")
- */
-gdx.Gdx = (function () {
-    return {
+define("gdx/Gdx", ["require", "exports"], function (require, exports) {
+    "use strict";
+    /**
+     * @JSName("Gdx")
+     */
+    const Gdx = {
         app: null,
         graphics: null,
         audio: null,
@@ -72,41 +132,45 @@ gdx.Gdx = (function () {
         _height: 0,
         _width: 0 // screen width
     };
-}());
+    exports.default = Gdx;
+});
 /**
  * @JSName("gdx.audio.Sound")
  */
-gdx.audio.Sound = (function () {
+define("gdx/audio/Sound", ["require", "exports"], function (require, exports) {
+    "use strict";
     class Sound {
         play() {
         }
     }
-    return Sound;
-}());
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = Sound;
+});
 /**
  * @JSName("gdx.files.FileHandle")
  */
-gdx.files.FileHandle = (function () {
-    var Gdx = gdx.Gdx;
+define("gdx/files/FileHandle", ["require", "exports", "gdx/Gdx"], function (require, exports, Gdx_1) {
+    "use strict";
     class FileHandle {
         constructor(path) {
             this.path = path;
         }
         readString() {
-            return Gdx._internal[this.path].xhr.responseText;
+            return Gdx_1.default._internal[this.path].xhr.responseText;
         }
     }
-    return FileHandle;
-}());
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = FileHandle;
+});
 /**
  * @JSName("gdx.graphics.g2d.Batch")
  */
-gdx.graphics.g2d.Batch = (function () {
-    var Gdx = gdx.Gdx;
+define("gdx/graphics/g2d/Batch", ["require", "exports", "gdx/Gdx"], function (require, exports, Gdx_2) {
+    "use strict";
     class Batch {
         constructor() {
             this.sprites = new PIXI.Container();
-            Gdx._stage.addChild(this.sprites);
+            Gdx_2.default._stage.addChild(this.sprites);
         }
         begin() {
             this.sprites.children.length = 0;
@@ -124,25 +188,26 @@ gdx.graphics.g2d.Batch = (function () {
             }
         }
         end() {
-            Gdx._renderer.render(Gdx._stage);
+            Gdx_2.default._renderer.render(Gdx_2.default._stage);
         }
         setProjectionMatrix(projection) {
         }
     }
-    return Batch;
-}());
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = Batch;
+});
 /**
  * @JSName("gdx.graphics.g2d.BitmapFont")
  */
-gdx.graphics.g2d.BitmapFont = (function () {
-    var Gdx = gdx.Gdx;
+define("gdx/graphics/g2d/BitmapFont", ["require", "exports", "gdx/Gdx"], function (require, exports, Gdx_3) {
+    "use strict";
     class BitmapFont {
         constructor(fontFile, region, integer) {
             this.fontFile = fontFile;
             this.region = region;
             this.integer = integer;
-            let name = this.fontFile.path.split('/').pop().split('.')[0];
-            let dom = (new DOMParser()).parseFromString(Gdx._resources[name].xhr.responseText, 'text/xml');
+            const name = this.fontFile.path.split('/').pop().split('.')[0];
+            const dom = (new DOMParser()).parseFromString(Gdx_3.default._resources[name].xhr.responseText, 'text/xml');
             this.face = dom.evaluate('/font/info/@face', dom, null, XPathResult.STRING_TYPE, null).stringValue;
             this.size = dom.evaluate('/font/info/@size', dom, null, XPathResult.STRING_TYPE, null).stringValue;
         }
@@ -150,51 +215,56 @@ gdx.graphics.g2d.BitmapFont = (function () {
         getWidth() { }
         getHeight() { }
         draw(batch, str, x, y) {
-            let texture = new PIXI.extras.BitmapText(str, { font: `${this.size}px ${this.face}`, align: 'right' });
-            batch.draw(texture, x, Gdx._height - y);
+            const texture = new PIXI.extras.BitmapText(str, { font: `${this.size}px ${this.face}`, align: 'right' });
+            batch.draw(texture, x, Gdx_3.default._height - y);
         }
     }
-    return BitmapFont;
-}());
-gdx.graphics.g2d.SpriteBatch = (function () {
-    var Batch = gdx.graphics.g2d.Batch;
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = BitmapFont;
+});
+define("gdx/graphics/g2d/SpriteBatch", ["require", "exports", "gdx/graphics/g2d/Batch"], function (require, exports, Batch_1) {
+    "use strict";
     /**
      * @JSName("gdx.graphics.g2d.SpriteBatch")
      */
-    return class SpriteBatch extends Batch {
+    class SpriteBatch extends Batch_1.default {
     }
-    ;
-}());
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = SpriteBatch;
+});
 /**
  * @JSName("gdx.graphics.g2d.TextureAtlas")
  */
-gdx.graphics.g2d.TextureAtlas = (function () {
-    return class TextureAtlas {
+define("gdx/graphics/g2d/TextureAtlas", ["require", "exports"], function (require, exports) {
+    "use strict";
+    class TextureAtlas {
         constructor(packFile) {
             this.packFile = packFile;
         }
         createSprite(name) { }
     }
-    ;
-}());
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = TextureAtlas;
+});
 /**
  * @JSName("gdx.graphics.g2d.TextureRegion")
  */
-gdx.graphics.g2d.TextureRegion = (function () {
-    return class TextureRegion {
+define("gdx/graphics/g2d/TextureRegion", ["require", "exports"], function (require, exports) {
+    "use strict";
+    class TextureRegion {
         constructor(texture) {
             this.texture = texture;
         }
     }
-    ;
-}());
-gdx.graphics.g2d.Sprite = (function () {
-    var Gdx = gdx.Gdx;
-    var TextureRegion = gdx.graphics.g2d.TextureRegion;
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = TextureRegion;
+});
+define("gdx/graphics/g2d/Sprite", ["require", "exports", "gdx/Gdx", "gdx/graphics/g2d/TextureRegion"], function (require, exports, Gdx_4, TextureRegion_1) {
+    "use strict";
     /**
      * @JSName("gdx.graphics.g2d.Sprite")
      */
-    return class Sprite extends TextureRegion {
+    class Sprite extends TextureRegion_1.default {
         constructor(texture) {
             super(texture);
         }
@@ -212,42 +282,46 @@ gdx.graphics.g2d.Sprite = (function () {
         setPosition(x, y) {
             //this.texture.sprite.position.set(x, y);
             //this.texture.sprite.position.set(Gdx.graphics.getWidth()-x, Gdx.graphics.getHeight()-y);
-            this.texture.sprite.position.set(x, Gdx.graphics.getHeight() - y - this.texture.sprite._texture.height);
+            this.texture.sprite.position.set(x, Gdx_4.default.graphics.getHeight() - y - this.texture.sprite._texture.height);
         }
         draw(batch) {
             batch.draw(this, this.texture.sprite.position.x, this.texture.sprite.position.y);
         }
     }
-    ;
-}());
-gdx.graphics.Camera = (function () {
-    var Vector3 = gdx.math.Vector3;
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = Sprite;
+});
+define("gdx/graphics/Camera", ["require", "exports", "gdx/math/Vector3"], function (require, exports, Vector3_1) {
+    "use strict";
     /**
      * @JSName("gdx.graphics.Camera")
      */
-    return class Camera {
+    class Camera {
         constructor(viewportWidth, viewportHeight) {
-            this.position = new Vector3();
+            this.position = new Vector3_1.default();
             this.viewportWidth = viewportWidth;
             this.viewportHeight = viewportHeight;
         }
         update() { }
     }
-    ;
-}());
-gdx.graphics.GL20 = (function () {
-    var Gdx = gdx.Gdx;
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = Camera;
+});
+define("gdx/graphics/GL20", ["require", "exports", "gdx/Gdx"], function (require, exports, Gdx_5) {
+    "use strict";
     /**
      * @JSName("gdx.graphics.GL20")
      */
     class GL20 {
         glClearColor(red, green, blue, alpha) {
-            let hexColor = ((1 << 24) + (red * 255 << 16) + (green * 255 << 8) + blue * 255); //.toString(16).substr(1);
-            Gdx._renderer.backgroundColor = hexColor;
+            const hexColor = ((1 << 24) + (red * 255 << 16) + (green * 255 << 8) + blue * 255); //.toString(16).substr(1);
+            Gdx_5.default._renderer.backgroundColor = hexColor;
         }
         glClear(mask) {
         }
     }
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = GL20;
     GL20.GL_COLOR_BUFFER_BIT = 0x00004000;
     GL20.GL_NEAREST = 0x2600;
     GL20.GL_LINEAR = 0x2601;
@@ -256,25 +330,24 @@ gdx.graphics.GL20 = (function () {
     GL20.GL_LINEAR_MIPMAP_NEAREST = 0x2701;
     GL20.GL_NEAREST_MIPMAP_LINEAR = 0x2702;
     GL20.GL_LINEAR_MIPMAP_LINEAR = 0x2703;
-    return GL20;
-}());
-gdx.graphics.OrthographicCamera = (function () {
-    var Camera = gdx.graphics.Camera;
+});
+define("gdx/graphics/OrthographicCamera", ["require", "exports", "gdx/graphics/Camera"], function (require, exports, Camera_1) {
+    "use strict";
     /**
      * @JSName("gdx.graphics.OrthographicCamera")
      */
-    return class OrthographicCamera extends Camera {
+    class OrthographicCamera extends Camera_1.default {
         constructor(viewportWidth, viewportHeight) {
             super(viewportWidth, viewportHeight);
             this.combined = null;
         }
         update() { }
     }
-    ;
-}());
-gdx.graphics.Texture = (function () {
-    var GL20 = gdx.graphics.GL20;
-    var Gdx = gdx.Gdx;
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = OrthographicCamera;
+});
+define("gdx/graphics/Texture", ["require", "exports", "gdx/graphics/GL20", "gdx/Gdx"], function (require, exports, GL20_1, Gdx_6) {
+    "use strict";
     /**
      * @JSName("gdx.graphics.Texture")
      */
@@ -282,7 +355,7 @@ gdx.graphics.Texture = (function () {
         constructor(path) {
             //let file = Gdx.files.internal(path);
             if (typeof path === 'string')
-                this.path = Gdx._resources[path] ? Gdx._resources[path].url : path;
+                this.path = Gdx_6.default._resources[path] ? Gdx_6.default._resources[path].url : path;
             else
                 this.path = path.path;
             this.sprite = PIXI.Sprite.fromImage(this.path);
@@ -290,35 +363,39 @@ gdx.graphics.Texture = (function () {
         }
         setFilter(minFilter, magFilter) { }
     }
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = Texture;
     Texture.uniqueId = 0;
     /**
      * @JSName("gdx.graphics.Texture.TextureFilter")
      */
     Texture.TextureFilter = {
-        Nearest: GL20.GL_NEAREST,
-        Linear: GL20.GL_LINEAR,
-        MipMap: GL20.GL_LINEAR_MIPMAP_LINEAR,
-        MipMapNearestNearest: GL20.GL_NEAREST_MIPMAP_NEAREST,
-        MipMapLinearNearest: GL20.GL_LINEAR_MIPMAP_NEAREST,
-        MipMapNearestLinear: GL20.GL_NEAREST_MIPMAP_LINEAR,
-        MipMapLinearLinear: GL20.GL_LINEAR_MIPMAP_LINEAR
+        Nearest: GL20_1.default.GL_NEAREST,
+        Linear: GL20_1.default.GL_LINEAR,
+        MipMap: GL20_1.default.GL_LINEAR_MIPMAP_LINEAR,
+        MipMapNearestNearest: GL20_1.default.GL_NEAREST_MIPMAP_NEAREST,
+        MipMapLinearNearest: GL20_1.default.GL_LINEAR_MIPMAP_NEAREST,
+        MipMapNearestLinear: GL20_1.default.GL_NEAREST_MIPMAP_LINEAR,
+        MipMapLinearLinear: GL20_1.default.GL_LINEAR_MIPMAP_LINEAR
     };
-    return Texture;
-}());
+});
 /**
  * @JSName("gdx.scenes.scene2d.utils.ClickListener")
  */
-gdx.scenes.scene2d.utils.ClickListener = (function () {
-    return class ClickListener {
+define("gdx/scenes/scene2d/utils/ClickListener", ["require", "exports"], function (require, exports) {
+    "use strict";
+    class ClickListener {
         clicked(event, x, y) { }
     }
-    ;
-}());
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = ClickListener;
+});
 /**
  * @JSName("gdx.scenes.scene2d.Actor")
  */
-gdx.scenes.scene2d.Actor = (function () {
-    return class Actor {
+define("gdx/scenes/scene2d/Actor", ["require", "exports"], function (require, exports) {
+    "use strict";
+    class Actor {
         constructor() {
             this.width = 0;
             this.height = 0;
@@ -343,61 +420,78 @@ gdx.scenes.scene2d.Actor = (function () {
             this.listeners.push(listener);
         }
     }
-    ;
-}());
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = Actor;
+});
 /**
  * @JSName("gdx.scenes.scene2d.Event")
  */
-gdx.scenes.scene2d.Event = (function () {
-    return class Event {
+define("gdx/scenes/scene2d/Event", ["require", "exports"], function (require, exports) {
+    "use strict";
+    class Event {
     }
-    ;
-}());
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = Event;
+});
 /**
  * @JSName("gdx.scenes.scene2d.EventListener")
  */
-gdx.scenes.scene2d.EventListener = (function () {
-    return class EventListener {
+define("gdx/scenes/scene2d/EventListener", ["require", "exports"], function (require, exports) {
+    "use strict";
+    class EventListener {
     }
-    ;
-}());
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = EventListener;
+});
 /**
  * @JSName("gdx.scenes.scene2d.InputEvent")
  */
-gdx.scenes.scene2d.InputEvent = (function () {
-    return class InputEvent {
+define("gdx/scenes/scene2d/InputEvent", ["require", "exports"], function (require, exports) {
+    "use strict";
+    class InputEvent {
     }
-    ;
-}());
-gdx.scenes.scene2d.InputListener = (function () {
-    var EventListener = gdx.scenes.scene2d.EventListener;
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = InputEvent;
+});
+define("gdx/scenes/scene2d/InputListener", ["require", "exports", "gdx/scenes/scene2d/EventListener"], function (require, exports, EventListener_1) {
+    "use strict";
     /**
      * @JSName("gdx.scenes.scene2d.InputListener")
      */
-    return class InputListener extends EventListener {
+    class InputListener extends EventListener_1.default {
     }
-    ;
-}());
-gdx.utils.Scaling = (function () {
-    /**
-     * @JSName("gdx.utils.Scaling")
-     */
-    return {
-        fit: 0,
-        fill: 1,
-        fillX: 2,
-        fillY: 3,
-        stretch: 4,
-        stretchX: 5,
-        stretchY: 6,
-        none: 7
-    };
-}());
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = InputListener;
+});
+define("gdx/utils/Scaling", ["require", "exports"], function (require, exports) {
+    "use strict";
+    const Scaling = {};
+    exports.default = Scaling;
+    Scaling[Scaling.fit = 0] = 'fit';
+    Scaling[Scaling.fill = 1] = 'fill';
+    Scaling[Scaling.fillX = 2] = 'fillX';
+    Scaling[Scaling.fillY = 3] = 'fillY';
+    Scaling[Scaling.stretch = 4] = 'stretch';
+    Scaling[Scaling.stretchX = 5] = 'stretchX';
+    Scaling[Scaling.stretchY = 6] = 'stretchY';
+    Scaling[Scaling.none = 7] = 'none';
+});
+// return {
+//     fit: 0,
+//     fill: 1,
+//     fillX: 2,
+//     fillY: 3,
+//     stretch: 4,
+//     stretchX: 5,
+//     stretchY: 6,
+//     none: 7
+// }
 /**
  * @JSName("gdx.utils.viewport.Viewport")
  */
-gdx.utils.viewport.Viewport = (function () {
-    return class Viewport {
+define("gdx/utils/viewport/Viewport", ["require", "exports"], function (require, exports) {
+    "use strict";
+    class Viewport {
         update(x, y) {
         }
         /**
@@ -410,85 +504,84 @@ gdx.utils.viewport.Viewport = (function () {
         applyCamera() {
         }
     }
-    ;
-}());
-gdx.utils.viewport.ScalingViewport = (function () {
-    var Viewport = gdx.utils.viewport.Viewport;
-    var OrthographicCamera = gdx.graphics.OrthographicCamera;
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = Viewport;
+});
+define("gdx/utils/viewport/ScalingViewport", ["require", "exports", "gdx/utils/viewport/Viewport", "gdx/graphics/OrthographicCamera"], function (require, exports, Viewport_1, OrthographicCamera_1) {
+    "use strict";
     /**
      * @JSName("gdx.utils.viewport.ScalingViewport")
      */
-    return class ScalingViewport extends Viewport {
+    class ScalingViewport extends Viewport_1.default {
         constructor(scaling, worldWidth, worldHeight, camera) {
             super();
             this.scaling = scaling;
             this.worldWidth = worldWidth;
             this.worldHeight = worldHeight;
-            this.camera = camera ? camera : new OrthographicCamera();
+            this.camera = camera ? camera : new OrthographicCamera_1.default();
         }
     }
-    ;
-}());
-gdx.utils.viewport.FillViewport = (function () {
-    var Scaling = gdx.utils.Scaling;
-    var ScalingViewport = gdx.utils.viewport.ScalingViewport;
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = ScalingViewport;
+});
+define("gdx/utils/viewport/FillViewport", ["require", "exports", "gdx/utils/Scaling", "gdx/utils/viewport/ScalingViewport"], function (require, exports, Scaling_1, ScalingViewport_1) {
+    "use strict";
     /**
      * @JSName("gdx.utils.viewport.FillViewport")
      */
-    return class FillViewport extends ScalingViewport {
+    class FillViewport extends ScalingViewport_1.default {
         constructor(worldWidth, worldHeight, camera) {
-            super(Scaling.fill, worldWidth, worldHeight, camera);
+            super(Scaling_1.default.fill, worldWidth, worldHeight, camera);
         }
     }
-    ;
-}());
-gdx.utils.viewport.FitViewport = (function () {
-    var Scaling = gdx.utils.Scaling;
-    var ScalingViewport = gdx.utils.viewport.ScalingViewport;
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = FillViewport;
+});
+define("gdx/utils/viewport/FitViewport", ["require", "exports", "gdx/utils/Scaling", "gdx/utils/viewport/ScalingViewport"], function (require, exports, Scaling_2, ScalingViewport_2) {
+    "use strict";
     /**
      * @JSName("gdx.utils.viewport.FitViewport")
      */
-    return class FitViewport extends ScalingViewport {
+    class FitViewport extends ScalingViewport_2.default {
         constructor(worldWidth, worldHeight, camera) {
-            super(Scaling.fit, worldWidth, worldHeight, camera);
+            super(Scaling_2.default.fit, worldWidth, worldHeight, camera);
         }
     }
-    ;
-}());
-gdx.Audio = (function () {
-    var Sound = gdx.audio.Sound;
-    /**
-     * @JSName("gdx.Audio")
-     */
-    return class Audio {
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = FitViewport;
+});
+define("gdx/Audio", ["require", "exports", "gdx/audio/Sound"], function (require, exports, Sound_1) {
+    "use strict";
+    class Audio {
         newSound(raw) {
-            return new Sound(raw);
+            return new Sound_1.default(raw);
         }
     }
-    ;
-}());
-gdx.Files = (function () {
-    var FileHandle = gdx.files.FileHandle;
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = Audio;
+});
+define("gdx/Files", ["require", "exports", "gdx/files/FileHandle"], function (require, exports, FileHandle_1) {
+    "use strict";
     /**
      * @JSName("gdx.Files")
      */
-    return class Files {
+    class Files {
         internal(path) {
-            return new FileHandle(path);
+            return new FileHandle_1.default(path);
         }
     }
-    ;
-}());
-gdx.Graphics = (function () {
-    var GL20 = gdx.graphics.GL20;
-    var Gdx = gdx.Gdx;
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = Files;
+});
+define("gdx/Graphics", ["require", "exports", "gdx/graphics/GL20", "gdx/Gdx"], function (require, exports, GL20_2, Gdx_7) {
+    "use strict";
     /**
      * @JSName("gdx.Graphics")
      */
-    return class Graphics {
+    class Graphics {
         constructor(config) {
             this.config = config;
-            this.gl20 = new GL20();
+            this.gl20 = new GL20_2.default();
             this.frameId = -1;
             this.lastTime = 0;
             this.deltaTime = 0;
@@ -501,7 +594,7 @@ gdx.Graphics = (function () {
         getHeight() { return this.config.height; }
         getDensity() { return window.devicePixelRatio; }
         setupDisplay() {
-            Gdx.gl = this.gl20;
+            Gdx_7.default.gl = this.gl20;
         }
         update(time) {
             if (this.lastTime <= 0) {
@@ -519,103 +612,162 @@ gdx.Graphics = (function () {
             }
         }
     }
-    ;
-}());
-gdx.Input = (function () {
-    var Gdx = gdx.Gdx;
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = Graphics;
+});
+define("gdx/Input", ["require", "exports", "gdx/Gdx"], function (require, exports, Gdx_8) {
+    "use strict";
     /**
      * @JSName("gdx.Input")
      */
     class Input {
         setInputProcessor(processor) {
-            Gdx._processor = processor;
+            Gdx_8.default._processor = processor;
             document.addEventListener('touchstart', (event) => {
-                let pixel = window.devicePixelRatio;
+                const pixel = window.devicePixelRatio;
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                Gdx._processor.touchDown(Math.ceil(event.clientX / Gdx._scaleX * pixel), Math.ceil(event.clientY / Gdx._scaleY * pixel), 0, 0);
+                Gdx_8.default._processor.touchDown(Math.ceil(event.clientX / Gdx_8.default._scaleX * pixel), Math.ceil(event.clientY / Gdx_8.default._scaleY * pixel), 0, 0);
             }, true);
             document.addEventListener('touchmove', (event) => {
-                let pixel = window.devicePixelRatio;
+                const pixel = window.devicePixelRatio;
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                Gdx._processor.touchDragged(Math.ceil(event.clientX / Gdx._scaleX * pixel), Math.ceil(event.clientY / Gdx._scaleY * pixel), 0);
+                Gdx_8.default._processor.touchDragged(Math.ceil(event.clientX / Gdx_8.default._scaleX * pixel), Math.ceil(event.clientY / Gdx_8.default._scaleY * pixel), 0);
             }, true);
             document.addEventListener('touchend', (event) => {
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                Gdx._processor.touchUp(0, 0, 0, 0);
+                Gdx_8.default._processor.touchUp(0, 0, 0, 0);
             }, true);
             document.addEventListener('mousedown', (event) => {
-                Gdx._processor.touchDown(Math.ceil(event.clientX / Gdx._scaleX), Math.ceil(event.clientY / Gdx._scaleY), -1, event.button);
+                Gdx_8.default._processor.touchDown(Math.ceil(event.clientX / Gdx_8.default._scaleX), Math.ceil(event.clientY / Gdx_8.default._scaleY), -1, event.button);
             }, true);
             document.addEventListener('mousemove', (event) => {
-                Gdx._processor.mouseMoved(Math.ceil(event.clientX / Gdx._scaleX), Math.ceil(event.clientY / Gdx._scaleY));
+                Gdx_8.default._processor.mouseMoved(Math.ceil(event.clientX / Gdx_8.default._scaleX), Math.ceil(event.clientY / Gdx_8.default._scaleY));
             }, true);
             document.addEventListener('mouseup', (event) => {
-                Gdx._processor.touchUp(Math.ceil(event.clientX / Gdx._scaleX), Math.ceil(event.clientY / Gdx._scaleY), -1, event.button);
+                Gdx_8.default._processor.touchUp(Math.ceil(event.clientX / Gdx_8.default._scaleX), Math.ceil(event.clientY / Gdx_8.default._scaleY), -1, event.button);
             }, true);
-            window.addEventListener('keydown', (event) => Gdx._processor.keyDown(event.keyCode), true);
-            window.addEventListener('keyup', (event) => Gdx._processor.keyUp(event.keyCode), true);
+            window.addEventListener('keydown', (event) => Gdx_8.default._processor.keyDown(event.which), true);
+            window.addEventListener('keyup', (event) => Gdx_8.default._processor.keyUp(event.which), true);
         }
     }
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = Input;
     /**
      * @JSName("gdx.Input.Buttons")
      */
-    Input.Buttons = {
-        LEFT: 0,
-        RIGHT: 1,
-        MIDDLE: 2,
-        BACK: 3,
-        FORWARD: 4
-    };
+    const Buttons = {};
+    Buttons[Buttons.LEFT = 0] = 'LEFT';
+    Buttons[Buttons.RIGHT = 1] = 'RIGHT';
+    Buttons[Buttons.MIDDLE = 2] = 'MIDDLE';
+    Buttons[Buttons.BACK = 3] = 'BACK';
+    Buttons[Buttons.FORWARD = 4] = 'FORWARD';
     /**
      * @JSName("gdx.InpuyKeys")
      */
-    Input.Keys = {
-        A: 54,
-        Z: 90
+    const Keys = {
+        ANY_KEY: -1,
+        NUM_0: 96,
+        NUM_1: 97,
+        NUM_2: 98,
+        NUM_3: 99,
+        NUM_4: 100,
+        NUM_5: 101,
+        NUM_6: 102,
+        NUM_7: 103,
+        NUM_8: 104,
+        NUM_9: 105,
+        A: 65,
+        B: 66,
+        BACKSLASH: 220,
+        C: 67,
+        COMMA: 188,
+        D: 68,
+        DEL: 46,
+        BACKSPACE: 8,
+        DOWN: 40,
+        LEFT: 37,
+        RIGHT: 39,
+        UP: 38,
+        E: 69,
+        EQUALS: 187,
+        F: 70,
+        G: 71,
+        H: 72,
+        HOME: 36,
+        I: 73,
+        J: 74,
+        K: 75,
+        L: 76,
+        LEFT_BRACKET: 219,
+        M: 77,
+        MINUS: 189,
+        N: 78,
+        O: 79,
+        P: 80,
+        PERIOD: 190,
+        PLUS: 187,
+        Q: 81,
+        R: 82,
+        RIGHT_BRACKET: 221,
+        S: 83,
+        SEMICOLON: 186,
+        SLASH: 191,
+        SPACE: 32,
+        T: 84,
+        TAB: 9,
+        U: 85,
+        UNKNOWN: 0,
+        V: 86,
+        W: 87,
+        X: 88,
+        Y: 89,
+        Z: 90,
+        ESCAPE: 27,
+        END: 35,
+        INSERT: 45,
+        PAGE_UP: 33,
+        PAGE_DOWN: 34,
+        COLON: 186
     };
-    return Input;
-}());
-gdx.JsApplication = (function () {
-    var Graphics = gdx.Graphics;
-    var Audio = gdx.Audio;
-    var Files = gdx.Files;
-    var Input = gdx.Input;
-    var Gdx = gdx.Gdx;
-    var Scaling = gdx.utils.Scaling;
+    Input.Buttons = Object.freeze(Buttons);
+    Input.Keys = Object.freeze(Keys);
+});
+define("gdx/JsApplication", ["require", "exports", "gdx/Graphics", "gdx/Audio", "gdx/Files", "gdx/Input", "gdx/Gdx", "gdx/utils/Scaling"], function (require, exports, Graphics_1, Audio_1, Files_1, Input_1, Gdx_9, Scaling_3) {
+    "use strict";
     function resize() {
-        switch (Gdx._scaling) {
-            case Scaling.fit:
+        switch (Gdx_9.default._scaling) {
+            case Scaling_3.default.fit:
                 // Determine which screen dimension is least constrained
-                Gdx._scaleX = Gdx._scaleY = Math.max(window.innerWidth / Gdx._width, window.innerHeight / Gdx._height);
+                Gdx_9.default._scaleX = Gdx_9.default._scaleY = Math.max(window.innerWidth / Gdx_9.default._width, window.innerHeight / Gdx_9.default._height);
                 break;
-            case Scaling.fill:
+            case Scaling_3.default.fill:
                 // Determine which screen dimension is most constrained
-                Gdx._scaleX = Gdx._scaleY = Math.min(window.innerWidth / Gdx._width, window.innerHeight / Gdx._height);
+                Gdx_9.default._scaleX = Gdx_9.default._scaleY = Math.min(window.innerWidth / Gdx_9.default._width, window.innerHeight / Gdx_9.default._height);
                 break;
-            case Scaling.fillX:
-                Gdx._scaleX = window.innerWidth / Gdx._width;
-                Gdx._scaleY = Gdx._scaleX;
+            case Scaling_3.default.fillX:
+                Gdx_9.default._scaleX = window.innerWidth / Gdx_9.default._width;
+                Gdx_9.default._scaleY = Gdx_9.default._scaleX;
                 break;
-            case Scaling.fillY:
-                Gdx._scaleY = window.innerHeight / Gdx._height;
-                Gdx._scaleX = Gdx._scaleY;
+            case Scaling_3.default.fillY:
+                Gdx_9.default._scaleY = window.innerHeight / Gdx_9.default._height;
+                Gdx_9.default._scaleX = Gdx_9.default._scaleY;
                 break;
-            case Scaling.stretch:
-                Gdx._scaleX = window.innerWidth / Gdx._width;
-                Gdx._scaleY = window.innerHeight / Gdx._height;
+            case Scaling_3.default.stretch:
+                Gdx_9.default._scaleX = window.innerWidth / Gdx_9.default._width;
+                Gdx_9.default._scaleY = window.innerHeight / Gdx_9.default._height;
                 break;
-            case Scaling.stretchX:
-                Gdx._scaleX = window.innerWidth / Gdx._width;
-                Gdx._scaleY = Gdx._scaleX;
+            case Scaling_3.default.stretchX:
+                Gdx_9.default._scaleX = window.innerWidth / Gdx_9.default._width;
+                Gdx_9.default._scaleY = Gdx_9.default._scaleX;
                 break;
-            case Scaling.stretchY:
-                Gdx._scaleY = window.innerHeight / Gdx._height;
-                Gdx._scaleX = Gdx._scaleY;
+            case Scaling_3.default.stretchY:
+                Gdx_9.default._scaleY = window.innerHeight / Gdx_9.default._height;
+                Gdx_9.default._scaleX = Gdx_9.default._scaleY;
                 break;
         }
-        Gdx._stage.scale.x = Gdx._scaleX;
-        Gdx._stage.scale.y = Gdx._scaleY;
-        Gdx._renderer.resize(Math.ceil(Gdx._width * Gdx._scaleX), Math.ceil(Gdx._height * Gdx._scaleY));
+        Gdx_9.default._stage.scale.x = Gdx_9.default._scaleX;
+        Gdx_9.default._stage.scale.y = Gdx_9.default._scaleY;
+        Gdx_9.default._renderer.resize(Math.ceil(Gdx_9.default._width * Gdx_9.default._scaleX), Math.ceil(Gdx_9.default._height * Gdx_9.default._scaleY));
     }
     /**
      * getJSON
@@ -628,16 +780,15 @@ gdx.JsApplication = (function () {
      */
     function getJSON(url) {
         return new Promise((resolve, reject) => {
-            var xhr = new XMLHttpRequest();
+            const xhr = new XMLHttpRequest();
             xhr.open('get', url, true);
             xhr.responseType = 'json';
             xhr.onload = () => {
-                var status = xhr.status;
-                if (status == 200) {
+                if (xhr.status === 200) {
                     resolve(xhr.response);
                 }
                 else {
-                    reject(status);
+                    reject(xhr.status);
                 }
             };
             xhr.send();
@@ -646,25 +797,25 @@ gdx.JsApplication = (function () {
     /**
      * @JSName("gdx.JsApplication")
      */
-    return class JsApplication {
+    class JsApplication {
         constructor(listener, config) {
             if (config.title === null) {
                 config.title = listener.constructor.name;
             }
             document.title = config.title;
             this.config = config;
-            this.graphics = new Graphics(config);
-            this.audio = new Audio();
-            this.files = new Files();
-            this.input = new Input();
+            this.graphics = new Graphics_1.default(config);
+            this.audio = new Audio_1.default();
+            this.files = new Files_1.default();
+            this.input = new Input_1.default();
             //this.net = new Net();
             this.gl = null;
             this.listener = listener;
-            Gdx.app = this;
-            Gdx.graphics = this.graphics;
-            Gdx.audio = this.audio;
-            Gdx.files = this.files;
-            Gdx.input = this.input;
+            Gdx_9.default.app = this;
+            Gdx_9.default.graphics = this.graphics;
+            Gdx_9.default.audio = this.audio;
+            Gdx_9.default.files = this.files;
+            Gdx_9.default.input = this.input;
             //Gdx.net = this.net;
             /**
              * Load the manifest, and initialize
@@ -675,7 +826,7 @@ gdx.JsApplication = (function () {
                 }
                 PIXI.loader.load((loader, res) => {
                     console.log(res);
-                    Gdx._resources = Object.create(res);
+                    Gdx_9.default._resources = Object.create(res);
                     for (let path in data.files) {
                         console.log(data.files[path]);
                         PIXI.loader.add(data.files[path]);
@@ -692,24 +843,24 @@ gdx.JsApplication = (function () {
          */
         initialize() {
             //console.log(JSON.parse(Gdx._resources['main'].xhr.responseText));
-            Gdx._width = this.config.width; //*window.devicePixelRatio;
-            Gdx._height = this.config.height; //*window.devicePixelRatio;
-            Gdx._renderer = PIXI.autoDetectRenderer(this.config.width, this.config.height, {
+            Gdx_9.default._width = this.config.width; //*window.devicePixelRatio;
+            Gdx_9.default._height = this.config.height; //*window.devicePixelRatio;
+            Gdx_9.default._renderer = PIXI.autoDetectRenderer(this.config.width, this.config.height, {
                 antialiasing: false,
                 transparent: false,
                 resolution: window.devicePixelRatio,
                 autoResize: true
             });
-            Gdx._renderer.view.style.position = "absolute";
-            Gdx._renderer.view.style.top = "0px";
-            Gdx._renderer.view.style.left = "0px";
-            Gdx._stage = new PIXI.Container();
+            Gdx_9.default._renderer.view.style.position = "absolute";
+            Gdx_9.default._renderer.view.style.top = "0px";
+            Gdx_9.default._renderer.view.style.left = "0px";
+            Gdx_9.default._stage = new PIXI.Container();
             resize(); // listener.resize();
-            document.body.appendChild(Gdx._renderer.view);
+            document.body.appendChild(Gdx_9.default._renderer.view);
             window.addEventListener("resize", resize);
             this.graphics.setupDisplay();
             this.listener.create();
-            let mainLoop = (time) => {
+            const mainLoop = (time) => {
                 this.graphics.update(time);
                 this.graphics.frameId++;
                 this.listener.render();
@@ -718,13 +869,15 @@ gdx.JsApplication = (function () {
             window.requestAnimationFrame(mainLoop);
         }
     }
-    ;
-}());
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = JsApplication;
+});
 /**
  * @JSName("gdx.JsApplicationConfiguration")
  */
-gdx.JsApplicationConfiguration = (function () {
-    return class JsApplicationConfiguration {
+define("gdx/JsApplicationConfiguration", ["require", "exports"], function (require, exports) {
+    "use strict";
+    class JsApplicationConfiguration {
         constructor() {
             this.height = 480;
             this.width = 640;
@@ -732,5 +885,6 @@ gdx.JsApplicationConfiguration = (function () {
             this.title = null;
         }
     }
-    ;
-}());
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = JsApplicationConfiguration;
+});

@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "amd",
+        "outFile": "../../main/resources/test/out.js"
+    },
+    "files": [
+        "test.js",
+        "lib.js",
+        "sub/lib2.js"
+    ]
+}

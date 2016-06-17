@@ -1,9 +1,7 @@
-gdx.scenes.scene2d.InputListener = (function() {
 
-    var EventListener = gdx.scenes.scene2d.EventListener;          
-    /**
-     * @JSName("gdx.scenes.scene2d.InputListener")
-     */
-    return class InputListener extends EventListener {}
-                
-}());
+import EventListener from 'gdx/scenes/scene2d/EventListener';          
+/**
+ * @JSName("gdx.scenes.scene2d.InputListener")
+ */
+export default class InputListener extends EventListener {}
+            

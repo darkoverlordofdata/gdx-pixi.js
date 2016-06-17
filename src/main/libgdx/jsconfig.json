@@ -1,11 +1,13 @@
 {
     "compilerOptions": {
         "target": "ES6",
-        "module": "system",
+        "module": "amd",
+        "allowSyntheticDefaultImports": true,
         "outFile": "../../main/resources/libgdx.js"
     },
     "files": [
         "gdx.js",
+        "define.js",
         "gdx/math/Vector3.js",
         "gdx/math/MathUtils.js",
         "gdx/Gdx.js",

@@ -1,1 +1,3 @@
-gdx.math.MathUtils = Math;
+const math = Math;
+
+export {math as default}

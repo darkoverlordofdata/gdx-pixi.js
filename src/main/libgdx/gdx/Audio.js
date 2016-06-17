@@ -1,14 +1,7 @@
-gdx.Audio = (function() {
+import Sound from 'gdx/audio/Sound';
 
-    var Sound = gdx.audio.Sound;
-    
-    /**
-     * @JSName("gdx.Audio")
-     */
-    return class Audio{
-        newSound(raw) {
-            return new Sound(raw);
-        }
+export default class Audio {
+    newSound(raw) {
+        return new Sound(raw);
     }
-    
-}());
+}

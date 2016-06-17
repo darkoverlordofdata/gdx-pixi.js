@@ -1,22 +1,18 @@
 /**
  * @JSName("gdx.files.FileHandle")
  */
-gdx.files.FileHandle = (function(){
 
-    var Gdx = gdx.Gdx;
+import Gdx from 'gdx/Gdx';
 
-    class FileHandle {
+export default class FileHandle {
 
-        constructor(path) {
-            this.path = path;
-        }
-        
-        readString() {
-            return Gdx._internal[this.path].xhr.responseText;
-        }
-
+    constructor(path) {
+        this.path = path;
+    }
+    
+    readString() {
+        return Gdx._internal[this.path].xhr.responseText;
     }
 
-    return FileHandle;
+}
 
-}());
