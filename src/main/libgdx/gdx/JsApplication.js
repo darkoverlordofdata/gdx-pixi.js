@@ -71,6 +71,7 @@ function getJSON(url) {
  * @JSName("gdx.JsApplication")
  */
 export default class JsApplication {
+    
     constructor(listener, config){
 
         if (config.title === null) {
