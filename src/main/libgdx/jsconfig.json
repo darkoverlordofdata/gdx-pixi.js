@@ -1,14 +1,14 @@
 {
     "compilerOptions": {
         "target": "es6",
-        "module": "system",
-        "allowSyntheticDefaultImports": true,
+        "module": "amd",
         "outFile": "../../main/resources/libgdx.js"
     },
     "files": [
-        "system.js",
+        "global.js",
+        "define.js",
+        "gdx.js",
         "gdx/math/Vector3.js",
-        "gdx/math/MathUtils.js",
         "gdx/Gdx.js",
         "gdx/audio/Sound.js",
         "gdx/files/FileHandle.js",
@@ -38,8 +38,6 @@
         "gdx/Graphics.js",
         "gdx/Input.js",
         "gdx/JsApplication.js",
-        "gdx/JsApplicationConfiguration.js",
-        "gdx.js",
-        "lib.js"
+        "gdx/JsApplicationConfiguration.js"
     ]
 }

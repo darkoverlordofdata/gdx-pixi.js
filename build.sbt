@@ -13,8 +13,9 @@ libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "0.9.0"
 skip in packageJSDependencies := false
 
 jsDependencies += "org.webjars" % "pixi.js" % "3.0.7" / "pixi.js"
-jsDependencies += ProvidedJS / "libgdx.js"
-jsDependencies += ProvidedJS / "overlap2d-runtime-libgdx.js"
+jsDependencies += ProvidedJS / "system.js" dependsOn "pixi.js"
+jsDependencies += ProvidedJS / "libgdx.js" dependsOn "system.js"
+jsDependencies += ProvidedJS / "overlap2d-runtime-libgdx.js" dependsOn "libgdx.js"
 jsDependencies += RuntimeDOM
 
 libraryDependencies += "com.darkoverlordofdata" %%% "entitas" % "0.0.0-SNAPSHOT"
