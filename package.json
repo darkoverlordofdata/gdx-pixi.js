@@ -4,7 +4,7 @@
   "description": "A libGDX api for scala.js ",
   "main": "index.js",
   "scripts": {
-    "_vscode_build": "tsc -p src/main/libgdx/jsconfig.json && tsc -p src/main/overlap2d/jsconfig.json",
+    "_vscode_build": "coffee -o src/main -bc src/coffee && tsc -p src/main/libgdx/jsconfig.json && tsc -p src/main/overlap2d/jsconfig.json",
     "publish": "gulp publish",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,7 +24,6 @@
   },
   "homepage": "https://github.com/darkoverlordofdata/gdx-pixi.js",
   "dependencies": {
-    "morgan": "^1.7.0",
-    "systemjs": "^0.19.31"
+    "morgan": "^1.7.0"
   }
 }

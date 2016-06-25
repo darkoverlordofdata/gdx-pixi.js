@@ -92,7 +92,7 @@ class JsApplication
             for name, url of data.atlas
                 PIXI.loader.add(name, url)
 
-            PIXI.loader.load((loader, res) -> 
+            PIXI.loader.load (loader, res) -> 
                 Gdx._resources = Object.create(res)
 
                 for path in data.files
@@ -100,7 +100,7 @@ class JsApplication
 
                 PIXI.loader.load((loader, res) -> console.log(res))
                 _this.initialize()
-                return)
+                return
 
         , (status) -> console.log "error #{status}: Unable to load manifest.json")
         

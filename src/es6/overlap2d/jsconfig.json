@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "system",
+        "outFile": "../../main/resources/overlap2d-runtime-libgdx.js"
+    },
+    "files": [
+        "uwsoft.js",
+        "uwsoft/editor/renderer/Engine.js",
+        "uwsoft/editor/renderer/SceneLoader.js",
+        "uwsoft/editor/renderer/resources/ResourceManager.js",
+        "uwsoft/editor/renderer/scene2d/CompositeActor.js",
+        "uwsoft/editor/renderer/scene2d/ButtonClickListener.js",
+        "load.js"
+    ]
+}
