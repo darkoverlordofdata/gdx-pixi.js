@@ -3,7 +3,7 @@
  * @JSName("gdx.graphics.g2d.BitmapFont")
 ###
 
-pixi = require('pixi')
+#pixi = require('pixi')
 
 class BitmapFont 
     
@@ -17,7 +17,7 @@ class BitmapFont
     getWidth:() ->
     getHeight:() ->
     draw:(batch, str, x, y) ->
-        texture = new pixi.extras.BitmapText(str, font: "#{@size}px #{@face}", align: 'right' )
+        texture = new PIXI.extras.BitmapText(str, font: "#{@size}px #{@face}", align: 'right' )
         batch.draw(texture, x, Gdx._height-y)
 
 

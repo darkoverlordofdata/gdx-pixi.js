@@ -5,7 +5,7 @@
  * @JSName("gdx.graphics.Texture")
 ###
 
-pixi = require('pixi')
+#pixi = require('pixi')
 
 class Texture 
 
@@ -25,7 +25,7 @@ class Texture
         else
             @path = path.path
             
-        @sprite = pixi.Sprite.fromImage(@path)
+        @sprite = PIXI.Sprite.fromImage(@path)
         @id = Texture.uniqueId++
     
     setFilter:(minFilter ,magFilter) ->

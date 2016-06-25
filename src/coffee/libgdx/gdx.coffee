@@ -33,14 +33,14 @@
 ###
  * Export the global gdx namespace
 ###
-libGDX =
-    audio: 
+class libGDX 
+    @audio: 
         Sound : Sound
     
-    files: 
+    @files: 
         FileHandle: FileHandle
     
-    graphics: 
+    @graphics: 
         g2d: 
             Batch: Batch
             BitmapFont: BitmapFont
@@ -54,11 +54,11 @@ libGDX =
         OrthographicCamera: OrthographicCamera
         Texture: Texture
     
-    math: 
+    @math: 
         MathUtils: Math
         Vector3: Vector3
     
-    scenes: 
+    @scenes: 
         scene2d: 
             utils: 
                 ClickListener: ClickListener
@@ -70,7 +70,7 @@ libGDX =
             InputListener: InputListener
         
     
-    utils: 
+    @utils: 
         viewport: 
             FillViewport: FillViewport
             FitViewport: FitViewport
@@ -79,14 +79,12 @@ libGDX =
         
         Scaling: ScalingViewport
     
-    Audio: Audio
-    Files: Files
-    Gdx: Gdx
-    Graphics: Graphics
-    Input: Input
-    JsApplication: JsApplication
-    JsApplicationConfiguration: JsApplicationConfiguration
+    @Audio: Audio
+    @Files: Files
+    @Gdx: Gdx
+    @Graphics: Graphics
+    @Input: Input
+    @JsApplication: JsApplication
+    @JsApplicationConfiguration: JsApplicationConfiguration
 
-window['gdx'] = libGDX
-define?.global 'gdx', libGDX
-define?.register 'gdx', libGDX
+`export default libGDX`

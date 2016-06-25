@@ -3,7 +3,7 @@
  * fallback to global require
  *
 ###
-define = do (global = this, modules = define.env || {} ) ->
+define = do (global = this, modules = define?.env || {} ) ->
 
     ###
      *  require module

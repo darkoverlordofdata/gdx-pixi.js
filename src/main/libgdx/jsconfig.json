@@ -1,12 +1,10 @@
 {
     "compilerOptions": {
         "target": "es6",
-        "module": "amd",
+        "module": "system",
         "outFile": "../../main/resources/libgdx.js"
     },
     "files": [
-        "global.js",
-        "define.js",
         "gdx.js",
         "gdx/math/Vector3.js",
         "gdx/Gdx.js",
@@ -38,6 +36,7 @@
         "gdx/Graphics.js",
         "gdx/Input.js",
         "gdx/JsApplication.js",
-        "gdx/JsApplicationConfiguration.js"
+        "gdx/JsApplicationConfiguration.js",
+        "load.js"
     ]
 }

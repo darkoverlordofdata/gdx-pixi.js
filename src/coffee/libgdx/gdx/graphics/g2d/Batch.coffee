@@ -1,11 +1,11 @@
 `import Gdx from 'gdx/Gdx'`
 
-pixi = require('pixi')
+#pixi = require('pixi')
 
 class Batch
 
     constructor:() ->
-        @sprites = new pixi.Container()
+        @sprites = new PIXI.Container()
         Gdx._stage.addChild(@sprites)
     
     begin:() ->

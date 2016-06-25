@@ -5,7 +5,7 @@
 `import Gdx from 'gdx/Gdx'`
 `import Scaling from 'gdx/utils/Scaling'`
 
-pixi = require('pixi')
+#pixi = require('pixi')
 
 resize = ->
     switch Gdx._scaling 
@@ -90,15 +90,15 @@ class JsApplication
         ###
         getJSON('manifest.json').then((data) ->
             for name, url of data.atlas
-                pixi.loader.add(name, url)
+                PIXI.loader.add(name, url)
 
-            pixi.loader.load((loader, res) -> 
+            PIXI.loader.load((loader, res) -> 
                 Gdx._resources = Object.create(res)
 
                 for path in data.files
-                    pixi.loader.add(path)
+                    PIXI.loader.add(path)
 
-                pixi.loader.load((loader, res) -> console.log(res))
+                PIXI.loader.load((loader, res) -> console.log(res))
                 _this.initialize()
                 return)
 
@@ -114,7 +114,7 @@ class JsApplication
         Gdx._width = @config.width
         Gdx._height = @config.height
         
-        Gdx._renderer = pixi.autoDetectRenderer(@config.width, @config.height, {
+        Gdx._renderer = PIXI.autoDetectRenderer(@config.width, @config.height, {
             antialiasing: false,
             transparent: false,
             resolution: window.devicePixelRatio,
@@ -123,7 +123,7 @@ class JsApplication
         Gdx._renderer.view.style.position = "absolute"
         Gdx._renderer.view.style.top = "0px"
         Gdx._renderer.view.style.left = "0px"
-        Gdx._stage = new pixi.Container()
+        Gdx._stage = new PIXI.Container()
         resize()
         document.body.appendChild(Gdx._renderer.view)
         window.addEventListener("resize", resize)

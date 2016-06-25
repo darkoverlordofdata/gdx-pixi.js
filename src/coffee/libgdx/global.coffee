@@ -4,7 +4,7 @@
  *
 ###
 
-define = 
-    env:
-        pixi: id: 'pixi', exports: PIXI
+# define = 
+#     env:
+#         pixi: id: 'pixi', exports: PIXI
     

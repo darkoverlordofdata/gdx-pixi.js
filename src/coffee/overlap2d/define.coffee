@@ -5,7 +5,7 @@
  * @param modules preloaded cache entries
  *
 ###
-define = do (global = this, modules = define.env || {} ) ->
+define = do (global = this, modules = define?.env || {} ) ->
 
     ###
      *  require module
