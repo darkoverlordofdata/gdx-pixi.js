@@ -1,38 +1,32 @@
-System.register("uwsoft", [], function(exports_1, context_1) {
+define("uwsoft", ["require", "exports"], function (require, exports) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
-    var uwsoft;
-    return {
-        setters:[],
-        execute: function() {
-            /**
-             * uwsoft.js
-             *
-             * MIT License
-             * Copyright (c) 2016 Bruce Davidson &lt;darkoverlordofdata@gmail.com&gt;
-             *
-             * partial implementation. to start, this is just enough for ShmupWarz to
-             * run in the browser.
-             */
-            class uwsoft {
-            }
-            exports_1("default", uwsoft);
-            uwsoft.editor = {
-                renderer: {
-                    commons: {},
-                    components: {},
-                    data: {},
-                    factory: {},
-                    physics: {},
-                    resources: {},
-                    scene2d: {},
-                    scripts: {},
-                    systems: {},
-                    utils: {}
-                }
-            };
-        }
+    /**
+     * uwsoft.js
+     *
+     * MIT License
+     * Copyright (c) 2016 Bruce Davidson &lt;darkoverlordofdata@gmail.com&gt;
+     *
+     * partial implementation. to start, this is just enough for ShmupWarz to
+     * run in the browser.
+     */
+    class uwsoft {
     }
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = uwsoft;
+    uwsoft.editor = {
+        renderer: {
+            commons: {},
+            components: {},
+            data: {},
+            factory: {},
+            physics: {},
+            resources: {},
+            scene2d: {},
+            scripts: {},
+            systems: {},
+            utils: {}
+        }
+    };
 });
 uwsoft.editor.renderer.Engine = (function () {
     return class Engine {
@@ -108,7 +102,7 @@ uwsoft.editor.renderer.resources.ResourceManager = (function () {
         }
         scheduleScene(name) {
             // if (preparedSceneNames.indexOf(name) !== -1) {
-            //     preparedSceneNames.push(name);
+            //     preparedSceneNames.push(name)
             // }
         }
         getProjectVO() {
