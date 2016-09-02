@@ -1,4 +1,7 @@
-export default class ButtonClickListener extends gdx.scenes.scene2d.utils.ClickListener {
+
+import ClickListener from  'gdx/scenes/scene2d/utils/ClickListener'
+
+export default class ButtonClickListener extends ClickListener {
     touchDown(event, x, y, pointer, button) {
         let compositeActor = event.getListenerActor()
         compositeActor.setLayerVisibility("normal", false)

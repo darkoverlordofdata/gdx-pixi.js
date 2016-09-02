@@ -18,8 +18,7 @@ skip in packageJSDependencies := false
 
 jsDependencies += "org.webjars.bower" % "system.js" % "0.19.17" / "dist/system.js"
 jsDependencies += "org.webjars" % "pixi.js" % "3.0.7" / "pixi.js"   dependsOn "dist/system.js"
-jsDependencies += ProvidedJS / "libgdx.js"                          dependsOn "pixi.js"
-jsDependencies += ProvidedJS / "overlap2d-runtime-libgdx.js"        dependsOn "libgdx.js"
+jsDependencies += ProvidedJS / "externals.js"                          dependsOn "pixi.js"
 jsDependencies += RuntimeDOM
 
 persistLauncher in Compile := true

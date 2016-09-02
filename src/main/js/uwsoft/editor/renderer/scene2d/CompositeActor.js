@@ -1,7 +1,7 @@
-import ButtonClickListener from 'editor/renderer/scene2d/ButtonClickListener'
+import ButtonClickListener from 'uwsoft/editor/renderer/scene2d/ButtonClickListener'
+import Actor from 'gdx/scenes/scene2d/Actor'
 
-
-var BuiltItemHandler = {
+const BuiltItemHandler = {
     DEFAULT: {
         onItemBuild(item) {
             if(item instanceof CompositeActor) {
@@ -14,7 +14,7 @@ var BuiltItemHandler = {
 }
 
 
-export default class CompositeActor extends gdx.scenes.scene2d.Actor {
+export default class CompositeActor extends Actor {
     constructor(vo, ir) {
         super()
         this.layerMap = {}

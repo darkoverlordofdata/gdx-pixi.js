@@ -1,5 +1,5 @@
 
-//import Gdx from  'gdx/Gdx'
+import Gdx from  'gdx/Gdx'
 
 const File = {separator:'/'}
 
