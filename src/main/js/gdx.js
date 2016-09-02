@@ -35,6 +35,8 @@ import JsApplicationConfiguration from 'gdx/JsApplicationConfiguration'
  */
 export default class gdx{}
 
+window['gdx'] = gdx
+
 gdx.audio = {
     Sound : Sound
 }

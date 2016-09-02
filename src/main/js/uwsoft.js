@@ -13,9 +13,12 @@ import ResourceManager from 'uwsoft/editor/renderer/resources/ResourceManager'
 import CompositeActor from 'uwsoft/editor/renderer/scene2d/CompositeActor'
 import ButtonClickListener from 'uwsoft/editor/renderer/scene2d/ButtonClickListener'
 
-export default class editor {}
+export default class uwsoft {}
 
-editor.renderer = {
+window['uwsoft'] = uwsoft
+
+uwsoft.editor = {}
+uwsoft.editor.renderer = {
     SceneLoader: SceneLoader,
 
     commons: {},

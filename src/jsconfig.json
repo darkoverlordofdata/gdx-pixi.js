@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "target": "es6",
-        "module": "system",
+        "module": "amd",
         "rootDir": "main/js",
         "outFile": "main/resources/externals.js"
     },
@@ -38,13 +38,11 @@
         "main/js/gdx/Input.js",
         "main/js/gdx/JsApplication.js",
         "main/js/gdx/JsApplicationConfiguration.js",
-        "main/js/gdx/load.js",
         "main/js/uwsoft/editor/renderer/Engine.js",
         "main/js/uwsoft/editor/renderer/SceneLoader.js",
         "main/js/uwsoft/editor/renderer/resources/ResourceManager.js",
         "main/js/uwsoft/editor/renderer/scene2d/CompositeActor.js",
         "main/js/uwsoft/editor/renderer/scene2d/ButtonClickListener.js",
-        "main/js/uwsoft.js",
-        "main/js/uwsoft/load.js"
+        "main/js/uwsoft.js"
     ]
 }
