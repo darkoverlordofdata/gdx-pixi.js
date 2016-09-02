@@ -1,7 +1,7 @@
 /**
  * @JSName("gdx.audio.Sound")
  */
-define("gdx/audio/Sound", ["require", "exports"], function (require, exports) {
+define("audio/Sound", ["require", "exports"], function (require, exports) {
     "use strict";
     class Sound {
         play() {
@@ -10,7 +10,7 @@ define("gdx/audio/Sound", ["require", "exports"], function (require, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = Sound;
 });
-define("gdx/Gdx", ["require", "exports"], function (require, exports) {
+define("Gdx", ["require", "exports"], function (require, exports) {
     "use strict";
     /**
      * @JSName("Gdx")
@@ -39,7 +39,7 @@ define("gdx/Gdx", ["require", "exports"], function (require, exports) {
 /**
  * @JSName("gdx.files.FileHandle")
  */
-define("gdx/files/FileHandle", ["require", "exports", "gdx/Gdx"], function (require, exports, Gdx_1) {
+define("files/FileHandle", ["require", "exports", "Gdx"], function (require, exports, Gdx_1) {
     "use strict";
     class FileHandle {
         constructor(path) {
@@ -55,7 +55,7 @@ define("gdx/files/FileHandle", ["require", "exports", "gdx/Gdx"], function (requ
 /**
  * @JSName("gdx.graphics.g2d.Batch")
  */
-define("gdx/graphics/g2d/Batch", ["require", "exports", "gdx/Gdx"], function (require, exports, Gdx_2) {
+define("graphics/g2d/Batch", ["require", "exports", "Gdx"], function (require, exports, Gdx_2) {
     "use strict";
     class Batch {
         constructor() {
@@ -89,7 +89,7 @@ define("gdx/graphics/g2d/Batch", ["require", "exports", "gdx/Gdx"], function (re
 /**
  * @JSName("gdx.graphics.g2d.BitmapFont")
  */
-define("gdx/graphics/g2d/BitmapFont", ["require", "exports", "gdx/Gdx"], function (require, exports, Gdx_3) {
+define("graphics/g2d/BitmapFont", ["require", "exports", "Gdx"], function (require, exports, Gdx_3) {
     "use strict";
     class BitmapFont {
         constructor(fontFile, region, integer) {
@@ -115,7 +115,7 @@ define("gdx/graphics/g2d/BitmapFont", ["require", "exports", "gdx/Gdx"], functio
 /**
  * @JSName("gdx.graphics.g2d.TextureRegion")
  */
-define("gdx/graphics/g2d/TextureRegion", ["require", "exports"], function (require, exports) {
+define("graphics/g2d/TextureRegion", ["require", "exports"], function (require, exports) {
     "use strict";
     class TextureRegion {
         constructor(texture) {
@@ -125,7 +125,7 @@ define("gdx/graphics/g2d/TextureRegion", ["require", "exports"], function (requi
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = TextureRegion;
 });
-define("gdx/graphics/g2d/Sprite", ["require", "exports", "gdx/Gdx", "gdx/graphics/g2d/TextureRegion"], function (require, exports, Gdx_4, TextureRegion_1) {
+define("graphics/g2d/Sprite", ["require", "exports", "Gdx", "graphics/g2d/TextureRegion"], function (require, exports, Gdx_4, TextureRegion_1) {
     "use strict";
     /**
      * @JSName("gdx.graphics.g2d.Sprite")
@@ -157,7 +157,7 @@ define("gdx/graphics/g2d/Sprite", ["require", "exports", "gdx/Gdx", "gdx/graphic
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = Sprite;
 });
-define("gdx/graphics/g2d/SpriteBatch", ["require", "exports", "gdx/graphics/g2d/Batch"], function (require, exports, Batch_1) {
+define("graphics/g2d/SpriteBatch", ["require", "exports", "graphics/g2d/Batch"], function (require, exports, Batch_1) {
     "use strict";
     /**
      * @JSName("gdx.graphics.g2d.SpriteBatch")
@@ -170,7 +170,7 @@ define("gdx/graphics/g2d/SpriteBatch", ["require", "exports", "gdx/graphics/g2d/
 /*
  * @JSName("gdx.graphics.g2d.TextureAtlas")
  */
-define("gdx/graphics/g2d/TextureAtlas", ["require", "exports"], function (require, exports) {
+define("graphics/g2d/TextureAtlas", ["require", "exports"], function (require, exports) {
     "use strict";
     class TextureAtlas {
         constructor(packFile) {
@@ -184,7 +184,7 @@ define("gdx/graphics/g2d/TextureAtlas", ["require", "exports"], function (requir
 /**
  * @JSName("gdx.math.Vector3")
  */
-define("gdx/math/Vector3", ["require", "exports"], function (require, exports) {
+define("math/Vector3", ["require", "exports"], function (require, exports) {
     "use strict";
     class Vector3 {
         constructor() {
@@ -199,7 +199,7 @@ define("gdx/math/Vector3", ["require", "exports"], function (require, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = Vector3;
 });
-define("gdx/graphics/Camera", ["require", "exports", "gdx/math/Vector3"], function (require, exports, Vector3_1) {
+define("graphics/Camera", ["require", "exports", "math/Vector3"], function (require, exports, Vector3_1) {
     "use strict";
     /*
      * @JSName("gdx.graphics.Camera")
@@ -215,7 +215,7 @@ define("gdx/graphics/Camera", ["require", "exports", "gdx/math/Vector3"], functi
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = Camera;
 });
-define("gdx/graphics/GL20", ["require", "exports", "gdx/Gdx"], function (require, exports, Gdx_5) {
+define("graphics/GL20", ["require", "exports", "Gdx"], function (require, exports, Gdx_5) {
     "use strict";
     /**
      * @JSName("gdx.graphics.GL20")
@@ -239,7 +239,7 @@ define("gdx/graphics/GL20", ["require", "exports", "gdx/Gdx"], function (require
     GL20.GL_NEAREST_MIPMAP_LINEAR = 0x2702;
     GL20.GL_LINEAR_MIPMAP_LINEAR = 0x2703;
 });
-define("gdx/graphics/OrthographicCamera", ["require", "exports", "gdx/graphics/Camera"], function (require, exports, Camera_1) {
+define("graphics/OrthographicCamera", ["require", "exports", "graphics/Camera"], function (require, exports, Camera_1) {
     "use strict";
     /**
      * @JSName("gdx.graphics.OrthographicCamera")
@@ -254,7 +254,7 @@ define("gdx/graphics/OrthographicCamera", ["require", "exports", "gdx/graphics/C
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = OrthographicCamera;
 });
-define("gdx/graphics/Texture", ["require", "exports", "gdx/graphics/GL20", "gdx/Gdx"], function (require, exports, GL20_1, Gdx_6) {
+define("graphics/Texture", ["require", "exports", "graphics/GL20", "Gdx"], function (require, exports, GL20_1, Gdx_6) {
     "use strict";
     /**
      * @JSName("gdx.graphics.Texture")
@@ -290,7 +290,7 @@ define("gdx/graphics/Texture", ["require", "exports", "gdx/graphics/GL20", "gdx/
 /**
  * @JSName("gdx.scenes.scene2d.utils.ClickListener")
  */
-define("gdx/scenes/scene2d/utils/ClickListener", ["require", "exports"], function (require, exports) {
+define("scenes/scene2d/utils/ClickListener", ["require", "exports"], function (require, exports) {
     "use strict";
     class ClickListener {
         clicked(event, x, y) { }
@@ -301,7 +301,7 @@ define("gdx/scenes/scene2d/utils/ClickListener", ["require", "exports"], functio
 /**
  * @JSName("gdx.scenes.scene2d.Actor")
  */
-define("gdx/scenes/scene2d/Actor", ["require", "exports"], function (require, exports) {
+define("scenes/scene2d/Actor", ["require", "exports"], function (require, exports) {
     "use strict";
     class Actor {
         constructor() {
@@ -334,7 +334,7 @@ define("gdx/scenes/scene2d/Actor", ["require", "exports"], function (require, ex
 /**
  * @JSName("gdx.scenes.scene2d.Event")
  */
-define("gdx/scenes/scene2d/Event", ["require", "exports"], function (require, exports) {
+define("scenes/scene2d/Event", ["require", "exports"], function (require, exports) {
     "use strict";
     class Event {
     }
@@ -344,7 +344,7 @@ define("gdx/scenes/scene2d/Event", ["require", "exports"], function (require, ex
 /**
  * @JSName("gdx.scenes.scene2d.EventListener")
  */
-define("gdx/scenes/scene2d/EventListener", ["require", "exports"], function (require, exports) {
+define("scenes/scene2d/EventListener", ["require", "exports"], function (require, exports) {
     "use strict";
     class EventListener {
     }
@@ -354,14 +354,14 @@ define("gdx/scenes/scene2d/EventListener", ["require", "exports"], function (req
 /**
  * @JSName("gdx.scenes.scene2d.InputEvent")
  */
-define("gdx/scenes/scene2d/InputEvent", ["require", "exports"], function (require, exports) {
+define("scenes/scene2d/InputEvent", ["require", "exports"], function (require, exports) {
     "use strict";
     class InputEvent {
     }
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = InputEvent;
 });
-define("gdx/scenes/scene2d/InputListener", ["require", "exports", "gdx/scenes/scene2d/EventListener"], function (require, exports, EventListener_1) {
+define("scenes/scene2d/InputListener", ["require", "exports", "scenes/scene2d/EventListener"], function (require, exports, EventListener_1) {
     "use strict";
     /**
      * @JSName("gdx.scenes.scene2d.InputListener")
@@ -371,7 +371,7 @@ define("gdx/scenes/scene2d/InputListener", ["require", "exports", "gdx/scenes/sc
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = InputListener;
 });
-define("gdx/utils/Scaling", ["require", "exports"], function (require, exports) {
+define("utils/Scaling", ["require", "exports"], function (require, exports) {
     "use strict";
     class Scaling {
     }
@@ -389,7 +389,7 @@ define("gdx/utils/Scaling", ["require", "exports"], function (require, exports) 
 /**
  * @JSName("gdx.utils.viewport.Viewport")
  */
-define("gdx/utils/viewport/Viewport", ["require", "exports"], function (require, exports) {
+define("utils/viewport/Viewport", ["require", "exports"], function (require, exports) {
     "use strict";
     class Viewport {
         update(x, y) {
@@ -407,7 +407,7 @@ define("gdx/utils/viewport/Viewport", ["require", "exports"], function (require,
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = Viewport;
 });
-define("gdx/utils/viewport/ScalingViewport", ["require", "exports", "gdx/utils/viewport/Viewport", "gdx/graphics/OrthographicCamera"], function (require, exports, Viewport_1, OrthographicCamera_1) {
+define("utils/viewport/ScalingViewport", ["require", "exports", "utils/viewport/Viewport", "graphics/OrthographicCamera"], function (require, exports, Viewport_1, OrthographicCamera_1) {
     "use strict";
     /**
      * @JSName("gdx.utils.viewport.ScalingViewport")
@@ -424,7 +424,7 @@ define("gdx/utils/viewport/ScalingViewport", ["require", "exports", "gdx/utils/v
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ScalingViewport;
 });
-define("gdx/utils/viewport/FillViewport", ["require", "exports", "gdx/utils/Scaling", "gdx/utils/viewport/ScalingViewport"], function (require, exports, Scaling_1, ScalingViewport_1) {
+define("utils/viewport/FillViewport", ["require", "exports", "utils/Scaling", "utils/viewport/ScalingViewport"], function (require, exports, Scaling_1, ScalingViewport_1) {
     "use strict";
     /**
      * @JSName("gdx.utils.viewport.FillViewport")
@@ -437,7 +437,7 @@ define("gdx/utils/viewport/FillViewport", ["require", "exports", "gdx/utils/Scal
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = FillViewport;
 });
-define("gdx/utils/viewport/FitViewport", ["require", "exports", "gdx/utils/Scaling", "gdx/utils/viewport/ScalingViewport"], function (require, exports, Scaling_2, ScalingViewport_2) {
+define("utils/viewport/FitViewport", ["require", "exports", "utils/Scaling", "utils/viewport/ScalingViewport"], function (require, exports, Scaling_2, ScalingViewport_2) {
     "use strict";
     /**
      * @JSName("gdx.utils.viewport.FitViewport")
@@ -450,7 +450,7 @@ define("gdx/utils/viewport/FitViewport", ["require", "exports", "gdx/utils/Scali
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = FitViewport;
 });
-define("gdx/Audio", ["require", "exports", "gdx/audio/Sound"], function (require, exports, Sound_1) {
+define("Audio", ["require", "exports", "audio/Sound"], function (require, exports, Sound_1) {
     "use strict";
     class Audio {
         newSound(raw) {
@@ -460,7 +460,7 @@ define("gdx/Audio", ["require", "exports", "gdx/audio/Sound"], function (require
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = Audio;
 });
-define("gdx/Files", ["require", "exports", "gdx/files/FileHandle"], function (require, exports, FileHandle_1) {
+define("Files", ["require", "exports", "files/FileHandle"], function (require, exports, FileHandle_1) {
     "use strict";
     /**
      * @JSName("gdx.Files")
@@ -473,7 +473,7 @@ define("gdx/Files", ["require", "exports", "gdx/files/FileHandle"], function (re
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = Files;
 });
-define("gdx/Graphics", ["require", "exports", "gdx/graphics/GL20", "gdx/Gdx"], function (require, exports, GL20_2, Gdx_7) {
+define("Graphics", ["require", "exports", "graphics/GL20", "Gdx"], function (require, exports, GL20_2, Gdx_7) {
     "use strict";
     /**
      * @JSName("gdx.Graphics")
@@ -515,7 +515,7 @@ define("gdx/Graphics", ["require", "exports", "gdx/graphics/GL20", "gdx/Gdx"], f
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = Graphics;
 });
-define("gdx/Input", ["require", "exports", "gdx/Gdx"], function (require, exports, Gdx_8) {
+define("Input", ["require", "exports", "Gdx"], function (require, exports, Gdx_8) {
     "use strict";
     /**
      * @JSName("gdx.Input")
@@ -633,7 +633,7 @@ define("gdx/Input", ["require", "exports", "gdx/Gdx"], function (require, export
     Input.Buttons = Buttons;
     Input.Keys = Keys;
 });
-define("gdx/JsApplication", ["require", "exports", "gdx/Graphics", "gdx/Audio", "gdx/Files", "gdx/Input", "gdx/Gdx", "gdx/utils/Scaling"], function (require, exports, Graphics_1, Audio_1, Files_1, Input_1, Gdx_9, Scaling_3) {
+define("JsApplication", ["require", "exports", "Graphics", "Audio", "Files", "Input", "Gdx", "utils/Scaling"], function (require, exports, Graphics_1, Audio_1, Files_1, Input_1, Gdx_9, Scaling_3) {
     "use strict";
     function resize() {
         switch (Gdx_9.default._scaling) {
@@ -772,7 +772,7 @@ define("gdx/JsApplication", ["require", "exports", "gdx/Graphics", "gdx/Audio", 
 /**
  * @JSName("gdx.JsApplicationConfiguration")
  */
-define("gdx/JsApplicationConfiguration", ["require", "exports"], function (require, exports) {
+define("JsApplicationConfiguration", ["require", "exports"], function (require, exports) {
     "use strict";
     class JsApplicationConfiguration {
         constructor() {
@@ -785,7 +785,7 @@ define("gdx/JsApplicationConfiguration", ["require", "exports"], function (requi
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = JsApplicationConfiguration;
 });
-define("gdx", ["require", "exports", "gdx/audio/Sound", "gdx/files/FileHandle", "gdx/graphics/g2d/Batch", "gdx/graphics/g2d/BitmapFont", "gdx/graphics/g2d/Sprite", "gdx/graphics/g2d/SpriteBatch", "gdx/graphics/g2d/TextureAtlas", "gdx/graphics/g2d/TextureRegion", "gdx/graphics/Camera", "gdx/graphics/GL20", "gdx/graphics/OrthographicCamera", "gdx/graphics/Texture", "gdx/math/Vector3", "gdx/scenes/scene2d/utils/ClickListener", "gdx/scenes/scene2d/Actor", "gdx/scenes/scene2d/Event", "gdx/scenes/scene2d/EventListener", "gdx/scenes/scene2d/InputEvent", "gdx/scenes/scene2d/InputListener", "gdx/utils/viewport/FillViewport", "gdx/utils/viewport/FitViewport", "gdx/utils/viewport/ScalingViewport", "gdx/utils/viewport/Viewport", "gdx/Audio", "gdx/Files", "gdx/Gdx", "gdx/Graphics", "gdx/Input", "gdx/JsApplication", "gdx/JsApplicationConfiguration"], function (require, exports, Sound_2, FileHandle_2, Batch_2, BitmapFont_1, Sprite_1, SpriteBatch_1, TextureAtlas_1, TextureRegion_2, Camera_2, GL20_3, OrthographicCamera_2, Texture_1, Vector3_2, ClickListener_1, Actor_1, Event_1, EventListener_2, InputEvent_1, InputListener_1, FillViewport_1, FitViewport_1, ScalingViewport_3, Viewport_2, Audio_2, Files_2, Gdx_10, Graphics_2, Input_2, JsApplication_1, JsApplicationConfiguration_1) {
+define("index", ["require", "exports", "audio/Sound", "files/FileHandle", "graphics/g2d/Batch", "graphics/g2d/BitmapFont", "graphics/g2d/Sprite", "graphics/g2d/SpriteBatch", "graphics/g2d/TextureAtlas", "graphics/g2d/TextureRegion", "graphics/Camera", "graphics/GL20", "graphics/OrthographicCamera", "graphics/Texture", "math/Vector3", "scenes/scene2d/utils/ClickListener", "scenes/scene2d/Actor", "scenes/scene2d/Event", "scenes/scene2d/EventListener", "scenes/scene2d/InputEvent", "scenes/scene2d/InputListener", "utils/viewport/FillViewport", "utils/viewport/FitViewport", "utils/viewport/ScalingViewport", "utils/viewport/Viewport", "Audio", "Files", "Gdx", "Graphics", "Input", "JsApplication", "JsApplicationConfiguration"], function (require, exports, Sound_2, FileHandle_2, Batch_2, BitmapFont_1, Sprite_1, SpriteBatch_1, TextureAtlas_1, TextureRegion_2, Camera_2, GL20_3, OrthographicCamera_2, Texture_1, Vector3_2, ClickListener_1, Actor_1, Event_1, EventListener_2, InputEvent_1, InputListener_1, FillViewport_1, FitViewport_1, ScalingViewport_3, Viewport_2, Audio_2, Files_2, Gdx_10, Graphics_2, Input_2, JsApplication_1, JsApplicationConfiguration_1) {
     "use strict";
     /**
      * Export the global gdx namespace
@@ -846,9 +846,4 @@ define("gdx", ["require", "exports", "gdx/audio/Sound", "gdx/files/FileHandle", 
     gdx.Input = Input_2.default;
     gdx.JsApplication = JsApplication_1.default;
     gdx.JsApplicationConfiguration = JsApplicationConfiguration_1.default;
-});
-System["import"]('gdx').then(function (gdx) {
-    window['gdx'] = gdx["default"];
-}, function (err) {
-    console.log(err);
 });

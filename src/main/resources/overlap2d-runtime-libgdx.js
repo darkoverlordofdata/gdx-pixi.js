@@ -1,4 +1,4 @@
-define("uwsoft", ["require", "exports"], function (require, exports) {
+define("index", ["require", "exports"], function (require, exports) {
     "use strict";
     /**
      * uwsoft.js
@@ -200,8 +200,3 @@ uwsoft.editor.renderer.scene2d.ButtonClickListener = (function () {
     }
     ;
 }());
-System["import"]('uwsoft').then(function (uwsoft) {
-    window['uwsoft'] = uwsoft["default"];
-}, function (err) {
-    console.log(err);
-});
