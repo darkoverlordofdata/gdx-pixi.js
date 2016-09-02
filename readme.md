@@ -14,8 +14,7 @@ Besides, this is fun.
 
 # Build
 Scala sources in src/main/scala are compiled using sbt fastOptJS.
-CoffeeScript sources in src/coffee/libgdx and src/coffee/overlap2d are maintained using vscode. 
-Build (Ctrl-Shift-b) uses coffee followed by tsc to 'pile these sources to src/main/resources.
+Js sources in src/main/js are compiled to src/main/resources 
 
 
 demo.scala:

@@ -16,9 +16,9 @@ libraryDependencies += "com.darkoverlordofdata" %%% "entitas" % "0.0.0-SNAPSHOT"
 
 skip in packageJSDependencies := false
 
-jsDependencies += "org.webjars" % "pixi.js" % "3.0.7" / "pixi.js"   
-jsDependencies += ProvidedJS / "amd.js"                             dependsOn "pixi.js"
-jsDependencies += ProvidedJS / "libgdx.js"                          dependsOn "amd.js"
+jsDependencies += "org.webjars.bower" % "system.js" % "0.19.17" / "dist/system.js"
+jsDependencies += "org.webjars" % "pixi.js" % "3.0.7" / "pixi.js"   dependsOn "dist/system.js"
+jsDependencies += ProvidedJS / "libgdx.js"                          dependsOn "pixi.js"
 jsDependencies += ProvidedJS / "overlap2d-runtime-libgdx.js"        dependsOn "libgdx.js"
 jsDependencies += RuntimeDOM
 

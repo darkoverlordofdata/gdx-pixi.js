@@ -1,9 +1,5 @@
-uwsoft.editor.renderer.Engine = (function(){
+export default class Engine {
+    update(delta) {
 
-    return class Engine {
-        update(delta) {
-
-        }
     }
-
-}());
+}
