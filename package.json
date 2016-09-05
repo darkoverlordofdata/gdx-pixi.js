@@ -4,8 +4,7 @@
   "description": "A libGDX api for scala.js ",
   "main": "index.js",
   "scripts": {
-    "_vscode_build": "tsc -p src/jsconfig.json",
-    "_vscode_buildz": "tsc -p src/gdx.json && tsc -p src/uwsoft.json  && tsc -p src/jsconfig.json",
+    "_vscode_build": "tsc -p jsconfig.json",
     "publish": "gulp publish",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,10 +20,9 @@
     "gulp-manifest": "0.0.7",
     "gulp-shell": "^0.4.2",
     "gulp-webserver": "^0.9.1",
-    "sbt-bin": "^0.1.1"
+    "morgan": "^1.7.0"
   },
   "homepage": "https://github.com/darkoverlordofdata/gdx-pixi.js",
   "dependencies": {
-    "morgan": "^1.7.0"
   }
 }
