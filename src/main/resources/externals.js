@@ -46,7 +46,9 @@ define("gdx/files/FileHandle", ["require", "exports", "gdx/Gdx"], function (requ
             this.path = path;
         }
         readString() {
-            return Gdx_1.default._internal[this.path].xhr.responseText;
+            console.log('readString', this.path);
+            console.log('Gdx._resources', Gdx_1.default._resources['assets/' + this.path]);
+            return Gdx_1.default._resources['assets/' + this.path].xhr.responseText;
         }
     }
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -299,33 +301,304 @@ define("gdx/scenes/scene2d/utils/ClickListener", ["require", "exports"], functio
     exports.default = ClickListener;
 });
 /**
- * @JSName("gdx.scenes.scene2d.Actor")
+ * @JSName("gdx.graphics.Color")
  */
-define("gdx/scenes/scene2d/Actor", ["require", "exports"], function (require, exports) {
+define("gdx/graphics/Color", ["require", "exports"], function (require, exports) {
+    "use strict";
+    function rgba8888ToColor(color, value) {
+        color.r = ((value & 0xff000000) >>> 24) / 255;
+        color.g = ((value & 0x00ff0000) >>> 16) / 255;
+        color.b = ((value & 0x0000ff00) >>> 8) / 255;
+        color.a = ((value & 0x000000ff)) / 255;
+    }
+    class Color {
+        constructor(r, g, b, a) {
+            if (r && g && b && a) {
+                this.r = r;
+                this.g = g;
+                this.b = b;
+                this.a = a;
+                this.clamp();
+            }
+            else if (!r) {
+                this.r = 0;
+                this.g = 0;
+                this.b = 0;
+                this.a = 0;
+            }
+            else {
+                rgba8888ToColor(this, r);
+            }
+        }
+        clamp() {
+            if (this.r < 0)
+                this.r = 0;
+            else if (this.r > 1)
+                this.r = 1;
+            if (this.g < 0)
+                this.g = 0;
+            else if (this.g > 1)
+                this.g = 1;
+            if (this.b < 0)
+                this.b = 0;
+            else if (this.b > 1)
+                this.b = 1;
+            if (this.a < 0)
+                this.a = 0;
+            else if (this.a > 1)
+                this.a = 1;
+            return this;
+        }
+    }
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = Color;
+    Color.CLEAR = new Color(0, 0, 0, 0);
+    Color.BLACK = new Color(0, 0, 0, 1);
+    Color.WHITE = new Color(0xffffffff);
+    Color.LIGHT_GRAY = new Color(0xbfbfbfff);
+    Color.GRAY = new Color(0x7f7f7fff);
+    Color.DARK_GRAY = new Color(0x3f3f3fff);
+    Color.BLUE = new Color(0, 0, 1, 1);
+    Color.NAVY = new Color(0, 0, 0.5, 1);
+    Color.ROYAL = new Color(0x4169e1ff);
+    Color.SLATE = new Color(0x708090ff);
+    Color.SKY = new Color(0x87ceebff);
+    Color.CYAN = new Color(0, 1, 1, 1);
+    Color.TEAL = new Color(0, 0.5, 0.5, 1);
+    Color.GREEN = new Color(0x00ff00ff);
+    Color.CHARTREUSE = new Color(0x7fff00ff);
+    Color.LIME = new Color(0x32cd32ff);
+    Color.FOREST = new Color(0x228b22ff);
+    Color.OLIVE = new Color(0x6b8e23ff);
+    Color.YELLOW = new Color(0xffff00ff);
+    Color.GOLD = new Color(0xffd700ff);
+    Color.GOLDENROD = new Color(0xdaa520ff);
+    Color.ORANGE = new Color(0xffa500ff);
+    Color.BROWN = new Color(0x8b4513ff);
+    Color.TAN = new Color(0xd2b48cff);
+    Color.FIREBRICK = new Color(0xb22222ff);
+    Color.RED = new Color(0xff0000ff);
+    Color.SCARLET = new Color(0xff341cff);
+    Color.CORAL = new Color(0xff7f50ff);
+    Color.SALMON = new Color(0xfa8072ff);
+    Color.PINK = new Color(0xff69b4ff);
+    Color.MAGENTA = new Color(1, 0, 1, 1);
+    Color.PURPLE = new Color(0xa020f0ff);
+    Color.VIOLET = new Color(0xee82eeff);
+    Color.MAROON = new Color(0xb03060ff);
+});
+define("gdx/scenes/scene2d/Touchable", ["require", "exports"], function (require, exports) {
+    "use strict";
+    class Touchable {
+    }
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = Touchable;
+    Touchable[Touchable.enabled = 0] = 'enabled';
+    Touchable[Touchable.disabled = 1] = 'disabled';
+    Touchable[Touchable.childrenOnly = 2] = 'childrenOnly';
+});
+define("gdx/scenes/scene2d/Actor", ["require", "exports", "gdx/Gdx", "gdx/graphics/Color", "gdx/scenes/scene2d/Touchable"], function (require, exports, Gdx_7, Color_1, Touchable_1) {
     "use strict";
     class Actor {
         constructor() {
-            this.width = 0;
-            this.height = 0;
+            this.stage = null;
+            this.parent = null;
+            this.listeners = [];
+            this.actions = [];
+            this.name = '';
+            this.touchable = Touchable_1.default.enabled;
             this.x = 0;
             this.y = 0;
-            this.scale = 0;
-            this.listeners = [];
+            this.width = 0;
+            this.height = 0;
+            this.originX = 0;
+            this.originY = 0;
+            this.scaleX = 1;
+            this.scaleY = 1;
+            this.rotation = 0;
+            this.color = new Color_1.default(1, 1, 1, 1);
+            this.userObject = null;
         }
-        getWidth() { return Math.ceil(this.width); }
-        getHeight() { return Math.ceil(this.height); }
-        setX(x) {
-            this.x = x;
+        draw(batch, parentAlpha) { }
+        act(delta) {
+            let actions = this.actions;
+            if (actions.length > 0) {
+                if (this.stage && this.stage.getActionsRequestRendering())
+                    Gdx_7.default.graphics.requestRendering();
+                for (let i = 0; i < actions.length; i++) {
+                    let action = actions[i];
+                    if (action.act(delta) && i < actions.length) {
+                        let current = actions[i];
+                        let actionIndex = current === action ? i : actions.indexOf(action, true);
+                        if (actionIndex !== -1) {
+                            actions.removeIndex(actionIndex);
+                            action.setActor(null);
+                            i--;
+                        }
+                    }
+                }
+            }
         }
-        setY(y) {
-            this.y = y;
-        }
-        setScale(scaleXY) {
-            this.scale = scaleXY;
+        fire(event) {
         }
         addListener(listener) {
-            console.log(listener);
-            this.listeners.push(listener);
+            if (this.listeners.indexOf(listener) === -1) {
+                this.listeners.push(listener);
+                return true;
+            }
+            return false;
+        }
+        removeListener(listener) {
+            return listeners.removeValue(listener);
+        }
+        getStage() { return this.stage; }
+        setStage(stage) { this.stage = stage; }
+        hasParent() { return this.parent != null; }
+        getParent() { return this.parent; }
+        setParent(parent) { this.parent = parent; }
+        isTouchable() { return this.touchable === Touchable_1.default.enabled; }
+        getTouchable() { return this.touchable; }
+        setTouchable(touchable) { this.touchable = touchable; }
+        isVisible() { return this.visible; }
+        setVisible(visible) { this.visible = visible; }
+        getWidth() { return Math.ceil(this.width); }
+        getHeight() { return Math.ceil(this.height); }
+        getUserObject() { return this.userObject; }
+        setUserObject(userObject) { this.userObject = userObject; }
+        getX(alignment) { return this.x; }
+        setX(x) { this.x = x; }
+        getY(alignment) { return this.y; }
+        setY(y) { this.y = y; }
+        setPosition(x, y) {
+            if (this.x !== x || this.y !== y) {
+                this.x = x;
+                this.y = y;
+                this.positionChanged();
+            }
+        }
+        moveBy(x, y) {
+            if (x !== 0 || y !== 0) {
+                this.x += x;
+                this.y += y;
+                positionChanged();
+            }
+        }
+        getWidth() { return this.width; }
+        setWidth(width) {
+            if (this.width !== width) {
+                this.width = width;
+                this.sizeChanged();
+            }
+        }
+        getHeight() { return this.height; }
+        setHeight(height) {
+            if (this.height !== height) {
+                this.height = height;
+                this.sizeChanged();
+            }
+        }
+        getTop() { return this.y + this.height; }
+        getRight() { return this.x + this.width; }
+        positionChanged() { }
+        sizeChanged() { }
+        rotationChanged() { }
+        setSize(width, height) {
+            if (this.width !== width || this.height !== height) {
+                this.width = width;
+                this.height = height;
+                sizeChanged();
+            }
+        }
+        sizeBy(width, height) {
+            if (typeof height === 'undefined') {
+                if (width !== 0) {
+                    this.width += width;
+                    this.height += width;
+                    sizeChanged();
+                }
+            }
+            else {
+                if (width != 0 || height != 0) {
+                    this.width += width;
+                    this.height += height;
+                    sizeChanged();
+                }
+            }
+        }
+        setBounds(x, y, width, height) {
+            if (this.x !== x || this.y !== y) {
+                this.x = x;
+                this.y = y;
+                positionChanged();
+            }
+            if (this.width !== width || this.height !== height) {
+                this.width = width;
+                this.height = height;
+                sizeChanged();
+            }
+        }
+        getOriginX() { return this.originX; }
+        setOriginX(originX) { this.originX = originX; }
+        getOriginY() { return this.originY; }
+        setOriginY(originY) { this.originY = originY; }
+        setOrigin(originX, originY) {
+            this.originX = originX;
+            this.originY = originY;
+        }
+        getScaleX() { return this.scaleX; }
+        setScaleX(scaleX) { this.scaleX = scaleX; }
+        getScaleY() { return this.scaleY; }
+        setScaleY(scaleY) { this.scaleY = scaleY; }
+        setScale(scaleX, scaleY = scaleX) {
+            this.scaleX = scaleX;
+            this.scaleY = scaleY;
+        }
+        scaleBy(scale) {
+            this.scaleX += scale;
+            this.scaleY += scale;
+        }
+        scaleBy(scaleX, scaleY) {
+            this.scaleX += scaleX;
+            this.scaleY += scaleY;
+        }
+        getRotation() { return rotation; }
+        setRotation(degrees) {
+            if (this.rotation !== degrees) {
+                this.rotation = degrees;
+                rotationChanged();
+            }
+        }
+        rotateBy(amountInDegrees) {
+            if (amountInDegrees != 0) {
+                this.rotation += amountInDegrees;
+                rotationChanged();
+            }
+        }
+        setColor(color) { this.color.set.apply(this.color, arguments); }
+        getColor() { return this.color; }
+        getName() { return this.name; }
+        setName(name) { this.name = name; }
+        toFront() { this.setZIndex(Number.MAX_VALUE); }
+        toBack() { this.setZIndex(0); }
+        setZIndex(index) {
+            if (index < 0)
+                throw new IllegalArgumentException("ZIndex cannot be < 0.");
+            let parent = this.parent;
+            if (parent == null)
+                return;
+            let children = parent.children;
+            if (children.length === 1)
+                return;
+            index = Math.min(index, children.length - 1);
+            if (index === children.indexOf(this))
+                return;
+            children.splice(index, 0, value);
+        }
+        getZIndex() {
+            let parent = this.parent;
+            if (parent == null)
+                return -1;
+            return parent.children.indexOf(this);
         }
     }
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -473,7 +746,7 @@ define("gdx/Files", ["require", "exports", "gdx/files/FileHandle"], function (re
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = Files;
 });
-define("gdx/Graphics", ["require", "exports", "gdx/graphics/GL20", "gdx/Gdx"], function (require, exports, GL20_2, Gdx_7) {
+define("gdx/Graphics", ["require", "exports", "gdx/graphics/GL20", "gdx/Gdx"], function (require, exports, GL20_2, Gdx_8) {
     "use strict";
     /**
      * @JSName("gdx.Graphics")
@@ -494,7 +767,7 @@ define("gdx/Graphics", ["require", "exports", "gdx/graphics/GL20", "gdx/Gdx"], f
         getHeight() { return this.config.height; }
         getDensity() { return window.devicePixelRatio; }
         setupDisplay() {
-            Gdx_7.default.gl = this.gl20;
+            Gdx_8.default.gl = this.gl20;
         }
         update(time) {
             if (this.lastTime <= 0) {
@@ -515,39 +788,39 @@ define("gdx/Graphics", ["require", "exports", "gdx/graphics/GL20", "gdx/Gdx"], f
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = Graphics;
 });
-define("gdx/Input", ["require", "exports", "gdx/Gdx"], function (require, exports, Gdx_8) {
+define("gdx/Input", ["require", "exports", "gdx/Gdx"], function (require, exports, Gdx_9) {
     "use strict";
     /**
      * @JSName("gdx.Input")
      */
     class Input {
         setInputProcessor(processor) {
-            Gdx_8.default._processor = processor;
+            Gdx_9.default._processor = processor;
             document.addEventListener('touchstart', (event) => {
                 const pixel = window.devicePixelRatio;
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                Gdx_8.default._processor.touchDown(Math.ceil(event.clientX / Gdx_8.default._scaleX * pixel), Math.ceil(event.clientY / Gdx_8.default._scaleY * pixel), 0, 0);
+                Gdx_9.default._processor.touchDown(Math.ceil(event.clientX / Gdx_9.default._scaleX * pixel), Math.ceil(event.clientY / Gdx_9.default._scaleY * pixel), 0, 0);
             }, true);
             document.addEventListener('touchmove', (event) => {
                 const pixel = window.devicePixelRatio;
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                Gdx_8.default._processor.touchDragged(Math.ceil(event.clientX / Gdx_8.default._scaleX * pixel), Math.ceil(event.clientY / Gdx_8.default._scaleY * pixel), 0);
+                Gdx_9.default._processor.touchDragged(Math.ceil(event.clientX / Gdx_9.default._scaleX * pixel), Math.ceil(event.clientY / Gdx_9.default._scaleY * pixel), 0);
             }, true);
             document.addEventListener('touchend', (event) => {
                 event = event.targetTouches ? event.targetTouches[0] : event;
-                Gdx_8.default._processor.touchUp(0, 0, 0, 0);
+                Gdx_9.default._processor.touchUp(0, 0, 0, 0);
             }, true);
             document.addEventListener('mousedown', (event) => {
-                Gdx_8.default._processor.touchDown(Math.ceil(event.clientX / Gdx_8.default._scaleX), Math.ceil(event.clientY / Gdx_8.default._scaleY), -1, event.button);
+                Gdx_9.default._processor.touchDown(Math.ceil(event.clientX / Gdx_9.default._scaleX), Math.ceil(event.clientY / Gdx_9.default._scaleY), -1, event.button);
             }, true);
             document.addEventListener('mousemove', (event) => {
-                Gdx_8.default._processor.mouseMoved(Math.ceil(event.clientX / Gdx_8.default._scaleX), Math.ceil(event.clientY / Gdx_8.default._scaleY));
+                Gdx_9.default._processor.mouseMoved(Math.ceil(event.clientX / Gdx_9.default._scaleX), Math.ceil(event.clientY / Gdx_9.default._scaleY));
             }, true);
             document.addEventListener('mouseup', (event) => {
-                Gdx_8.default._processor.touchUp(Math.ceil(event.clientX / Gdx_8.default._scaleX), Math.ceil(event.clientY / Gdx_8.default._scaleY), -1, event.button);
+                Gdx_9.default._processor.touchUp(Math.ceil(event.clientX / Gdx_9.default._scaleX), Math.ceil(event.clientY / Gdx_9.default._scaleY), -1, event.button);
             }, true);
-            window.addEventListener('keydown', (event) => Gdx_8.default._processor.keyDown(event.which), true);
-            window.addEventListener('keyup', (event) => Gdx_8.default._processor.keyUp(event.which), true);
+            window.addEventListener('keydown', (event) => Gdx_9.default._processor.keyDown(event.which), true);
+            window.addEventListener('keyup', (event) => Gdx_9.default._processor.keyUp(event.which), true);
         }
     }
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -633,42 +906,42 @@ define("gdx/Input", ["require", "exports", "gdx/Gdx"], function (require, export
     Input.Buttons = Buttons;
     Input.Keys = Keys;
 });
-define("gdx/JsApplication", ["require", "exports", "gdx/Graphics", "gdx/Audio", "gdx/Files", "gdx/Input", "gdx/Gdx", "gdx/utils/Scaling"], function (require, exports, Graphics_1, Audio_1, Files_1, Input_1, Gdx_9, Scaling_3) {
+define("gdx/JsApplication", ["require", "exports", "gdx/Graphics", "gdx/Audio", "gdx/Files", "gdx/Input", "gdx/Gdx", "gdx/utils/Scaling"], function (require, exports, Graphics_1, Audio_1, Files_1, Input_1, Gdx_10, Scaling_3) {
     "use strict";
     function resize() {
-        switch (Gdx_9.default._scaling) {
+        switch (Gdx_10.default._scaling) {
             case Scaling_3.default.fit:
                 // Determine which screen dimension is least constrained
-                Gdx_9.default._scaleX = Gdx_9.default._scaleY = Math.max(window.innerWidth / Gdx_9.default._width, window.innerHeight / Gdx_9.default._height);
+                Gdx_10.default._scaleX = Gdx_10.default._scaleY = Math.max(window.innerWidth / Gdx_10.default._width, window.innerHeight / Gdx_10.default._height);
                 break;
             case Scaling_3.default.fill:
                 // Determine which screen dimension is most constrained
-                Gdx_9.default._scaleX = Gdx_9.default._scaleY = Math.min(window.innerWidth / Gdx_9.default._width, window.innerHeight / Gdx_9.default._height);
+                Gdx_10.default._scaleX = Gdx_10.default._scaleY = Math.min(window.innerWidth / Gdx_10.default._width, window.innerHeight / Gdx_10.default._height);
                 break;
             case Scaling_3.default.fillX:
-                Gdx_9.default._scaleX = window.innerWidth / Gdx_9.default._width;
-                Gdx_9.default._scaleY = Gdx_9.default._scaleX;
+                Gdx_10.default._scaleX = window.innerWidth / Gdx_10.default._width;
+                Gdx_10.default._scaleY = Gdx_10.default._scaleX;
                 break;
             case Scaling_3.default.fillY:
-                Gdx_9.default._scaleY = window.innerHeight / Gdx_9.default._height;
-                Gdx_9.default._scaleX = Gdx_9.default._scaleY;
+                Gdx_10.default._scaleY = window.innerHeight / Gdx_10.default._height;
+                Gdx_10.default._scaleX = Gdx_10.default._scaleY;
                 break;
             case Scaling_3.default.stretch:
-                Gdx_9.default._scaleX = window.innerWidth / Gdx_9.default._width;
-                Gdx_9.default._scaleY = window.innerHeight / Gdx_9.default._height;
+                Gdx_10.default._scaleX = window.innerWidth / Gdx_10.default._width;
+                Gdx_10.default._scaleY = window.innerHeight / Gdx_10.default._height;
                 break;
             case Scaling_3.default.stretchX:
-                Gdx_9.default._scaleX = window.innerWidth / Gdx_9.default._width;
-                Gdx_9.default._scaleY = Gdx_9.default._scaleX;
+                Gdx_10.default._scaleX = window.innerWidth / Gdx_10.default._width;
+                Gdx_10.default._scaleY = Gdx_10.default._scaleX;
                 break;
             case Scaling_3.default.stretchY:
-                Gdx_9.default._scaleY = window.innerHeight / Gdx_9.default._height;
-                Gdx_9.default._scaleX = Gdx_9.default._scaleY;
+                Gdx_10.default._scaleY = window.innerHeight / Gdx_10.default._height;
+                Gdx_10.default._scaleX = Gdx_10.default._scaleY;
                 break;
         }
-        Gdx_9.default._stage.scale.x = Gdx_9.default._scaleX;
-        Gdx_9.default._stage.scale.y = Gdx_9.default._scaleY;
-        Gdx_9.default._renderer.resize(Math.ceil(Gdx_9.default._width * Gdx_9.default._scaleX), Math.ceil(Gdx_9.default._height * Gdx_9.default._scaleY));
+        Gdx_10.default._stage.scale.x = Gdx_10.default._scaleX;
+        Gdx_10.default._stage.scale.y = Gdx_10.default._scaleY;
+        Gdx_10.default._renderer.resize(Math.ceil(Gdx_10.default._width * Gdx_10.default._scaleX), Math.ceil(Gdx_10.default._height * Gdx_10.default._scaleY));
     }
     /**
      * getJSON
@@ -712,27 +985,28 @@ define("gdx/JsApplication", ["require", "exports", "gdx/Graphics", "gdx/Audio", 
             //this.net = new Net()
             this.gl = null;
             this.listener = listener;
-            Gdx_9.default.app = this;
-            Gdx_9.default.graphics = this.graphics;
-            Gdx_9.default.audio = this.audio;
-            Gdx_9.default.files = this.files;
-            Gdx_9.default.input = this.input;
+            Gdx_10.default.app = this;
+            Gdx_10.default.graphics = this.graphics;
+            Gdx_10.default.audio = this.audio;
+            Gdx_10.default.files = this.files;
+            Gdx_10.default.input = this.input;
             //Gdx.net = this.net
             /**
              * Load the manifest, and initialize
              */
             getJSON('manifest.json').then(data => {
+                let z = 0;
                 for (let name in data.atlas) {
                     PIXI.loader.add(name, data.atlas[name]);
                 }
                 PIXI.loader.load((loader, res) => {
-                    Gdx_9.default._resources = Object.create(res);
+                    Gdx_10.default._resources = Object.create(res);
                     for (let path in data.files) {
                         PIXI.loader.add(data.files[path]);
                     }
                     PIXI.loader.load((loader, res) => {
+                        this.initialize();
                     });
-                    this.initialize();
                 });
             }, status => console.log(`error ${status}: Unable to load manifest.json`));
         }
@@ -740,20 +1014,20 @@ define("gdx/JsApplication", ["require", "exports", "gdx/Graphics", "gdx/Audio", 
          * Start the main loop
          */
         initialize() {
-            Gdx_9.default._width = this.config.width;
-            Gdx_9.default._height = this.config.height;
-            Gdx_9.default._renderer = PIXI.autoDetectRenderer(this.config.width, this.config.height, {
+            Gdx_10.default._width = this.config.width;
+            Gdx_10.default._height = this.config.height;
+            Gdx_10.default._renderer = PIXI.autoDetectRenderer(this.config.width, this.config.height, {
                 antialiasing: false,
                 transparent: false,
                 resolution: window.devicePixelRatio,
                 autoResize: true
             });
-            Gdx_9.default._renderer.view.style.position = "absolute";
-            Gdx_9.default._renderer.view.style.top = "0px";
-            Gdx_9.default._renderer.view.style.left = "0px";
-            Gdx_9.default._stage = new PIXI.Container();
+            Gdx_10.default._renderer.view.style.position = "absolute";
+            Gdx_10.default._renderer.view.style.top = "0px";
+            Gdx_10.default._renderer.view.style.left = "0px";
+            Gdx_10.default._stage = new PIXI.Container();
             resize();
-            document.body.appendChild(Gdx_9.default._renderer.view);
+            document.body.appendChild(Gdx_10.default._renderer.view);
             window.addEventListener("resize", resize);
             this.graphics.setupDisplay();
             this.listener.create();
@@ -785,7 +1059,7 @@ define("gdx/JsApplicationConfiguration", ["require", "exports"], function (requi
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = JsApplicationConfiguration;
 });
-define("gdx", ["require", "exports", "gdx/audio/Sound", "gdx/files/FileHandle", "gdx/graphics/g2d/Batch", "gdx/graphics/g2d/BitmapFont", "gdx/graphics/g2d/Sprite", "gdx/graphics/g2d/SpriteBatch", "gdx/graphics/g2d/TextureAtlas", "gdx/graphics/g2d/TextureRegion", "gdx/graphics/Camera", "gdx/graphics/GL20", "gdx/graphics/OrthographicCamera", "gdx/graphics/Texture", "gdx/math/Vector3", "gdx/scenes/scene2d/utils/ClickListener", "gdx/scenes/scene2d/Actor", "gdx/scenes/scene2d/Event", "gdx/scenes/scene2d/EventListener", "gdx/scenes/scene2d/InputEvent", "gdx/scenes/scene2d/InputListener", "gdx/utils/viewport/FillViewport", "gdx/utils/viewport/FitViewport", "gdx/utils/viewport/ScalingViewport", "gdx/utils/viewport/Viewport", "gdx/Audio", "gdx/Files", "gdx/Gdx", "gdx/Graphics", "gdx/Input", "gdx/JsApplication", "gdx/JsApplicationConfiguration"], function (require, exports, Sound_2, FileHandle_2, Batch_2, BitmapFont_1, Sprite_1, SpriteBatch_1, TextureAtlas_1, TextureRegion_2, Camera_2, GL20_3, OrthographicCamera_2, Texture_1, Vector3_2, ClickListener_1, Actor_1, Event_1, EventListener_2, InputEvent_1, InputListener_1, FillViewport_1, FitViewport_1, ScalingViewport_3, Viewport_2, Audio_2, Files_2, Gdx_10, Graphics_2, Input_2, JsApplication_1, JsApplicationConfiguration_1) {
+define("gdx", ["require", "exports", "gdx/audio/Sound", "gdx/files/FileHandle", "gdx/graphics/g2d/Batch", "gdx/graphics/g2d/BitmapFont", "gdx/graphics/g2d/Sprite", "gdx/graphics/g2d/SpriteBatch", "gdx/graphics/g2d/TextureAtlas", "gdx/graphics/g2d/TextureRegion", "gdx/graphics/Camera", "gdx/graphics/GL20", "gdx/graphics/OrthographicCamera", "gdx/graphics/Texture", "gdx/math/Vector3", "gdx/scenes/scene2d/utils/ClickListener", "gdx/scenes/scene2d/Actor", "gdx/scenes/scene2d/Event", "gdx/scenes/scene2d/EventListener", "gdx/scenes/scene2d/InputEvent", "gdx/scenes/scene2d/InputListener", "gdx/utils/viewport/FillViewport", "gdx/utils/viewport/FitViewport", "gdx/utils/viewport/ScalingViewport", "gdx/utils/viewport/Viewport", "gdx/Audio", "gdx/Files", "gdx/Gdx", "gdx/Graphics", "gdx/Input", "gdx/JsApplication", "gdx/JsApplicationConfiguration"], function (require, exports, Sound_2, FileHandle_2, Batch_2, BitmapFont_1, Sprite_1, SpriteBatch_1, TextureAtlas_1, TextureRegion_2, Camera_2, GL20_3, OrthographicCamera_2, Texture_1, Vector3_2, ClickListener_1, Actor_1, Event_1, EventListener_2, InputEvent_1, InputListener_1, FillViewport_1, FitViewport_1, ScalingViewport_3, Viewport_2, Audio_2, Files_2, Gdx_11, Graphics_2, Input_2, JsApplication_1, JsApplicationConfiguration_1) {
     "use strict";
     /**
      * Export the global gdx namespace
@@ -842,11 +1116,49 @@ define("gdx", ["require", "exports", "gdx/audio/Sound", "gdx/files/FileHandle", 
     };
     gdx.Audio = Audio_2.default;
     gdx.Files = Files_2.default;
-    gdx.Gdx = Gdx_10.default;
+    gdx.Gdx = Gdx_11.default;
     gdx.Graphics = Graphics_2.default;
     gdx.Input = Input_2.default;
     gdx.JsApplication = JsApplication_1.default;
     gdx.JsApplicationConfiguration = JsApplicationConfiguration_1.default;
+});
+define("gdx/scenes/scene2d/Group", ["require", "exports", "gdx/scenes/scene2d/Actor"], function (require, exports, Actor_2) {
+    "use strict";
+    class Group extends Actor_2.default {
+        constructor() {
+            this.children = [];
+        }
+        act(delta) {
+            super.act(delta);
+            for (let i = 0, n = this.children.length; i < n; i++) {
+                actors[i].act(delta);
+            }
+        }
+        childrenChanged() { }
+        addActor(actor) {
+            if (actor.parent != null)
+                actor.parent.removeActor(actor, false);
+            children.push(actor);
+            actor.setParent(this);
+            actor.setStage(getStage());
+            childrenChanged();
+        }
+        removeActor(actor, unfocus) {
+            if (!children.removeValue(actor, true))
+                return false;
+            if (unfocus) {
+                let stage = getStage();
+                if (stage != null)
+                    stage.unfocus(actor);
+            }
+            actor.setParent(null);
+            actor.setStage(null);
+            childrenChanged();
+            return true;
+        }
+    }
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = Group;
 });
 define("uwsoft/editor/renderer/Engine", ["require", "exports"], function (require, exports) {
     "use strict";
@@ -859,6 +1171,9 @@ define("uwsoft/editor/renderer/Engine", ["require", "exports"], function (requir
 });
 define("uwsoft/editor/renderer/SceneLoader", ["require", "exports"], function (require, exports) {
     "use strict";
+    /**
+     * @JSName("uwsoft.editor.renderer.SceneLoader")
+     */
     class SceneLoader {
         constructor(name, viewport) {
             this.name = '';
@@ -884,7 +1199,7 @@ define("uwsoft/editor/renderer/SceneLoader", ["require", "exports"], function (r
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = SceneLoader;
 });
-define("uwsoft/editor/renderer/resources/ResourceManager", ["require", "exports", "gdx/Gdx"], function (require, exports, Gdx_11) {
+define("uwsoft/editor/renderer/resources/ResourceManager", ["require", "exports", "gdx/Gdx"], function (require, exports, Gdx_12) {
     "use strict";
     const File = { separator: '/' };
     const scenesPath = "scenes";
@@ -911,12 +1226,13 @@ define("uwsoft/editor/renderer/resources/ResourceManager", ["require", "exports"
             this.loadAssets();
         }
         loadProjectVO() {
-            let file = Gdx_11.default.files.internal('project.dt');
+            let file = Gdx_12.default.files.internal('project.dt');
+            console.log('file', file);
             this.projectVO = JSON.parse(file.readString());
             return this.projectVO;
         }
         loadSceneVO(sceneName) {
-            let file = Gdx_11.default.files.internal(scenesPath + File.separator + sceneName + ".dt");
+            let file = Gdx_12.default.files.internal(scenesPath + File.separator + sceneName + ".dt");
             let sceneVO = JSON.parse(file.readString());
             this.loadedSceneVOs[sceneName] = sceneVO;
             return sceneVO;
@@ -936,7 +1252,7 @@ define("uwsoft/editor/renderer/resources/ResourceManager", ["require", "exports"
             //gdx.graphics.g2d.TextureAtlas()
         }
         loadAssets() {
-            loadAtlasPack();
+            this.loadAtlasPack();
         }
         loadAtlasPack() {
         }
@@ -962,8 +1278,11 @@ define("uwsoft/editor/renderer/scene2d/ButtonClickListener", ["require", "export
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ButtonClickListener;
 });
-define("uwsoft/editor/renderer/scene2d/CompositeActor", ["require", "exports", "uwsoft/editor/renderer/scene2d/ButtonClickListener", "gdx/scenes/scene2d/Actor"], function (require, exports, ButtonClickListener_1, Actor_2) {
+define("uwsoft/editor/renderer/scene2d/CompositeActor", ["require", "exports", "uwsoft/editor/renderer/scene2d/ButtonClickListener", "gdx/scenes/scene2d/Actor"], function (require, exports, ButtonClickListener_1, Actor_3) {
     "use strict";
+    // import NinePatch from 'gdx/graphics/g2d/NinePatch'
+    // import Image from 'gdx/scenes/scene2d/ui/Image'
+    // import Label from 'gdx/scenes/scene2d/ui/Label'
     const BuiltItemHandler = {
         DEFAULT: {
             onItemBuild(item) {
@@ -975,27 +1294,33 @@ define("uwsoft/editor/renderer/scene2d/CompositeActor", ["require", "exports", "
             }
         }
     };
-    class CompositeActor extends Actor_2.default {
+    class CompositeActor extends Actor_3.default {
         constructor(vo, ir) {
             super();
+            this.scripts = [];
+            this.indexes = {};
             this.layerMap = {};
             this.itemHandler = BuiltItemHandler.DEFAULT;
             this.vo = vo;
             this.ir = ir;
             this.width = vo.width;
             this.height = vo.height;
-            this.pixelsPerWU = ir.getProjectVO().pixelToWorld;
-            this.makeLayerMap(vo);
-            this.build(vo, itemHandler, true);
+            // this.pixelsPerWU = ir.getProjectVO().pixelToWorld
+            // let resolutionEntryVO = ir.getLoadedResolution()
+            // this.resMultiplier = resolutionEntryVO.getMultiplier(ir.getProjectVO().originalResolution)
+            // this.makeLayerMap(vo)
+            // this.build(vo, this.itemHandler, true)
+            console.log('CompositeActor.ctor', vo);
         }
         makeLayerMap(vo) {
             this.layerMap = {};
             for (let i = 0; i < vo.composite.layers.length; i++) {
-                layerMap[vo.composite.layers[i].layerName] = vo.composite.layers[i];
+                this.layerMap[vo.composite.layers[i].layerName] = vo.composite.layers[i];
             }
         }
         build(vo, itemHandler, isRoot) {
-            this.buildImages(vo.composite.sImages, itemHandler);
+            console.log('CompositeActor.build', vo);
+            this.buildImages(vo.composite.sImages || [], itemHandler);
             this.build9PatchImages(vo.composite.sImage9patchs, itemHandler);
             this.buildLabels(vo.composite.sLabels, itemHandler);
             this.buildComposites(vo.composite.sComposites, itemHandler);
@@ -1006,18 +1331,99 @@ define("uwsoft/editor/renderer/scene2d/CompositeActor", ["require", "exports", "
                 itemHandler.onItemBuild(this);
             }
         }
+        buildComposites(composites, itemHandler) {
+            for (let i = 0; i < composites.length; i++) {
+                // CompositeActor actor;
+                // if(className!=null){
+                //     try {
+                //         Class<?> c = Class.forName(className);
+                //         actor   =   (CompositeActor) c.getConstructors()[0].newInstance(composites.get(i), ir, itemHandler);
+                //     }catch (Exception ex){
+                //         actor  = new CompositeActor(composites.get(i), ir, itemHandler, false);
+                //     }
+                // }else {
+                //     actor  = new CompositeActor(composites.get(i), ir, itemHandler, false);
+                // }
+                let actor = new CompositeActor(composites[i], this.ir, itemHandler, false);
+                this.processMain(actor, composites[i]);
+                this.addActor(actor);
+                this.itemHandler.onItemBuild(actor);
+            }
+        }
         buildImages(images, itemHandler) {
             for (let i = 0; i < images.length; i++) {
                 let image = new Image(this.ir.getTextureRegion(images[i].imageName));
+                this.processMain(image, images[i]);
+                this.addActor(image);
+                itemHandler.onItemBuild(image);
             }
         }
         build9PatchImages(patches, itemHandler) {
+            for (let i = 0; i < patches.length; i++) {
+                let region = this.ir.getTextureRegion(patches[i].imageName);
+                let ninePatch = new NinePatch(region, region.splits[0], region.splits[1], region.splits[2], region.splits[3]);
+                let image = new Image(ninePatch);
+                image.setWidth(patches[i].width * this.pixelsPerWU / this.resMultiplier);
+                image.setHeight(patches[i].height * this.pixelsPerWU / this.resMultiplier);
+                this.processMain(image, patches[i]);
+                this.addActor(image);
+                itemHandler.onItemBuild(image);
+            }
         }
-        buildLabels(labeles, itemHandler) {
+        buildLabels(labels, itemHandler) {
+            for (let i = 0; i < labels.length; i++) {
+                let style = new Label.LabelStyle(ir.getBitmapFont(labels[i].style, labels[i].size), Color.WHITE);
+                let label = new Label(labels[i].text, style);
+                label.setAlignment(labels[i].align);
+                label.setWidth(labels[i].width * this.pixelsPerWU / this.resMultiplier);
+                label.setHeight(labels[i].height * this.pixelsPerWU / this.resMultiplier);
+                this.processMain(label, labels[i]);
+                this.addActor(label);
+                itemHandler.onItemBuild(image);
+            }
         }
-        buildComposites(composites, itemHandler) {
+        processMain(actor, vo) {
+            actor.setName(vo.itemIdentifier);
+            buildCoreData(actor, vo);
+            actor.setPosition(vo.x * this.pixelsPerWU / this.resMultiplier, vo.y * this.pixelsPerWU / this.resMultiplier);
+            actor.setOrigin(vo.originX * this.pixelsPerWU / this.resMultiplier, vo.originY * this.pixelsPerWU / this.resMultiplier);
+            actor.setScale(vo.scaleX, vo.scaleY);
+            actor.setRotation(vo.rotation);
+            actor.setColor(new Color(vo.tint[0], vo.tint[1], vo.tint[2], vo.tint[3]));
+            //this.indexes[this.getLayerIndex(vo.layerName) + vo.zIndex, actor)]
+            if (this.layerMap[vo.layerName].isVisible) {
+                actor.setVisible(true);
+            }
+            else {
+                actor.setVisible(false);
+            }
+        }
+        buildCoreData(actor, vo) {
+            //custom variables
+            let cv = null;
+            if (vo.customVars != null && !vo.customVars.isEmpty()) {
+                cv = new CustomVariables();
+                cv.loadFromString(vo.customVars);
+            }
+            //core data
+            let data = new CoreActorData();
+            data.id = vo.itemIdentifier;
+            data.layerIndex = this.getLayerIndex(vo.layerName);
+            data.tags = vo.tags;
+            data.customVars = cv;
+            actor.setUserObject(data);
         }
         processZIndexes() {
+            let indexArray = Object.keys(indexes);
+            indexArray.sort();
+            for (let i = 0; i < indexArray.length; i++) {
+                indexes[indexArray[i]].setZIndex(i);
+            }
+        }
+        getLayerIndex(name) {
+            return vo.composite.layers.indexOf(layerMap[name]);
+        }
+        getItem(id) {
         }
         recalculateSize() {
         }

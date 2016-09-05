@@ -32,6 +32,7 @@ export default class ResourceManager {
 
     loadProjectVO() {
         let file = Gdx.files.internal('project.dt')
+        console.log('file', file)
         this.projectVO = JSON.parse(file.readString())
         return this.projectVO
     }
@@ -63,7 +64,7 @@ export default class ResourceManager {
     }
 
     loadAssets() {
-        loadAtlasPack()
+        this.loadAtlasPack()
     }
 
     loadAtlasPack() {

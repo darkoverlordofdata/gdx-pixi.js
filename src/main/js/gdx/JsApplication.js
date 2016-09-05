@@ -96,6 +96,7 @@ export default class JsApplication {
          * Load the manifest, and initialize
          */
         getJSON('manifest.json').then(data => {
+            let z = 0
             for (let name in data.atlas) {
                 PIXI.loader.add(name, data.atlas[name])
             }
@@ -106,8 +107,9 @@ export default class JsApplication {
                     PIXI.loader.add(data.files[path])
                 }
                 PIXI.loader.load( (loader, res) => {
+                    this.initialize()
+                    
                 })
-                this.initialize()
 
             })
         }, status => console.log(`error ${status}: Unable to load manifest.json`))
