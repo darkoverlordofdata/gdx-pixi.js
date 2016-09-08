@@ -6,23 +6,15 @@ import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.uwsoft.editor.renderer.SceneLoader
 import com.uwsoft.editor.renderer.scene2d.CompositeActor
-/**
-gdx.scenes.scene2d.Actor.js
-  gdx.scenes.scene2d.Group.js
-    uwsoft.editor.renderer.scene2d.CompositeActor.js
 
-
-com.badlogic.gdx.InputProcessor.scala
-	com.badlogic.gdx.InputAdapter.scala
-		com.badlogic.gdx.scenes.scene2d.Stage.scala
-			com.darkoverlordofdata.demo.MenuUI.scala
-*/
 class MenuUI(game: Demo, sceneLoader: SceneLoader) extends Stage() {
 
   sceneLoader.loadScene("MenuScene", new FitViewport(320f, 480f))
   val playButtonVo = sceneLoader.loadVoFromLibrary("playButton")
   val playButtonActor = new CompositeActor(playButtonVo, sceneLoader.getRm)
   val pixelFactor = if (Gdx.graphics.getDensity > 1f) 2f else 1f
+  println("class MenuUI", getWidth, playButtonActor)
+  /**
   val col = (getWidth-playButtonActor.getWidth*pixelFactor)/2f
   val row = (pixelFactor-1f)*100f-200f*pixelFactor
 
@@ -62,6 +54,19 @@ class MenuUI(game: Demo, sceneLoader: SceneLoader) extends Stage() {
     }
   })
 
+  */
   Gdx.input.setInputProcessor(this)
 
 }
+
+/**
+gdx.scenes.scene2d.Actor.js
+  gdx.scenes.scene2d.Group.js
+    uwsoft.editor.renderer.scene2d.CompositeActor.js
+
+
+com.badlogic.gdx.InputProcessor.scala
+	com.badlogic.gdx.InputAdapter.scala
+		com.badlogic.gdx.scenes.scene2d.Stage.scala
+			com.darkoverlordofdata.demo.MenuUI.scala
+*/

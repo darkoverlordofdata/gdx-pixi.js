@@ -1,6 +1,9 @@
 /**
  * @JSName("uwsoft.editor.renderer.SceneLoader")
  */
+import Engine from 'uwsoft/editor/renderer/Engine'
+import ResourceManager from 'uwsoft/editor/renderer/resources/ResourceManager'
+
 export default class SceneLoader {
     constructor(name, viewport) {
         this.name = ''

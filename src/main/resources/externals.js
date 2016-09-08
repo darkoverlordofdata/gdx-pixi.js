@@ -994,8 +994,8 @@ define("gdx/JsApplication", ["require", "exports", "gdx/Graphics", "gdx/Audio", 
             /**
              * Load the manifest, and initialize
              */
-            getJSON('manifest.json').then(data => {
-                let z = 0;
+            getJSON('assets.json').then(data => {
+                //let z = 0
                 for (let name in data.atlas) {
                     PIXI.loader.add(name, data.atlas[name]);
                 }
@@ -1008,7 +1008,7 @@ define("gdx/JsApplication", ["require", "exports", "gdx/Graphics", "gdx/Audio", 
                         this.initialize();
                     });
                 });
-            }, status => console.log(`error ${status}: Unable to load manifest.json`));
+            }, status => console.log(`error ${status}: Unable to load manifest: assets.json`));
         }
         /**
          * Start the main loop
@@ -1169,36 +1169,6 @@ define("uwsoft/editor/renderer/Engine", ["require", "exports"], function (requir
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = Engine;
 });
-define("uwsoft/editor/renderer/SceneLoader", ["require", "exports"], function (require, exports) {
-    "use strict";
-    /**
-     * @JSName("uwsoft.editor.renderer.SceneLoader")
-     */
-    class SceneLoader {
-        constructor(name, viewport) {
-            this.name = '';
-            this.viewport = null;
-            this.engine = new Engine();
-            this.rm = new ResourceManager();
-            this.rm.initAllResources();
-            this.sceneVO = null;
-        }
-        loadScene(sceneName, viewport) {
-            this.name = name;
-            this.viewport = viewport;
-            this.sceneVO = this.rm.getSceneVO(sceneName);
-            return this.sceneVO;
-        }
-        getRm() { return this.rm; }
-        loadVoFromLibrary(libraryName) {
-            let projectInfoVO = this.getRm().getProjectVO();
-            let compositeItemVO = projectInfoVO.libraryItems[libraryName];
-            return compositeItemVO;
-        }
-    }
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = SceneLoader;
-});
 define("uwsoft/editor/renderer/resources/ResourceManager", ["require", "exports", "gdx/Gdx"], function (require, exports, Gdx_12) {
     "use strict";
     const File = { separator: '/' };
@@ -1259,6 +1229,33 @@ define("uwsoft/editor/renderer/resources/ResourceManager", ["require", "exports"
     }
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ResourceManager;
+});
+define("uwsoft/editor/renderer/SceneLoader", ["require", "exports", "uwsoft/editor/renderer/Engine", "uwsoft/editor/renderer/resources/ResourceManager"], function (require, exports, Engine_1, ResourceManager_1) {
+    "use strict";
+    class SceneLoader {
+        constructor(name, viewport) {
+            this.name = '';
+            this.viewport = null;
+            this.engine = new Engine_1.default();
+            this.rm = new ResourceManager_1.default();
+            this.rm.initAllResources();
+            this.sceneVO = null;
+        }
+        loadScene(sceneName, viewport) {
+            this.name = name;
+            this.viewport = viewport;
+            this.sceneVO = this.rm.getSceneVO(sceneName);
+            return this.sceneVO;
+        }
+        getRm() { return this.rm; }
+        loadVoFromLibrary(libraryName) {
+            let projectInfoVO = this.getRm().getProjectVO();
+            let compositeItemVO = projectInfoVO.libraryItems[libraryName];
+            return compositeItemVO;
+        }
+    }
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = SceneLoader;
 });
 define("uwsoft/editor/renderer/scene2d/ButtonClickListener", ["require", "exports", "gdx/scenes/scene2d/utils/ClickListener"], function (require, exports, ClickListener_2) {
     "use strict";
@@ -1431,7 +1428,7 @@ define("uwsoft/editor/renderer/scene2d/CompositeActor", ["require", "exports", "
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = CompositeActor;
 });
-define("uwsoft", ["require", "exports", "uwsoft/editor/renderer/SceneLoader", "uwsoft/editor/renderer/resources/ResourceManager", "uwsoft/editor/renderer/scene2d/CompositeActor", "uwsoft/editor/renderer/scene2d/ButtonClickListener"], function (require, exports, SceneLoader_1, ResourceManager_1, CompositeActor_1, ButtonClickListener_2) {
+define("uwsoft", ["require", "exports", "uwsoft/editor/renderer/SceneLoader", "uwsoft/editor/renderer/resources/ResourceManager", "uwsoft/editor/renderer/scene2d/CompositeActor", "uwsoft/editor/renderer/scene2d/ButtonClickListener"], function (require, exports, SceneLoader_1, ResourceManager_2, CompositeActor_1, ButtonClickListener_2) {
     "use strict";
     class uwsoft {
     }
@@ -1447,7 +1444,7 @@ define("uwsoft", ["require", "exports", "uwsoft/editor/renderer/SceneLoader", "u
         factory: {},
         physics: {},
         resources: {
-            ResourceManager: ResourceManager_1.default
+            ResourceManager: ResourceManager_2.default
         },
         scene2d: {
             CompositeActor: CompositeActor_1.default,

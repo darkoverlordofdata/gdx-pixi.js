@@ -1,0 +1,36 @@
+{
+  "files": [
+    "assets/orig/pack.atlas",
+    "assets/orig/pack.png",
+    "assets/project.dt",
+    "assets/scenes/MainScene.dt",
+    "assets/scenes/LeaderboardScene.dt",
+    "assets/scenes/MenuScene.dt",
+    "assets/scenes/OptionsScene.dt",
+    "fonts/hud.fnt",
+    "fonts/hud_0.png",
+    "fonts/normal.fnt",
+    "fonts/normal_0.png"
+  ],
+  "atlas": {
+    "pack":"assets/orig/pack.atlas",
+    "atlas":"assets/orig/pack.png",
+    "project":"assets/project.dt",
+    "MainScene":"assets/scenes/MainScene.dt",
+    "LeaderboardScene":"assets/scenes/LeaderboardScene.dt",
+    "MenuScene":"assets/scenes/MenuScene.dt",
+    "OptionsScene":"assets/scenes/OptionsScene.dt",
+    "background":"images/BackdropBlackLittleSparkBlack.png",
+    "bang":"images/bang.png",
+    "explosion":"images/explosion.png",
+    "enemy1":"images/enemy1.png",
+    "enemy2":"images/enemy2.png",
+    "enemy3":"images/enemy3.png",
+    "bullet":"images/bullet.png",
+    "player":"images/spaceshipspr.png",
+    "hud":"fonts/hud.fnt",
+    "hud_0":"fonts/hud_0.png",
+    "normal":"fonts/normal.fnt",
+    "normal_0":"fonts/normal_0.png"
+  }
+}

@@ -19,6 +19,7 @@ skip in packageJSDependencies := false
 jsDependencies += "org.webjars" % "pixi.js" % "3.0.7" / "pixi.js"   
 jsDependencies += ProvidedJS / "amd.js"                             dependsOn "pixi.js"
 jsDependencies += ProvidedJS / "externals.js"                       dependsOn "amd.js"
+jsDependencies += ProvidedJS / "register.js"                        dependsOn "externals.js"
 jsDependencies += RuntimeDOM
 
 

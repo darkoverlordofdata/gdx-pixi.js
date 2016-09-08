@@ -43,7 +43,10 @@ class Demo extends Game {
   }
 
   def playGame() {
-    menuScene = null
+    val sceneLoader = new SceneLoader()
+    val ui = new MenuUI(this, sceneLoader)
+    //menuScene = new MenuScene(sceneLoader, ui)
+    //menuScene = null
     optionScene = null
     scoreScene = null
     gameScene = new GameScene()
