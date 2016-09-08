@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>GDX-Pixj.js</title>
   <link rel="icon" type="image/GIF" href="res/favicon.png" />
+  <link rel="manifest" href="manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="full-screen" content="yes" />
   <meta name="screen-orientation" content="portrait" />
@@ -28,7 +29,6 @@
   <meta property="fb:admins" content="100002160218840">
     <style>
       html {
-        background: url(logo.png) #000;
         background-repeat: no-repeat;
         background-size: cover;
         -webkit-background-size: cover;
@@ -43,7 +43,9 @@
         display:block;
         overflow:hidden;
       }
-
+      /*body {
+          background-image: url("assets/DarkCaviar.png");
+      }*/
       body,
       canvas, div {
         -moz-user-select: none;
@@ -55,11 +57,12 @@
     </style>
   </head>
   <body>
+
     <!-- Include JavaScript dependencies -->
-    <script type="text/javascript" src="target/scala-2.11/invaders-jsdeps.min.js"></script>
+    <script type="text/javascript" src="target/scala-2.11/shmupwarz-jsdeps.js"></script>
     <!-- Include Scala.js compiled code -->
-    <script type="text/javascript" src="target/scala-2.11/invaders-opt.js"></script>
+    <script type="text/javascript" src="target/scala-2.11/shmupwarz-fastopt.js"></script>
     <!-- Run JSApp -->
-    <script type="text/javascript" src="target/scala-2.11/invaders-launcher.js"></script>
+    <script type="text/javascript" src="target/scala-2.11/shmupwarz-launcher.js"></script>
   </body>
 </html>

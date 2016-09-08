@@ -1,0 +1,1 @@
+{"libDeps":[{"resourceName":"pixi.js"},{"resourceName":"amd.js","dependencies":["pixi.js"]},{"resourceName":"externals.js","dependencies":["amd.js"]},{"resourceName":"register.js","dependencies":["externals.js"]}],"requiresDOM":true,"origin":{"configuration":"compile","moduleName":"gdx-pixi-js"}}
