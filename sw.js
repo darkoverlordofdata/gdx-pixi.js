@@ -1,5 +1,6 @@
 // use a cacheName for cache versioning
-var cacheName = 'v1:shmupwarz';
+var cacheName = 'v2:shmupwarz';
+
 
 // during the install phase you usually want to cache static assets
 self.addEventListener('install', function(e) {
@@ -17,7 +18,16 @@ self.addEventListener('install', function(e) {
                 "fonts/hud.fnt",
                 "fonts/hud_0.png",
                 "fonts/normal.fnt",
-                "fonts/normal_0.png"
+                "fonts/normal_0.png",
+                "images/BackdropBlackLittleSparkBlack.png",
+                "images/bang.png",
+                "images/explosion.png",
+                "images/enemy1.png",
+                "images/enemy2.png",
+                "images/enemy3.png",
+                "images/bullet.png",
+                "images/spaceshipspr.png"
+                
             ]).then(function() {
                 self.skipWaiting();
             });
