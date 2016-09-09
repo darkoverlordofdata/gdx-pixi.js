@@ -16,10 +16,10 @@ libraryDependencies += "com.darkoverlordofdata" %%% "entitas" % "0.0.0-SNAPSHOT"
 
 skip in packageJSDependencies := false
 
-jsDependencies += "org.webjars" % "pixi.js" % "3.0.7" / "pixi.js"
-jsDependencies += ProvidedJS / "amd.js"         dependsOn "pixi.js"
-jsDependencies += ProvidedJS / "gdxem.js"       dependsOn "amd.js"
-jsDependencies += ProvidedJS / "register.js"    dependsOn "gdxem.js"
+jsDependencies += "org.webjars" % "pixi.js" % "3.0.7" / "pixi.js"   
+jsDependencies += ProvidedJS / "amd.js"                             dependsOn "pixi.js"
+jsDependencies += ProvidedJS / "gdxem.js"                           dependsOn "amd.js"
+jsDependencies += ProvidedJS / "register.js"                        dependsOn "gdxem.js"
 jsDependencies += RuntimeDOM
 
 

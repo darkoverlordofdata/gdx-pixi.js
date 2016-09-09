@@ -3,7 +3,7 @@
         "target": "es6",
         "module": "amd",
         "rootDir": "src/main/js",
-        "outFile": "src/main/resources/externals.js"
+        "outFile": "src/main/resources/gdxem.js"
     },
     "files": [
         "src/main/js/gdx.js",

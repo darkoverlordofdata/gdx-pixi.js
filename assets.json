@@ -10,7 +10,16 @@
     "fonts/hud.fnt",
     "fonts/hud_0.png",
     "fonts/normal.fnt",
-    "fonts/normal_0.png"
+    "fonts/normal_0.png",
+    "images/BackdropBlackLittleSparkBlack.png",
+    "images/bang.png",
+    "images/explosion.png",
+    "images/enemy1.png",
+    "images/enemy2.png",
+    "images/enemy3.png",
+    "images/bullet.png",
+    "images/spaceshipspr.png"
+    
   ],
   "atlas": {
     "pack":"assets/orig/pack.atlas",
