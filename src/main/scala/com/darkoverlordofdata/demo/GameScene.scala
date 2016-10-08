@@ -46,6 +46,7 @@ class GameScene extends Screen {
   }
   override def resize(width: Int, height: Int): Unit = {
     spriteRenderSystem.resize(width, height)
+    ()
   }
   override def show(): Unit = {}
   override def resume(): Unit = {}

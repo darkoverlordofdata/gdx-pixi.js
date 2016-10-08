@@ -49,6 +49,21 @@ class SpriteRenderSystem (val game:GameScene, val pool:Pool) extends IExecuteSys
 
   def drawEntity(entity:Entity): Unit = {
     val sprite = entity.view.sprite
+    if (sprite != null) {
+      if (entity.hasScale)
+        sprite.setScale(entity.scale.x * scale, entity.scale.y * scale)
+      else
+        sprite.setScale(scale)
+
+      val x = sprite.getWidth / 2f
+      val y = sprite.getHeight / 2f
+
+      sprite.setPosition(entity.position.x - x, entity.position.y - y)
+      sprite.draw(batch)
+    }
+  }
+/**  def drawEntity(entity:Entity): Unit = {
+    val sprite = entity.view.sprite
     var scaleX = 1f
     var scaleY = 1f
     if (sprite != null) {
@@ -65,7 +80,7 @@ class SpriteRenderSystem (val game:GameScene, val pool:Pool) extends IExecuteSys
       sprite.setPosition(entity.position.x - x, entity.position.y - y)
       sprite.draw(batch)
     }
-  }
+  }*/
   
   /**
     * Draw the list
