@@ -1,13 +1,13 @@
-package com.darkoverlordofdata.demo.systems
+package com.darkoverlordofdata.shmupwarz.systems
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.{OrthographicCamera, GL20}
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.utils.viewport.FillViewport
 import com.darkoverlordofdata.entitas.{Entity, GroupChangedArgs, IInitializeSystem, IExecuteSystem, Pool}
-import com.darkoverlordofdata.demo.EntityExtensions._
-import com.darkoverlordofdata.demo.Factory._
-import com.darkoverlordofdata.demo.{O2dLibrary, Match, GameScene}
+import com.darkoverlordofdata.shmupwarz.EntityExtensions._
+import com.darkoverlordofdata.shmupwarz.Factory._
+import com.darkoverlordofdata.shmupwarz.{O2dLibrary, Match, GameScene}
 
 import scala.collection.mutable.ListBuffer
 

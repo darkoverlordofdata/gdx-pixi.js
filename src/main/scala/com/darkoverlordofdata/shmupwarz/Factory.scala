@@ -1,7 +1,7 @@
-package com.darkoverlordofdata.demo
+package com.darkoverlordofdata.shmupwarz
 
 import com.darkoverlordofdata.entitas.{Pool, Entity}
-import com.darkoverlordofdata.demo.EntityExtensions._
+import com.darkoverlordofdata.shmupwarz.EntityExtensions._
 
 
 object Factory {

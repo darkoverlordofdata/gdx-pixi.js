@@ -1,9 +1,9 @@
-package com.darkoverlordofdata.demo.systems
+package com.darkoverlordofdata.shmupwarz.systems
 
 import com.badlogic.gdx.Gdx
-import com.darkoverlordofdata.demo.GameScene
+import com.darkoverlordofdata.shmupwarz.GameScene
 import com.darkoverlordofdata.entitas.{IExecuteSystem, Pool}
-import com.darkoverlordofdata.demo.Factory._
+import com.darkoverlordofdata.shmupwarz.Factory._
 
 class EntitySpawningTimerSystem (val game:GameScene, val pool:Pool) extends IExecuteSystem {
   println("EntitySpawningTimerSystem")

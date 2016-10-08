@@ -1,11 +1,11 @@
-package com.darkoverlordofdata.demo
+package com.darkoverlordofdata.shmupwarz
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Screen
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.darkoverlordofdata.entitas.Pool
 import com.darkoverlordofdata.entitas.Systems
-import com.darkoverlordofdata.demo.systems._
+import com.darkoverlordofdata.shmupwarz.systems._
 
 import scala.scalajs.js.annotation.{JSExport, ScalaJSDefined}
 

@@ -1,9 +1,9 @@
-package com.darkoverlordofdata.demo.systems
+package com.darkoverlordofdata.shmupwarz.systems
 
-import com.darkoverlordofdata.demo.{Component, GameScene, Match}
+import com.darkoverlordofdata.shmupwarz.{Component, GameScene, Match}
 import com.darkoverlordofdata.entitas.{Entity, Pool, IExecuteSystem}
-import com.darkoverlordofdata.demo.EntityExtensions._
-import com.darkoverlordofdata.demo.Factory._
+import com.darkoverlordofdata.shmupwarz.EntityExtensions._
+import com.darkoverlordofdata.shmupwarz.Factory._
 
 
 class CollisionSystem (val game:GameScene, val pool:Pool) extends IExecuteSystem {

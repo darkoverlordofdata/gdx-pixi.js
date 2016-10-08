@@ -1,10 +1,10 @@
-package com.darkoverlordofdata.demo.systems
+package com.darkoverlordofdata.shmupwarz.systems
 
 import com.badlogic.gdx.{Input, Gdx, InputProcessor}
 import com.darkoverlordofdata.entitas.{IInitializeSystem, IExecuteSystem, Pool}
-import com.darkoverlordofdata.demo.{Match, GameScene}
-import com.darkoverlordofdata.demo.EntityExtensions._
-import com.darkoverlordofdata.demo.Factory._
+import com.darkoverlordofdata.shmupwarz.{Match, GameScene}
+import com.darkoverlordofdata.shmupwarz.EntityExtensions._
+import com.darkoverlordofdata.shmupwarz.Factory._
 
 import scala.scalajs.js.annotation.JSExport
 

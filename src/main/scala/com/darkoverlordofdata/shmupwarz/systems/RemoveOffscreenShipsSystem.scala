@@ -1,8 +1,8 @@
-package com.darkoverlordofdata.demo.systems
+package com.darkoverlordofdata.shmupwarz.systems
 
 import com.darkoverlordofdata.entitas.{IExecuteSystem, Pool}
-import com.darkoverlordofdata.demo.{Match, GameScene}
-import com.darkoverlordofdata.demo.EntityExtensions._
+import com.darkoverlordofdata.shmupwarz.{Match, GameScene}
+import com.darkoverlordofdata.shmupwarz.EntityExtensions._
 
 class RemoveOffscreenShipsSystem (val game:GameScene, val pool:Pool) extends IExecuteSystem {
   println("RemoveOffscreenShipsSystem")

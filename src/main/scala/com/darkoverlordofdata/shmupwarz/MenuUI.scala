@@ -1,4 +1,4 @@
-package com.darkoverlordofdata.demo
+package com.darkoverlordofdata.shmupwarz
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.uwsoft.editor.renderer.SceneLoader
 import com.uwsoft.editor.renderer.scene2d.CompositeActor
 
-class MenuUI(game: Demo, sceneLoader: SceneLoader) extends Stage() {
+class MenuUI(game: Shmupwarz, sceneLoader: SceneLoader) extends Stage() {
 
   sceneLoader.loadScene("MenuScene", new FitViewport(320f, 480f))
   val playButtonVo = sceneLoader.loadVoFromLibrary("playButton")
@@ -68,5 +68,5 @@ gdx.scenes.scene2d.Actor.js
 com.badlogic.gdx.InputProcessor.scala
 	com.badlogic.gdx.InputAdapter.scala
 		com.badlogic.gdx.scenes.scene2d.Stage.scala
-			com.darkoverlordofdata.demo.MenuUI.scala
+			com.darkoverlordofdata.shmupwarz.MenuUI.scala
 */

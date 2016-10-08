@@ -1,9 +1,9 @@
-package com.darkoverlordofdata.demo
+package com.darkoverlordofdata.shmupwarz
 
 import com.badlogic.gdx.{Screen, Game}
 import com.uwsoft.editor.renderer.SceneLoader
 
-class Demo extends Game {
+class Shmupwarz(val desktop:Boolean, val scale:Float) extends Game {
 
   var menuScene: MenuScene = null
   var gameScene: GameScene = null

@@ -1,5 +1,5 @@
 {
-  "namespace": "com.darkoverlordofdata.demo",
+  "namespace": "com.darkoverlordofdata.shmupwarz",
   "src": "src/main/scala",
   "output": {
     "generated": "components.scala"

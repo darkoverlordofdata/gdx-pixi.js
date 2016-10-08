@@ -1,8 +1,8 @@
-package com.darkoverlordofdata.demo.systems
+package com.darkoverlordofdata.shmupwarz.systems
 
-import com.darkoverlordofdata.demo.{GameScene, Match}
+import com.darkoverlordofdata.shmupwarz.{GameScene, Match}
 import com.darkoverlordofdata.entitas.{Matcher, IExecuteSystem, Pool}
-import com.darkoverlordofdata.demo.EntityExtensions._
+import com.darkoverlordofdata.shmupwarz.EntityExtensions._
 
 class DestroySystem (val game:GameScene, val pool:Pool) extends IExecuteSystem {
   println("DestroySystem")

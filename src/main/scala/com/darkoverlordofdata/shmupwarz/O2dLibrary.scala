@@ -1,4 +1,4 @@
-package com.darkoverlordofdata.demo
+package com.darkoverlordofdata.shmupwarz
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Texture

@@ -1,4 +1,4 @@
-package com.darkoverlordofdata.demo
+package com.darkoverlordofdata.shmupwarz
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.uwsoft.editor.renderer.SceneLoader
 import com.uwsoft.editor.renderer.scene2d.CompositeActor
 
-class ScoreUI(game: Demo, sceneLoader: SceneLoader) extends Stage() {
+class ScoreUI(game: Shmupwarz, sceneLoader: SceneLoader) extends Stage() {
   val backButtonVo = sceneLoader.loadVoFromLibrary("backButton")
   val backButtonActor = new CompositeActor(backButtonVo, sceneLoader.getRm)
   val pixelFactor = if (Gdx.graphics.getDensity > 1f) 2f else 1f

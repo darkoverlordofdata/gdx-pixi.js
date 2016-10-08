@@ -1,4 +1,4 @@
-package com.darkoverlordofdata.demo
+package com.darkoverlordofdata.shmupwarz
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.uwsoft.editor.renderer.SceneLoader
 import com.uwsoft.editor.renderer.scene2d.CompositeActor
 
-class OptionUI(game: Demo, sceneLoader: SceneLoader) extends Stage() {
+class OptionUI(game: Shmupwarz, sceneLoader: SceneLoader) extends Stage() {
   sceneLoader.loadScene("OptionsScene", new FitViewport(320f, 480f))
 
   val backButtonVo = sceneLoader.loadVoFromLibrary("backButton")
