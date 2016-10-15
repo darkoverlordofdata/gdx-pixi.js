@@ -8,17 +8,33 @@ import com.darkoverlordofdata.shmupwarz.Factory._
 
 import scala.scalajs.js.annotation.JSExport
 
+
+class PlayerInputProcessor(val parent:PlayerInputSystem) extends InputProcessor {
+  def keyDown(keycode: Int): Boolean = parent.keyDown(keycode)
+  def keyUp(keycode: Int): Boolean = parent.keyUp(keycode)
+  def keyTyped(keycode: Char): Boolean = parent.keyTyped(keycode)
+  def touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean = parent.touchDown(screenX, screenY, pointer, button)
+  def touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean = parent.touchUp(screenX, screenY, pointer, button)
+  def touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean = parent.touchDragged(screenX, screenY, pointer)
+  def mouseMoved(screenX: Int, screenY: Int): Boolean = parent.mouseMoved(screenX, screenY)
+  def scrolled(amount: Int): Boolean  = parent.scrolled(amount)
+
+}
+
 /**
   * Created by bruce on 5/13/16.
   */
 class PlayerInputSystem (val game:GameScene, val pool:Pool)
-  extends IExecuteSystem with IInitializeSystem with InputProcessor {
+  extends IExecuteSystem with IInitializeSystem { 
   println("PlayerInputSystem")
 
   lazy val group = pool.getGroup(Match.Player)
   val width = game.width
   val height = game.height
-  val pixelFactor = game.pixelFactor
+  val pixelFactor:Int = { if (Gdx.graphics.getDensity > 1f) 2 else 1 }
+  val desktop = game.desktop
+  val scale = game.scale
+  //val pixelFactor = game.pixelFactor
   val FireRate = .1f
 
   private var shoot = false
@@ -26,9 +42,9 @@ class PlayerInputSystem (val game:GameScene, val pool:Pool)
   private var mouseY = 0
   private var timeToFire = 0f
 
-
   override def initialize(): Unit = {
-    Gdx.input.setInputProcessor(this)
+    //Gdx.input.setInputProcessor(this)
+    Gdx.input.setInputProcessor(new PlayerInputProcessor(this))
     pool.createPlayer(width.toFloat, height.toFloat)
   }
 
@@ -53,8 +69,15 @@ class PlayerInputSystem (val game:GameScene, val pool:Pool)
 
 
   def moveTo(x: Int, y:Int) = {
-    mouseX = x/pixelFactor
-    mouseY = height - y/pixelFactor
+    if (desktop) {
+      mouseX = (x.toFloat/scale).toInt
+      mouseY = ((height - y).toFloat/scale).toInt
+    } else {
+      mouseX = x/pixelFactor
+      mouseY = (height - y)/pixelFactor
+    }
+    //mouseX = x/pixelFactor
+    //mouseY = height - y/pixelFactor
   }
 
   def keyTyped(character: Char): Boolean = {

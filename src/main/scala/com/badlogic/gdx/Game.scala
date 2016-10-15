@@ -14,6 +14,8 @@
   * limitations under the License.
   ******************************************************************************/
 package com.badlogic.gdx
+import scala.scalajs.js
+import scala.scalajs.js.annotation.JSName
 
 /** <p>
   * An {@link ApplicationListener} that delegates to a {@link Screen}. This allows an application to easily have multiple screens.
@@ -22,41 +24,25 @@ package com.badlogic.gdx
   * Screens are not disposed automatically. You must handle whether you want to keep screens around or dispose of them when another
   * screen is set.
   * </p> */
+@JSName("gdx.ApplicationAdapter")
+@js.native
 abstract class Game extends ApplicationListener {
-  protected var screen: Screen = null
 
-  override def dispose(): Unit = {
-    if (screen != null) screen.hide()
-  }
-  override def pause(): Unit = {
-    if (screen != null) screen.pause()
-  }
+  override def dispose(): Unit = js.native
+  override def pause(): Unit = js.native
 
-  override def resume(): Unit = {
-    if (screen != null) screen.resume()
-  }
+  override def resume(): Unit = js.native
 
-  override def render(): Unit = {
-    if (screen != null) screen.render(Gdx.graphics.getDeltaTime())
-  }
+  override def render(): Unit = js.native
 
-  override def resize(width: Int, height: Int): Unit = {
-    if (screen != null) screen.resize(width, height)
-  }
+  override def resize(width: Int, height: Int): Unit = js.native
 
   /** Sets the current screen. {@link Screen#hide()} is called on any old screen, and {@link Screen#show()} is called on the new
     * screen, if any.
     * @param screen may be {@code null} */
-  def setScreen(screen:Screen): Unit = {
-    if (this.screen != null) this.screen.hide()
-    this.screen = screen
-    if (this.screen != null) {
-      this.screen.show()
-      this.screen.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight())
-    }
-  }
+  def setScreen(screen:Screen): Unit = js.native
 
   /** @return the currently active {@link Screen}. */
-  def getScreen: Screen = screen
+  def getScreen: Screen = js.native
 }
 

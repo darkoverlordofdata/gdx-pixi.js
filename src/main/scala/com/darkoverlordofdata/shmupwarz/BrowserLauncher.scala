@@ -6,8 +6,8 @@ import scala.scalajs.js.JSApp
 object BrowserLauncher extends JSApp {
 
   def main(): Unit = {
-      val desktop = true
-      val scale = 1.5f
+      val desktop = false //true
+      val scale = 1f //1.5f
       val width = 320// desktop?700:(int)(350*scale);
       val height = 480//(int)(480*scale);
       val config = new JsApplicationConfiguration()

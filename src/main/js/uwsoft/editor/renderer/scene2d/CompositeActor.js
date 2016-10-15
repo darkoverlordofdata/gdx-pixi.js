@@ -33,7 +33,7 @@ export default class CompositeActor extends Actor {
         // this.resMultiplier = resolutionEntryVO.getMultiplier(ir.getProjectVO().originalResolution)
         // this.makeLayerMap(vo)
         // this.build(vo, this.itemHandler, true)
-        console.log('CompositeActor.ctor', vo)
+        //console.log('CompositeActor.ctor', vo)
     }
 
     makeLayerMap(vo) {
@@ -44,7 +44,7 @@ export default class CompositeActor extends Actor {
     }
 
     build(vo, itemHandler, isRoot) {
-        console.log('CompositeActor.build', vo)
+        //console.log('CompositeActor.build', vo)
         this.buildImages(vo.composite.sImages||[], itemHandler)
         this.build9PatchImages(vo.composite.sImage9patchs, itemHandler)
         this.buildLabels(vo.composite.sLabels, itemHandler)

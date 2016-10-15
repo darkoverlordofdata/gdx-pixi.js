@@ -14,7 +14,7 @@ class MenuUI(game: Shmupwarz, sceneLoader: SceneLoader) extends Stage() {
   val playButtonActor = new CompositeActor(playButtonVo, sceneLoader.getRm)
   val pixelFactor = if (Gdx.graphics.getDensity > 1f) 2f else 1f
   println("class MenuUI", getWidth, playButtonActor)
-  /**
+
   val col = (getWidth-playButtonActor.getWidth*pixelFactor)/2f
   val row = (pixelFactor-1f)*100f-200f*pixelFactor
 
@@ -24,12 +24,14 @@ class MenuUI(game: Shmupwarz, sceneLoader: SceneLoader) extends Stage() {
   playButtonActor.setX(col)
   playButtonActor.setY(row+220f*2f*pixelFactor)
   playButtonActor.setScale(pixelFactor)
+  /**
   playButtonActor.addListener(new ClickListener() {
     override def clicked(event: InputEvent, x: Float, y: Float) {
       game.playGame()
     }
-  })
+  })*/
 
+  /**
   val scoreButtonVo  = sceneLoader.loadVoFromLibrary("scoreButton")
   val scoreButtonActor = new CompositeActor(scoreButtonVo, sceneLoader.getRm)
   addActor(scoreButtonActor)
@@ -53,8 +55,8 @@ class MenuUI(game: Shmupwarz, sceneLoader: SceneLoader) extends Stage() {
       game.optionsGame()
     }
   })
-
   */
+  
   Gdx.input.setInputProcessor(this)
 
 }

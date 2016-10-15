@@ -108,7 +108,6 @@ export default class JsApplication {
                 }
                 PIXI.loader.load( (loader, res) => {
                     this.initialize()
-                    
                 })
 
             })

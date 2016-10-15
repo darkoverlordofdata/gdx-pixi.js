@@ -11,8 +11,8 @@ export default class FileHandle {
     }
     
     readString() {
-        console.log('readString', this.path)
-        console.log('Gdx._resources', Gdx._resources['assets/'+this.path])
+        //console.log('readString', this.path)
+        //console.log('Gdx._resources', Gdx._resources['assets/'+this.path])
         return Gdx._resources['assets/'+this.path].xhr.responseText
     }
 

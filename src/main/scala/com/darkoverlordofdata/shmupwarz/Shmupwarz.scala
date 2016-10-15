@@ -11,7 +11,7 @@ class Shmupwarz(val desktop:Boolean, val scale:Float) extends Game {
   var scoreScene: MenuScene = null
 
   def create(): Unit = {
-//    menuGame()
+    //menuGame()
     playGame()
   }
 
@@ -43,13 +43,10 @@ class Shmupwarz(val desktop:Boolean, val scale:Float) extends Game {
   }
 
   def playGame() {
-    val sceneLoader = new SceneLoader()
-    val ui = new MenuUI(this, sceneLoader)
-    //menuScene = new MenuScene(sceneLoader, ui)
-    //menuScene = null
+    menuScene = null
     optionScene = null
     scoreScene = null
-    gameScene = new GameScene()
+    gameScene = new GameScene(desktop, scale)
     setScreen(gameScene)
   }
 

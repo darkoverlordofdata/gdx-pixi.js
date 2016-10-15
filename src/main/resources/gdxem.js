@@ -46,8 +46,8 @@ define("gdx/files/FileHandle", ["require", "exports", "gdx/Gdx"], function (requ
             this.path = path;
         }
         readString() {
-            console.log('readString', this.path);
-            console.log('Gdx._resources', Gdx_1.default._resources['assets/' + this.path]);
+            //console.log('readString', this.path)
+            //console.log('Gdx._resources', Gdx._resources['assets/'+this.path])
             return Gdx_1.default._resources['assets/' + this.path].xhr.responseText;
         }
     }
@@ -483,14 +483,14 @@ define("gdx/scenes/scene2d/Actor", ["require", "exports", "gdx/Gdx", "gdx/graphi
                 positionChanged();
             }
         }
-        getWidth() { return this.width; }
+        //getWidth() {return this.width}
         setWidth(width) {
             if (this.width !== width) {
                 this.width = width;
                 this.sizeChanged();
             }
         }
-        getHeight() { return this.height; }
+        //getHeight() {return this.height}
         setHeight(height) {
             if (this.height !== height) {
                 this.height = height;
@@ -1160,6 +1160,86 @@ define("gdx/scenes/scene2d/Group", ["require", "exports", "gdx/scenes/scene2d/Ac
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = Group;
 });
+/**
+ * @JSName("gdx.scenes.scene2d.Group")
+ */
+define("gdx/scenes/scene2d/Stage", ["require", "exports"], function (require, exports) {
+    "use strict";
+    class Stage {
+        constructor() {
+            this.width = 0;
+            this.height = 0;
+        }
+        getWidth() { return this.width; }
+        getHeight() { return this.height; }
+        act() {
+        }
+        draw() {
+        }
+        addActor(actor) {
+            console.log('this is the actor', actor);
+        }
+    }
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = Stage;
+});
+define("gdx/ApplicationAdapter", ["require", "exports"], function (require, exports) {
+    "use strict";
+    class ApplicationAdapter {
+        create() { }
+        resize(width, height) { }
+        render() { }
+        pause() { }
+        resume() { }
+        dispose() { }
+    }
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = ApplicationAdapter;
+});
+define("gdx/Game", ["require", "exports"], function (require, exports) {
+    "use strict";
+    class Game {
+        constructor() {
+            this.screen = null;
+        }
+        dispose() {
+            if (this.screen != null)
+                this.screen.hide();
+        }
+        pause() {
+            if (this.screen != null)
+                this.screen.pause();
+        }
+        resume() {
+            if (this.screen != null)
+                this.screen.resume();
+        }
+        render() {
+            if (this.screen != null)
+                this.screen.render(Gdx.graphics.getDeltaTime());
+        }
+        resize(width, height) {
+            if (this.screen != null)
+                this.screen.resize(width, height);
+        }
+        /** Sets the current screen. {@link Screen#hide()} is called on any old screen, and {@link Screen#show()} is called on the new
+            * screen, if any.
+            * @param screen may be {@code null} */
+        setScreen(screen) {
+            if (this.screen != null)
+                this.screen.hide();
+            this.screen = screen;
+            if (this.screen != null) {
+                this.screen.show();
+                this.screen.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            }
+        }
+        /** @return the currently active {@link Screen}. */
+        getScreen() { return this.screen; }
+    }
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = Game;
+});
 define("uwsoft/editor/renderer/Engine", ["require", "exports"], function (require, exports) {
     "use strict";
     class Engine {
@@ -1188,7 +1268,7 @@ define("uwsoft/editor/renderer/resources/ResourceManager", ["require", "exports"
         initAllResources() {
             this.loadProjectVO();
             for (let i = 0; i < this.projectVO.scenes.length; i++) {
-                console.log(`i ${i}`, this.projectVO.scenes[i].sceneName);
+                //console.log(`i ${i}`, this.projectVO.scenes[i].sceneName)
                 this.loadSceneVO(this.projectVO.scenes[i].sceneName);
                 this.scheduleScene(this.projectVO.scenes[i].sceneName);
             }
@@ -1197,7 +1277,7 @@ define("uwsoft/editor/renderer/resources/ResourceManager", ["require", "exports"
         }
         loadProjectVO() {
             let file = Gdx_12.default.files.internal('project.dt');
-            console.log('file', file);
+            //console.log('file', file)
             this.projectVO = JSON.parse(file.readString());
             return this.projectVO;
         }
@@ -1307,7 +1387,7 @@ define("uwsoft/editor/renderer/scene2d/CompositeActor", ["require", "exports", "
             // this.resMultiplier = resolutionEntryVO.getMultiplier(ir.getProjectVO().originalResolution)
             // this.makeLayerMap(vo)
             // this.build(vo, this.itemHandler, true)
-            console.log('CompositeActor.ctor', vo);
+            //console.log('CompositeActor.ctor', vo)
         }
         makeLayerMap(vo) {
             this.layerMap = {};
@@ -1316,7 +1396,7 @@ define("uwsoft/editor/renderer/scene2d/CompositeActor", ["require", "exports", "
             }
         }
         build(vo, itemHandler, isRoot) {
-            console.log('CompositeActor.build', vo);
+            //console.log('CompositeActor.build', vo)
             this.buildImages(vo.composite.sImages || [], itemHandler);
             this.build9PatchImages(vo.composite.sImage9patchs, itemHandler);
             this.buildLabels(vo.composite.sLabels, itemHandler);
