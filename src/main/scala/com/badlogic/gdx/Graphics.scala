@@ -50,6 +50,6 @@ trait Graphics extends js.Object {
     * this density value will be 1; on a 120 dpi screen it would be .75; etc.
     *
     * @return the logical density of the Display. */
-  def getDensity(): Int = js.native
+  def getDensity(): Float = js.native
 
 }

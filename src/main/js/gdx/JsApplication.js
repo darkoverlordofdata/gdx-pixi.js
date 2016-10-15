@@ -7,40 +7,40 @@ import Gdx from 'gdx/Gdx'
 import Scaling from 'gdx/utils/Scaling'
 
 function resize() {
-    switch(Gdx._scaling) {
+    switch (Gdx._scaling) {
         case Scaling.fit:
             // Determine which screen dimension is least constrained
-            Gdx._scaleX = Gdx._scaleY = Math.max(window.innerWidth/Gdx._width, window.innerHeight/Gdx._height)
+            Gdx._scaleX = Gdx._scaleY = Math.max(window.innerWidth / Gdx._width, window.innerHeight / Gdx._height)
             break
         case Scaling.fill:
             // Determine which screen dimension is most constrained
-            Gdx._scaleX = Gdx._scaleY = Math.min(window.innerWidth/Gdx._width, window.innerHeight/Gdx._height)
+            Gdx._scaleX = Gdx._scaleY = Math.min(window.innerWidth / Gdx._width, window.innerHeight / Gdx._height)
             break
         case Scaling.fillX:
-            Gdx._scaleX = window.innerWidth/Gdx._width
+            Gdx._scaleX = window.innerWidth / Gdx._width
             Gdx._scaleY = Gdx._scaleX
             break
         case Scaling.fillY:
-            Gdx._scaleY = window.innerHeight/Gdx._height
+            Gdx._scaleY = window.innerHeight / Gdx._height
             Gdx._scaleX = Gdx._scaleY
             break
         case Scaling.stretch:
-            Gdx._scaleX = window.innerWidth/Gdx._width
-            Gdx._scaleY = window.innerHeight/Gdx._height
+            Gdx._scaleX = window.innerWidth / Gdx._width
+            Gdx._scaleY = window.innerHeight / Gdx._height
             break
         case Scaling.stretchX:
-            Gdx._scaleX = window.innerWidth/Gdx._width
+            Gdx._scaleX = window.innerWidth / Gdx._width
             Gdx._scaleY = Gdx._scaleX
             break
         case Scaling.stretchY:
-            Gdx._scaleY = window.innerHeight/Gdx._height
+            Gdx._scaleY = window.innerHeight / Gdx._height
             Gdx._scaleX = Gdx._scaleY
             break
     }
     Gdx._stage.scale.x = Gdx._scaleX
     Gdx._stage.scale.y = Gdx._scaleY
     Gdx._renderer.resize(Math.ceil(Gdx._width * Gdx._scaleX), Math.ceil(Gdx._height * Gdx._scaleY))
-}    
+}
 
 /**
  * getJSON
@@ -71,8 +71,8 @@ function getJSON(url) {
  * @JSName("gdx.JsApplication")
  */
 export default class JsApplication {
-    
-    constructor(listener, config){
+
+    constructor(listener, config) {
 
         if (config.title === null) {
             config.title = listener.constructor.name
@@ -100,29 +100,30 @@ export default class JsApplication {
             for (let name in data.atlas) {
                 PIXI.loader.add(name, data.atlas[name])
             }
-            PIXI.loader.load( (loader, res) => {
+            PIXI.loader.load((loader, res) => {
                 Gdx._resources = Object.create(res)
 
                 for (let path in data.files) {
                     PIXI.loader.add(data.files[path])
                 }
-                PIXI.loader.load( (loader, res) => {
+                PIXI.loader.load((loader, res) => {
                     this.initialize()
+
                 })
 
             })
         }, status => console.log(`error ${status}: Unable to load manifest: assets.json`))
-        
+
     }
-    
+
     /**
      * Start the main loop
      */
     initialize() {
-        
+
         Gdx._width = this.config.width
         Gdx._height = this.config.height
-        
+
         Gdx._renderer = PIXI.autoDetectRenderer(this.config.width, this.config.height, {
             antialiasing: false,
             transparent: false,
@@ -140,7 +141,7 @@ export default class JsApplication {
         this.graphics.setupDisplay()
         this.listener.create()
         const mainLoop = (time) => {
-            
+
             this.graphics.update(time)
             this.graphics.frameId++
             this.listener.render()
@@ -149,4 +150,4 @@ export default class JsApplication {
         window.requestAnimationFrame(mainLoop)
     }
 }
-    
+

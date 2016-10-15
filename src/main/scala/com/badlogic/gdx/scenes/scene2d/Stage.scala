@@ -36,31 +36,9 @@ import scala.scalajs.js.annotation.JSName
   *
   * @author mzechner
   * @author Nathan Sweet */
+class Stage extends InputAdapter {
 
-@JSName("gdx.scenes.scene2d.Stage")
-@js.native
-class Stage extends js.Object with InputAdapter {
-  
-//class Stage extends InputAdapter {
-
-  val width:Int = js.native
-  def act(): Unit = js.native
-  def draw(): Unit = js.native
-
-  def getWidth(): Float = js.native
-  def getHeight(): Float = js.native
-  
-  def addActor(actor: Actor): Unit = js.native
-  override def keyDown(keycode: Int): Boolean = js.native
-  override def keyUp(keycode: Int): Boolean = js.native
-  override def keyTyped(keycode: Char): Boolean = js.native
-  override def touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean = js.native
-  override def touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean = js.native
-  override def touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean = js.native
-  override def mouseMoved(screenX: Int, screenY: Int): Boolean = js.native
-  override def scrolled(amount: Int): Boolean = js.native
-
-/**  val height = Gdx.graphics.getHeight()
+  val height = Gdx.graphics.getHeight()
   val width = Gdx.graphics.getWidth()
 
   def act(): Unit = {}
@@ -69,7 +47,5 @@ class Stage extends js.Object with InputAdapter {
   def getWidth(): Float = height
   def getHeight(): Float = width
 
-  def addActor(actor: Actor): Unit = {
-    println("addActor", actor)
-  }*/
+  def addActor(actor: Actor): Unit = {}
 }

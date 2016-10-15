@@ -14,7 +14,6 @@
   * limitations under the License.
   ******************************************************************************/
 package com.badlogic.gdx
-import scala.scalajs.js
 
 /** An InputProcessor is used to receive input events from the keyboard and the touch screen (mouse on the desktop). For this it
   * has to be registered with the {@link Input#setInputProcessor(InputProcessor)} method. It will be called each frame before the
@@ -22,8 +21,7 @@ import scala.scalajs.js
   * {@link InputMultiplexer} to chain input processors.
   *
   * @author mzechner */
-@js.native
-trait InputProcessor extends js.Object {
+trait InputProcessor {
   /** Called when a key was pressed
     *
     * @param keycode one of the constants in {@link Input.Keys}

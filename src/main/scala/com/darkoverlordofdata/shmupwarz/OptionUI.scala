@@ -20,13 +20,12 @@ class OptionUI(game: Shmupwarz, sceneLoader: SceneLoader) extends Stage() {
   backButtonActor.setX(col)
   backButtonActor.setY(row+110f*2f*pixelFactor)
   backButtonActor.setScale(pixelFactor)
-  /**
   backButtonActor.addListener(new ClickListener() {
     override def clicked(event: InputEvent, x: Float, y: Float) {
       game.menuGame()
     }
   })
-  */
+
   Gdx.input.setInputProcessor(this)
 
 }

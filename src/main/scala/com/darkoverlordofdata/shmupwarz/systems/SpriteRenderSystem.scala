@@ -16,10 +16,14 @@ class SpriteRenderSystem (val game:GameScene, val pool:Pool) extends IExecuteSys
 
   lazy val group = pool.getGroup(Match.View)
   val scale = .8f
+  println("SpriteRenderSystem-1")
   val width = game.width.toFloat
   val height = game.height.toFloat
+  println("SpriteRenderSystem-2")
   val pixelFactor = game.pixelFactor
+  println("SpriteRenderSystem-3")
   lazy val batch = new SpriteBatch()
+  println("SpriteRenderSystem-4")
   val camera = game.camera
   lazy val viewport = new FillViewport(width/pixelFactor, height/pixelFactor, camera)
   lazy val background = O2dLibrary.getSprite("background")

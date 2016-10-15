@@ -14,17 +14,13 @@
   * limitations under the License.
   ******************************************************************************/
 package com.badlogic.gdx
-import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
 /** Convenience implementation of {@link ApplicationListener}. Derive from this and only override what you need.
   * @author mzechner */
-@JSName("gdx.ApplicationAdapter")
-@js.native
 abstract class ApplicationAdapter extends ApplicationListener {
-  override def create(): Unit = js.native
-  override def resize(width: Int, height: Int): Unit = js.native
-  override def render(): Unit = js.native
-  override def pause(): Unit = js.native
-  override def resume(): Unit = js.native
-  override def dispose(): Unit = js.native
+  override def create(): Unit = {}
+  override def resize(width: Int, height: Int): Unit = {}
+  override def render(): Unit = {}
+  override def pause(): Unit = {}
+  override def resume(): Unit = {}
+  override def dispose(): Unit = {}
 }

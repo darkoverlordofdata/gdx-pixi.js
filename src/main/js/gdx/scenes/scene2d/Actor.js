@@ -106,7 +106,7 @@ export default class Actor {
 		}
     }
 
-    //getWidth() {return this.width}
+    getWidth() {return this.width}
     setWidth(width) {
         if (this.width !== width) {
             this.width = width
@@ -114,7 +114,7 @@ export default class Actor {
         }
     }
 
-    //getHeight() {return this.height}
+    getHeight() {return this.height}
     setHeight(height) {
         if (this.height !== height) {
             this.height = height

@@ -28,11 +28,10 @@ package com.badlogic.gdx
   *
   * @author mzechner */
 import scala.scalajs.js.annotation.JSExport
-import scala.scalajs.js
 
-@js.native
-trait ApplicationListener extends js.Object {
+trait ApplicationListener {
   /** Called when the {@link Application} is first created. */
+  @JSExport
   def create(): Unit
   /** Called when the {@link Application} is resized. This can happen at any point during a non-paused state but will never happen
     * before a call to {@link #create()}.
@@ -40,18 +39,23 @@ trait ApplicationListener extends js.Object {
     * @param width the new width in pixels
     * @param height the new height in pixels */
 
+  @JSExport
   def resize(width: Int, height: Int): Unit
 
   /** Called when the {@link Application} should render itself. */
+  @JSExport
   def render(): Unit
 
   /** Called when the {@link Application} is paused, usually when it's not active or visible on screen. An Application is also
     * paused before it is destroyed. */
+  @JSExport
   def pause(): Unit
 
   /** Called when the {@link Application} is resumed from a paused state, usually when it regains focus. */
+  @JSExport
   def resume(): Unit
 
   /** Called when the {@link Application} is destroyed. Preceded by a call to {@link #pause()}. */
+  @JSExport
   def dispose(): Unit
 }

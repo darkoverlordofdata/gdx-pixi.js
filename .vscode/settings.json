@@ -10,6 +10,10 @@
 		"**/packages": true,
 		"**/tools": true,
 		"**/web": true
-	}
+	},
+    // Controls the font size in pixels.
+    "editor.fontSize": 16,
+    // The path of the shell that the terminal uses on Windows. When using shells shipped with Windows (cmd, PowerShell or Bash on Ubuntu), prefer C:\Windows\sysnative over C:\Windows\System32 to use the 64-bit versions.
+    "terminal.integrated.shell.windows": "C:\\Windows\\sysnative\\bash.exe",
 
 }

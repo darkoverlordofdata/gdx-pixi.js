@@ -21,7 +21,7 @@ export default class ResourceManager {
     initAllResources() {
         this.loadProjectVO()
         for (let i = 0; i < this.projectVO.scenes.length; i++) {
-            //console.log(`i ${i}`, this.projectVO.scenes[i].sceneName)
+            console.log(`i ${i}`, this.projectVO.scenes[i].sceneName)
             
             this.loadSceneVO(this.projectVO.scenes[i].sceneName)
             this.scheduleScene(this.projectVO.scenes[i].sceneName)
@@ -32,7 +32,7 @@ export default class ResourceManager {
 
     loadProjectVO() {
         let file = Gdx.files.internal('project.dt')
-        //console.log('file', file)
+        console.log('file', file)
         this.projectVO = JSON.parse(file.readString())
         return this.projectVO
     }
